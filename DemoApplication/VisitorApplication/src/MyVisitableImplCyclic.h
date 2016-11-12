@@ -8,10 +8,13 @@
 #ifndef MYVISITABLEIMPLCYCLIC_H_
 #define MYVISITABLEIMPLCYCLIC_H_
 
-#include <iostream>
+#include "MyVisitorCyclicBase.h"
 
 #include <include/VisitorCyclic.h>
-#include "MyVisitorCyclicBase.h"
+#include <include/StoragePolicies.h>
+
+#include <iostream>
+
 
 class Element_1;
 class Element_2;
@@ -24,7 +27,17 @@ template
 	class ConcreteVisitable,
 	class VisitableImplementation = ConcreteVisitable
 	>
-using Visitable = VisitorCyclic::VisitableImpl<ConcreteVisitable, MyVisitorBase>;
+using VisitableImpl = VisitorCyclic::VisitableImpl<ConcreteVisitable, MyVisitorBase>;
+
+using Visitable = VisitorCyclic::Visitable<MyVisitorBase>;
+
+template
+	<class Adaptee,
+	class StoragePolicy = StorageByReference<Adaptee>
+	>
+using VisitableAdapter =
+		VisitorCyclic::VisitableAdapter<Adaptee, StoragePolicy, MyVisitorBase>;
+
 
 // bis C++11
 template<class ConcreteVisitable, class VisitableImplementation = ConcreteVisitable>
