@@ -12,7 +12,7 @@
 
 #include <include/VisitorAcyclic.h>
 #include <include/DefaultLoggingPolicy.h>
-#include <include/VisitableAdapterStoragePolicy.h>
+#include <include/VisitableAdapterAcyclic.h>
 
 namespace MyRepositoryAcyclic{
 // ab C++11

@@ -10,10 +10,8 @@
 
 #include "VisitorAcyclic.h"
 #include "StoragePolicies.h"
-#include "VisitorImplementation.h"
-
-//TODO wieder entfernen
 #include "DefaultLoggingPolicy.h"
+#include "TypeFunctions.h"
 
 namespace VisitorAcyclic{
 

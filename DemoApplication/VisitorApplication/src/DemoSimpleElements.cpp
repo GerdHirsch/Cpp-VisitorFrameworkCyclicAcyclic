@@ -18,7 +18,7 @@
 #include "MyVisitableCyclicAcyclic.h"
 
 #include <include/VisitorAcyclic.h>
-#include <include/VisitableAdapterStoragePolicy.h>
+#include <include/VisitableAdapterAcyclic.h>
 
 using namespace std;
 

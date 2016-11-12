@@ -8,7 +8,7 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-#define ACYCLIC
+//#define ACYCLIC
 
 #include "Element_1.h"
 #include "Element_2.h"
