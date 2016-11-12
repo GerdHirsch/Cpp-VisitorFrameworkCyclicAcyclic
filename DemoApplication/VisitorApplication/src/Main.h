@@ -13,4 +13,6 @@
 #include "MyElementType.h"
 #include "MyVisitorUniversal.h"
 
+void demoSimpleElements();
+
 #endif /* MAIN_H_ */

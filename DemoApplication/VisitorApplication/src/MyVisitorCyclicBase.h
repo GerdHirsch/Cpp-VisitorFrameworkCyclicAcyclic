@@ -9,6 +9,7 @@
 #define MYVISITORCYCLICBASE_H_
 
 #include <iostream>
+#include <include/VisitorCyclic.h>
 
 class Element_1;
 class Element_2;
@@ -16,13 +17,20 @@ class Element_3;
 
 namespace MyRepositoryCyclic{
 
+struct VisitorCyclicBase;
+
+using ParamType = VisitorCyclic::Visitable<VisitorCyclicBase>;
+
 struct VisitorCyclicBase{
 	virtual ~VisitorCyclicBase(){}
 	virtual void visit(Element_1 &d) = 0;
 	virtual void visit(Element_2 &d) = 0;
-	virtual void visit(Element_3 &d){
-		std::cout << this->toString() << "::visit(Element_3&) is not implemented" << std::endl;
+	virtual void visit(ParamType &d){
+		std::cout << this->toString() << "::visit(" << d.toString() <<"&) is not implemented" << std::endl;
 	}
+//	virtual void visit(Element_3 &d){
+//		std::cout << this->toString() << "::visit(Element_3&) is not implemented" << std::endl;
+//	}
 	virtual std::string toString() const = 0;
 };
 

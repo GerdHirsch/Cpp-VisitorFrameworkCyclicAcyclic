@@ -9,25 +9,18 @@
 
 #include <iostream>
 using namespace std;
+//using SharedPointer = std::shared_ptr<Visitable>;
+//using Visitables = std::vector<SharedPointer>;
+
+//void demoVisitor(Visitor& visitor, Visitables& visitables){
+//	std::cout << std::endl << "==== " << visitor.toString() << " ====" << std::endl;
+//	std::for_each(visitables.begin(), visitables.end(),
+//			[&visitor](SharedPointer& visitable){ visitable->accept(visitor); });
+//}
+
+
 
 int main(){
 	cout << "VariableTemplateDefaultArgumente" << endl;
-	Element_1 d1;
-	Element_2 d2;
-	Element_3 d3;
-
-#ifdef ACYCLIC
-	cout << "ACYCLIC VariableTemplateDefaultArgumente" << endl;
-	typedef VisitorAcyclic::Visitable Visitable;
-#else
-	cout << "CYCLIC VariableTemplateDefaultArgumente" << endl;
-	typedef VisitorCyclic::Visitable<MyRepositoryCyclic::MyVisitorBase> Visitable;
-#endif
-	VisitorUniversal visitor;
-	Visitable * pV = &d1;
-	pV->accept(visitor);
-	d2.accept(visitor);
-	d3.accept(visitor);
-
-
+	demoSimpleElements();
 }

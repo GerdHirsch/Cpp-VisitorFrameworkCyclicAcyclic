@@ -3,6 +3,7 @@
 	<name>VisitorApplication</name>
 	<comment></comment>
 	<projects>
+		<project>VisitorVariableTemplateDefaultArgumente</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

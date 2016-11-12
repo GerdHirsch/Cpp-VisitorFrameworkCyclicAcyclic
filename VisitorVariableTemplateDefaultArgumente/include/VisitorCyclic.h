@@ -18,6 +18,7 @@ class Visitable
 public:
     virtual ~Visitable(){};
 	virtual void accept(VisitorBase& visitor) = 0;
+	virtual std::string toString() const = 0;
 };
 
 template<class Derived, class VisitorBase>
