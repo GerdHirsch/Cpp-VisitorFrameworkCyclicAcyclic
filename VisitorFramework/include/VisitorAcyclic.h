@@ -104,47 +104,6 @@ public:
 	}
 };
 
-//=====================================================================
-//template<
-//	class ConcreteVisitable_,
-//	class VisitableImplementation_,
-//	class LoggingPolicy
-//	>
-//class VisitableImpl : public Visitable, public LoggingPolicy {
-//public:
-//	typedef ConcreteVisitable_ ConcreteVisitable;
-//	typedef ConcreteVisitable_ VisitableImplementation;
-//
-//	class Accessor{};
-//	using Visitor = ElementVisitor<VisitableImplementation>;
-//
-////	struct Visitor{
-////		virtual void visit(ConcreteVisitable& d) = 0;
-////	};
-//	// liefert this als Pointer auf die Spezialisierung
-//	VisitableImplementation* This(){
-//		return static_cast<VisitableImplementation*>(this);
-//	}
-//	// Muss überschrieben werden wenn ConcreteVisitable und
-//	// VisitableImplementation nicht übereinstimmen
-//	ConcreteVisitable* getVisitable() {
-//		return static_cast<ConcreteVisitable*>(this);
-//	}
-//	ConcreteVisitable const* getVisitable() const {
-//		return static_cast<ConcreteVisitable*>(this);
-//	}
-//
-//	void accept(VisitorAcyclic::Visitor& visitor){
-//		ConcreteVisitable *visitable = This()->getVisitable();
-//		Visitor *pV = dynamic_cast<Visitor*>(&visitor);
-//		if(pV){
-//			this->logAccepted(*visitable, visitor);
-//			pV->visit(*visitable);
-//		}else{
-//			this->logNotAccepted(*visitable, visitor);
-//		}
-//	}
-//};
 } // end namespace
 
 
