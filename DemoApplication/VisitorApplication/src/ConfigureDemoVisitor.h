@@ -8,16 +8,17 @@
 #ifndef CONFIGUREDEMOVISITOR_H_
 #define CONFIGUREDEMOVISITOR_H_
 
-#include "NonVisitable.h"
-#include "NonVisitableWithAccessor.h"
-#include <include/VisitorImplementation.h>
-#include <include/VisitableAdapterStoragePolicy.h>
-#include <iostream>
 #include "DemoAdapterAcyclic.h"
 #include "Element_1.h"
 #include "Element_2.h"
 
-namespace DemoAdapter{
+#include "NonVisitable.h"
+#include "NonVisitableWithAccessor.h"
+#include <include/TypeFunctions.h>
+#include <include/VisitableAdapterAcyclic.h>
+#include <iostream>
+
+namespace DemoAdapterAcyclic{
 
 class ConfigureDemoVisitor : public Visitor,
 	public implementsVisitor<NonVisitable>, // AlternativesInterface für getVisitor

@@ -14,6 +14,10 @@
 #include <include/DefaultLoggingPolicy.h>
 #include <include/VisitableAdapterAcyclic.h>
 
+class Element_2;
+class NonVisitable;
+
+
 namespace MyRepositoryAcyclic{
 // ab C++11
 template
@@ -31,15 +35,27 @@ using VisitableImpl =
 
 using Visitable = VisitorAcyclic::Visitable;
 
+template<class Adaptee, class StoragePolicy>
+struct MyAdapter{
+	using type = VisitorAcyclic::VisitableAdapter<Adaptee, StoragePolicy, AdapterLoggingPolicy>;
+};
+
+template<class StoragePolicy>
+struct MyAdapter<NonVisitable, StoragePolicy>{
+	using type = VisitorAcyclic::VisitableAdapter<NonVisitable, StoragePolicy, DemoLoggingPolicy>;
+};
+
 template
 	<class Adaptee,
 	class StoragePolicy = StorageByReference<Adaptee>
 	>
-using VisitableAdapter =
-		VisitorAcyclic::VisitableAdapter<Adaptee, StoragePolicy, DemoLoggingPolicy>;
+using VisitableAdapter = typename MyAdapter<Adaptee, StoragePolicy>::type;
+//using VisitableAdapter =
+//		VisitorAcyclic::VisitableAdapter<Adaptee, StoragePolicy, AdapterLoggingPolicy>;
 
 
-// bis C++11
+
+// ab C++03
 template<class ConcreteVisitable, class VisitableImplementation = ConcreteVisitable>
 class Repository{
 public:
@@ -49,6 +65,17 @@ public:
 		DemoLoggingPolicy
 	> Visitable;
 };
+//Spezialisierung z.B. Type spezifisches Logging
+template<class VisitableImplementation>
+class Repository<Element_2, VisitableImplementation>{
+public:
+	typedef VisitorAcyclic::VisitableImpl
+	<	Element_2,
+		VisitableImplementation,
+		ElementLoggingPolicy
+	> Visitable;
+};
+
 
 }
 

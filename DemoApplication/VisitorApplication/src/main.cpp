@@ -10,7 +10,7 @@
 using namespace std;
 
 int main(){
-	cout << "VariableTemplateDefaultArgumente" << endl;
+	cout << "VisitorApplication" << endl;
 	demoSimpleElements();
 	cout << "================================" << endl;
 //	demoAdapterAcyclic();

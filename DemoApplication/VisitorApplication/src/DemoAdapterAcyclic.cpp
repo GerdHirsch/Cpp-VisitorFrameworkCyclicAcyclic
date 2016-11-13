@@ -22,7 +22,7 @@
 
 using namespace std;
 
-namespace DemoAdapterCyclic{
+namespace DemoAdapterAcyclic{
 using Visitable = VisitorAcyclic::Visitable;
 using Visitor = VisitorAcyclic::Visitor;
 
@@ -33,6 +33,7 @@ void demoVisitor(Visitor& visitor, Visitables& visitables){
 	std::cout << std::endl << "==== " << visitor.toString() << " ====" << std::endl;
 	std::for_each(visitables.begin(), visitables.end(),
 			[&visitor](SharedPointer& visitable){ visitable->accept(visitor); });
+	std::cout << std::endl << "==== " << visitor.toString() << " ====" << std::endl;
 }
 
 template<class Adaptee>
@@ -43,7 +44,9 @@ using AdapterReference = VisitorAcyclic::VisitableAdapter<Adaptee, StorageByRefe
 }//end namespace
 
 void demoAdapterAcyclic(){
-	using namespace DemoAdapter;
+	using namespace DemoAdapterAcyclic;
+
+	using namespace DemoAdapterAcyclic;
 	cout << "demoAdapterAcyclic" << endl;
 	Visitables visitables;
 
@@ -54,10 +57,11 @@ void demoAdapterAcyclic(){
 	visitables.push_back(SharedPointer(new AdapterWeak<NonVisitable>(p)));
 	visitables.push_back(SharedPointer(new AdapterWeak<NonVisitableWithAccessor>(pw)));
 	visitables.push_back(SharedPointer(new AdapterReference<NonVisitable>(nv)));
-	visitables.push_back(SharedPointer(new Element_1));
-	visitables.push_back(SharedPointer(new Element_2));
-
+//	visitables.push_back(SharedPointer(new Element_1));
+	Element_1 e1;
+//	VisitorAcyclic::Visitable* pE1 = &e1;
 	ConfigureDemoVisitor cdv;
+//	e1.accept(cdv);
 
 	demoVisitor(cdv, visitables);
 

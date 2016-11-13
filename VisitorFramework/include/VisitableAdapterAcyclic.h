@@ -22,8 +22,8 @@ template<
 		>
 class VisitableAdapter :
 		public VisitableImpl<
-				Adaptee,
-				VisitableAdapter<Adaptee, StoragePolicy>,
+				Adaptee, //ConcreteVisitable
+				VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy>,//VisitableImplementation
 				LoggingPolicy>,
 		public StoragePolicy
 {

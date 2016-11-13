@@ -12,10 +12,10 @@
 #include <memory>
 
 #include <include/VisitorAcyclic.h>
-#include <include/VisitableAdapterStoragePolicy.h>
+#include <include/VisitableAdapterAcyclic.h>
 #include <include/StoragePolicies.h>
 
-namespace DemoAdapter{
+namespace DemoAdapterAcyclic{
 using Visitable = VisitorAcyclic::Visitable;
 using Visitor = VisitorAcyclic::Visitor;
 
