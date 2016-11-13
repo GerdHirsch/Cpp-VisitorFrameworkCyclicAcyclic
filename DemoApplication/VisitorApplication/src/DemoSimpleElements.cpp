@@ -18,8 +18,6 @@
 
 #include "MyVisitableCyclicAcyclic.h"
 
-#include "ConfigureDemoVisitor.h"
-
 #include <include/VisitorAcyclic.h>
 #include <include/VisitableAdapterAcyclic.h>
 
@@ -32,7 +30,6 @@ void demoSimpleElements(){
 	NonVisitable nv;
 	NonVisitableWithAccessor nvwa;
 	Repository::VisitableAdapter<NonVisitable> adapter(nv);
-	Repository::VisitableAdapter<NonVisitableWithAccessor> adapter2(nvwa);
 	typedef Repository::Visitable Visitable;
 
 #ifdef ACYCLIC
@@ -41,7 +38,6 @@ void demoSimpleElements(){
 	cout << "CYCLIC demoSimpleElements" << endl;
 #endif
 	DemoSimpleElements::VisitorUniversal1 visitor1;
-	DemoAdapterAcyclic::ConfigureDemoVisitor visitorConfigure;
 	std::shared_ptr<Element_2>p(new Element_2);
 
 	Visitable * pV = &e1;
@@ -52,20 +48,6 @@ void demoSimpleElements(){
 
 	pV = &adapter;
 	pV->accept(visitor1);
-	adapter2.accept(visitor1);
 
 	cout << "=== " << endl;
-	p->accept(visitorConfigure);
-	pV->accept(visitorConfigure);
-	adapter2.accept(visitorConfigure);
-	e2.accept(visitorConfigure);
-	e3.accept(visitorConfigure);
-
-
-//	DemoSimpleElements::VisitorUniversal2 visitor2;
-//	pV->accept(visitor2);
-//	d2.accept(visitor2);
-//	d3.accept(visitor2);
-//	adapter.accept(visitor2);
-
 }

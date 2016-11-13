@@ -16,6 +16,7 @@
 class Element_1;
 class Element_2;
 class Element_3;
+class NonVisitableWithAccessor;
 
 namespace MyRepositoryCyclic{
 
@@ -31,9 +32,9 @@ struct VisitorCyclicBase{
 	virtual void visit(ElementBaseType &d){
 		std::cout << this->toString() << "::visit(" << d.toString() <<"&) is not implemented" << std::endl;
 	}
-//	virtual void visit(Element_3 &d){
-//		std::cout << this->toString() << "::visit(Element_3&) is not implemented" << std::endl;
-//	}
+	virtual void visit(NonVisitableWithAccessor&d){
+		std::cout << this->toString() << "::visit(NonVisitableWithAccessor&) is not implemented" << std::endl;
+	}
 	virtual std::string toString() const = 0;
 };
 
