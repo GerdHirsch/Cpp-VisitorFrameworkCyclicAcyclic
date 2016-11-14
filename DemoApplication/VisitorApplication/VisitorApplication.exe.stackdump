@@ -1,0 +1,7 @@
+Exception: STATUS_PRIVILEGED_INSTRUCTION at eip=0040865F
+eax=006ACB58 ebx=20076018 ecx=0040865C edx=4022F020 esi=20061542 edi=611D8DB2
+ebp=006ACB68 esp=006ACB3F program=D:\DevProjects\GitRepositories\Cpp\VisitorTemplateCyclicAcyclic\DemoApplication\VisitorApplication\Debug\VisitorApplication.exe, pid 12616, thread main
+cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
+Stack trace:
+Frame     Function  Args
+End of stack trace

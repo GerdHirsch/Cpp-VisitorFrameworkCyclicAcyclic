@@ -8,6 +8,8 @@
 #ifndef MYVISITORCYCLICACYCLIC_H_
 #define MYVISITORCYCLICACYCLIC_H_
 
+#include "SwitchCyclicAcyclic.h"
+
 #ifdef ACYCLIC
 // kann nur includiert werden wenn Elemente_n auch einen Membertype Visitor definieren
 #include "MyVisitorAcyclicBase.h"

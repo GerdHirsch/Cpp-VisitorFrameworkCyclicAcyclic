@@ -8,6 +8,8 @@
 #ifndef MYVISITABLECYCLICACYCLIC_H_
 #define MYVISITABLECYCLICACYCLIC_H_
 
+#include "SwitchCyclicAcyclic.h"
+
 #ifdef ACYCLIC
 #include "MyVisitableImplAcyclic.h"
 namespace Repository = MyRepositoryAcyclic;

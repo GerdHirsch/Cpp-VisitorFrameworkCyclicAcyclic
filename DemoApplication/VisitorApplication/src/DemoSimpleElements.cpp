@@ -4,9 +4,6 @@
  *  Created on: 12.11.2016
  *      Author: Gerd
  */
-//#include "main.h"
-#include "Main.h"
-
 #include "Element_1.h"
 #include "Element_2.h"
 #include "Element_3.h"
@@ -20,6 +17,7 @@
 
 #include <include/VisitorAcyclic.h>
 #include <include/VisitableAdapterAcyclic.h>
+#include "main.h"
 
 using namespace std;
 
