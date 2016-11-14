@@ -22,7 +22,9 @@ public:
 		std::cout << "NonVisitableWithAccessor::~NonVisitableWithAccessor() data: " << data << std::endl;
 	}
 	std::string toString() const {
-		return "NonVisitableWithAccessor";
+		std::string retVal("NonVisitableWithAccessor ");
+		retVal += data;
+		return retVal;
 	}
 	class Accessor{
 	protected:

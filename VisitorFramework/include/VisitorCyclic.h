@@ -30,6 +30,8 @@ template
 		class VisitableImplementation = ConcreteVisitable
 	>
 struct VisitableImpl : Visitable<VisitorBase> {
+	typedef Visitable<VisitorBase> base_type;
+
 	void accept(VisitorBase& mv){
 		std::cout << This()->toString() <<"::accept: " << mv.toString() << std::endl;
 		mv.visit(*(This()->getVisitable()) );

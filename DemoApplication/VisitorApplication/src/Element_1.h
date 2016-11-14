@@ -14,7 +14,7 @@ class Element_1 : public Repository::VisitableImpl<Element_1>
 {
 public:
 
-	std::string toString() const { return "Element_1";}
+	std::string toString() const override; //{ return "Element_1";}
 };
 
 

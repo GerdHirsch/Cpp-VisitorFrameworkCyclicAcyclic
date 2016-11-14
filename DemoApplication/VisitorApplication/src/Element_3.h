@@ -13,10 +13,10 @@
 #include "MyVisitableCyclicAcyclic.h"
 
 //vor C++11 via typedef in Template
-class Element_3 : public Repository::Repository<Element_3>::Visitable{
+class Element_3 : public Repository::Repository<Element_3>::VisitableImpl{
 public:
 
-	std::string toString() const { return "Element_3";}
+	std::string toString() const override;// { return "Element_3";}
 };
 
 #endif /* ELEMENT_3_H_ */

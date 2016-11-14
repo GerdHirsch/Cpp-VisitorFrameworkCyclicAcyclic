@@ -63,7 +63,7 @@ public:
 	<	ConcreteVisitable,
 		VisitableImplementation,
 		DemoLoggingPolicy
-	> Visitable;
+	> VisitableImpl;
 };
 //Spezialisierung z.B. Type spezifisches Logging
 template<class VisitableImplementation>
@@ -73,7 +73,7 @@ public:
 	<	Element_2,
 		VisitableImplementation,
 		ElementLoggingPolicy
-	> Visitable;
+	> VisitableImpl;
 };
 
 

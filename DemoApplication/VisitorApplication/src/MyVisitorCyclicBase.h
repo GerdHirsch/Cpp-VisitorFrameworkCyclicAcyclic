@@ -8,15 +8,18 @@
 #ifndef MYVISITORCYCLICBASE_H_
 #define MYVISITORCYCLICBASE_H_
 
+//Definitions
+#include "NonVisitable.h"
+//ForwardDeclarations
+class NonVisitableWithAccessor;
+class Element_1; // Element_1 cannot be included because of recursive Definitions
+class Element_2;
+class Element_3;
+
 #include <iostream>
 #include <include/VisitorCyclic.h>
 
-#include "NonVisitable.h"
 
-class Element_1;
-class Element_2;
-class Element_3;
-class NonVisitableWithAccessor;
 
 namespace MyRepositoryCyclic{
 

@@ -15,11 +15,6 @@
 
 #include <iostream>
 
-
-class Element_1;
-class Element_2;
-class Element_3;
-
 namespace MyRepositoryCyclic{
 // ab C++11
 template
@@ -29,7 +24,6 @@ template
 	>
 using VisitableImpl = VisitorCyclic::VisitableImpl<ConcreteVisitable, MyVisitorBase>;
 
-//using Visitable = VisitorCyclic::Visitable<MyVisitorBase>;
 
 template
 	<class Adaptee,
@@ -43,7 +37,7 @@ using VisitableAdapter =
 template<class ConcreteVisitable, class VisitableImplementation = ConcreteVisitable>
 class Repository{
 public:
-	typedef VisitorCyclic::VisitableImpl<ConcreteVisitable, MyVisitorBase> Visitable;
+	typedef VisitorCyclic::VisitableImpl<ConcreteVisitable, MyVisitorBase> VisitableImpl;
 };
 
 }

@@ -12,6 +12,7 @@
 #include "Element_2.h"
 #include "Element_3.h"
 #include "NonVisitable.h"
+#include "NonVisitableWithAccessor.h"
 
 #include <include/VisitorAcyclic.h>
 #include <include/TypeFunctions.h>
@@ -23,7 +24,8 @@ namespace MyRepositoryAcyclic{
 struct VisitorAcyclicBase : public VisitorAcyclic::Visitor,
 	public implementsVisitor<Element_1>,
 	public implementsVisitor<Element_2>,
-	public implementsVisitor<NonVisitable>
+	public implementsVisitor<NonVisitable>,
+	public implementsVisitor<NonVisitableWithAccessor>
 { };
 
 using MyVisitorBase = VisitorAcyclicBase;

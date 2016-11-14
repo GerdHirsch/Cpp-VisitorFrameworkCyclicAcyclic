@@ -25,6 +25,8 @@ class Visitable
 public:
     virtual ~Visitable(){};
 	virtual void accept(Visitor& visitor) = 0;
+	virtual std::string toString() const = 0;
+
 };
 //=====================================================================
 

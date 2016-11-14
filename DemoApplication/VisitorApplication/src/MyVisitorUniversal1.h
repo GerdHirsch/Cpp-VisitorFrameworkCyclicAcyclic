@@ -9,6 +9,7 @@
 #define MYVISITORUNIVERSAL1_H_
 
 #include "NonVisitable.h"
+#include "NonVisitableWithAccessor.h"
 #include "MyVisitorCyclicAcyclic.h"
 
 namespace DemoSwitchCyclicAcyclic{
@@ -22,6 +23,9 @@ struct VisitorUniversal1 : public Repository::MyVisitorBase {
 		std::cout << toString() << "::visit: " << d.toString() << std::endl;
 	}
 	void visit(NonVisitable &d) override {
+		std::cout << toString() << "::visit: " << d.toString() << std::endl;
+	}
+	void visit(NonVisitableWithAccessor &d) override {
 		std::cout << toString() << "::visit: " << d.toString() << std::endl;
 	}
 	std::string toString() const override {
