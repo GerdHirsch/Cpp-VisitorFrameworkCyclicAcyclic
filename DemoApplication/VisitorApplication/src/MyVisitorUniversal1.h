@@ -11,7 +11,7 @@
 #include "NonVisitable.h"
 #include "MyVisitorCyclicAcyclic.h"
 
-namespace DemoSimpleElements{
+namespace DemoSwitchCyclicAcyclic{
 
 struct VisitorUniversal1 : public Repository::MyVisitorBase {
 

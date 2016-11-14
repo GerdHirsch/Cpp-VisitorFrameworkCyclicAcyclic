@@ -14,7 +14,7 @@
 #include "Element_3.h"
 #include "MyVisitorCyclicAcyclic.h"
 
-namespace DemoSimpleElements{
+namespace DemoSwitchCyclicAcyclic{
 
 struct VisitorUniversal2 : public Repository::MyVisitorBase {
 
@@ -22,6 +22,10 @@ struct VisitorUniversal2 : public Repository::MyVisitorBase {
 		std::cout << toString() << "::visit: " << d.toString() << std::endl;
 	}
 	void visit(Element_2 &d) override {
+		std::cout << toString() << "::visit: " << d.toString() << std::endl;
+	}
+	void visit(Element_3 &d) //override
+	{
 		std::cout << toString() << "::visit: " << d.toString() << std::endl;
 	}
 	void visit(NonVisitable &d) override {

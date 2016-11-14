@@ -5,7 +5,6 @@
  *      Author: Gerd
  */
 
-//#define ACYCLIC
 
 #include "DemoAdapterAcyclic.h"
 
@@ -14,6 +13,8 @@
 #include "Element_1.h"
 #include "Element_2.h"
 #include "ConfigureDemoVisitor.h"
+
+#include "DemoRunVisitor.h"
 
 #include <iostream>
 #include <vector>
@@ -29,13 +30,6 @@ using Visitor = VisitorAcyclic::Visitor;
 using SharedPointer = std::shared_ptr<Visitable>;
 using Visitables = std::vector<SharedPointer>;
 
-void demoVisitor(Visitor& visitor, Visitables& visitables){
-	std::cout << std::endl << "==== " << visitor.toString() << " ====" << std::endl;
-	std::for_each(visitables.begin(), visitables.end(),
-			[&visitor](SharedPointer& visitable){ visitable->accept(visitor); });
-	std::cout << std::endl << "==== " << visitor.toString() << " ====" << std::endl;
-}
-
 template<class Adaptee>
 using AdapterWeak = VisitorAcyclic::VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee>>;
 template<class Adaptee>
@@ -44,7 +38,6 @@ using AdapterReference = VisitorAcyclic::VisitableAdapter<Adaptee, StorageByRefe
 }//end namespace
 
 void demoAdapterAcyclic(){
-	using namespace DemoAdapterAcyclic;
 
 	using namespace DemoAdapterAcyclic;
 	cout << "demoAdapterAcyclic" << endl;

@@ -22,14 +22,20 @@ namespace MyRepositoryCyclic{
 
 struct VisitorCyclicBase;
 
-using ElementBaseType = VisitorCyclic::Visitable<VisitorCyclicBase>;
+using Visitable = VisitorCyclic::Visitable<VisitorCyclicBase>;
 
 struct VisitorCyclicBase{
 	virtual ~VisitorCyclicBase(){}
-	virtual void visit(Element_1 &d) = 0;
-	virtual void visit(Element_2 &d) = 0;
+	virtual void visit(Element_1 &e) = 0;
+	virtual void visit(Element_2 &e) = 0;
+//	virtual void visit(Element_3 &e){
+//		//cannot dynamic_cast '& e' source is a pointer to incomplete type
+//		Visitable* vp = dynamic_cast<Visitable*>(&e);
+//		if(vp)
+//			this->visit(*vp);
+//	}
 	virtual void visit(NonVisitable &d) = 0;
-	virtual void visit(ElementBaseType &d){
+	virtual void visit(Visitable &d){
 		std::cout << this->toString() << "::visit(" << d.toString() <<"&) is not implemented" << std::endl;
 	}
 	virtual void visit(NonVisitableWithAccessor&d){

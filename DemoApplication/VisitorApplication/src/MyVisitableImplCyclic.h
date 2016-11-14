@@ -29,7 +29,7 @@ template
 	>
 using VisitableImpl = VisitorCyclic::VisitableImpl<ConcreteVisitable, MyVisitorBase>;
 
-using Visitable = VisitorCyclic::Visitable<MyVisitorBase>;
+//using Visitable = VisitorCyclic::Visitable<MyVisitorBase>;
 
 template
 	<class Adaptee,

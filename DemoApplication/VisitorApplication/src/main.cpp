@@ -13,5 +13,5 @@ int main(){
 	cout << "VisitorApplication" << endl;
 	demoSimpleElements();
 	cout << "================================" << endl;
-	demoAdapterAcyclic();
+//	demoAdapterAcyclic();
 }
