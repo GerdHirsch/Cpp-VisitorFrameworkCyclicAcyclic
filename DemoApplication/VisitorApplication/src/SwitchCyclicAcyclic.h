@@ -8,6 +8,6 @@
 #ifndef SWITCHCYCLICACYCLIC_H_
 #define SWITCHCYCLICACYCLIC_H_
 
-//#define ACYCLIC
+#define ACYCLIC
 
 #endif /* SWITCHCYCLICACYCLIC_H_ */

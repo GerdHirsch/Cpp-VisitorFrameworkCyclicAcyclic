@@ -17,7 +17,8 @@
 #include "MyVisitorUniversal2.h"
 
 void demoSimpleElements();
-void demoAdapterAcyclic();
+void demoVisitorCyclic();
+//void demoAdapterAcyclic();
 
 #include <iostream>
 

@@ -55,7 +55,7 @@ using VisitableAdapter = typename MyAdapter<Adaptee, StoragePolicy>::type;
 
 
 
-// ab C++03
+//vor C++11
 template<class ConcreteVisitable, class VisitableImplementation = ConcreteVisitable>
 class Repository{
 public:

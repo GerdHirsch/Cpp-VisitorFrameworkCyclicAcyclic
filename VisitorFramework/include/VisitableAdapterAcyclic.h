@@ -30,13 +30,14 @@ class VisitableAdapter :
 public:
 	using StorageType = typename StoragePolicy::StorageType;
 	using ReturnType = typename StoragePolicy::ReturnType;
+	using ConstReturnType = typename StoragePolicy::ConstReturnType;
 
 	using Visitor = getVisitor<Adaptee>;
 
 	VisitableAdapter(StorageType element): StoragePolicy(element){}
 
 	ReturnType getVisitable() { return this->get(); }
-	ReturnType getVisitable()const { return this->get(); }
+	ConstReturnType getVisitable()const { return this->get(); }
 
 	std::string toString() const {
 		std::string message("AcyclicAdapter::");

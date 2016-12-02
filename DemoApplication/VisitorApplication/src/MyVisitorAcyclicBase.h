@@ -21,14 +21,8 @@
 
 namespace MyRepositoryAcyclic{
 
-struct VisitorAcyclicBase : public VisitorAcyclic::Visitor,
-	public implementsVisitor<Element_1>,
-	public implementsVisitor<Element_2>,
-	public implementsVisitor<NonVisitable>,
-	public implementsVisitor<NonVisitableWithAccessor>
-{ };
-
-using MyVisitorBase = VisitorAcyclicBase;
+using MyVisitorBase = VisitorAcyclic::VisitorBase<Element_1, Element_2, NonVisitable, NonVisitableWithAccessor>;
+//using MyVisitorBase = MyVisitorAcyclicBase;
 }
 
 #endif /* MYVISITORACYCLICBASE_H_ */

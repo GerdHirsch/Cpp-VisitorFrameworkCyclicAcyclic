@@ -7,6 +7,7 @@
 
 #ifndef ELEMENT_2_H_
 #define ELEMENT_2_H_
+
 #include "MyVisitableCyclicAcyclic.h"
 
 //vor C++11 via typedef in Template

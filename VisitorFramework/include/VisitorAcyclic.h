@@ -12,6 +12,7 @@
 #include <iostream>
 
 #include "ElementVisitor.h"
+#include "TypeFunctions.h"
 
 namespace VisitorAcyclic{
 
@@ -19,6 +20,12 @@ struct Visitor{
 	virtual ~Visitor(){}
 	virtual std::string toString() const = 0;
 };
+
+template<class... T>
+class VisitorBase :
+		public Visitor,
+		public implementsVisitor<T>...
+{};
 
 class Visitable
 {
@@ -34,7 +41,7 @@ public:
  * VisitableImpl stellt eine allgemeine Implementierung
  * für alle ConcreteVisitables zur Verfügung.
  * Dazu gehört:
- * eine accept(::Visitor&) Methode
+ * eine accept(VisitorAcyclic::Visitor&) Methode
  * für alle Visitables -> Implementation Inheritance
  * Wenn die Ausgaben entfernt werden, bleibt eine einfache TemplateMethod
  * (siehe GoF TemplateMethod Pattern) mit folgender Struktur übrig:
@@ -43,6 +50,7 @@ public:
  * ansonsten log("not accepted")
  *
  * log steht als policy zur Verfügung
+ * (see: policy based design)
  *
  * Außerdem definiert VisitableImpl das Interface Visitor
  * für die ConcreteVisitors auf der Basis des template ElementVisitor
@@ -85,17 +93,24 @@ public:
 	VisitableImplementation* This(){
 		return static_cast<VisitableImplementation*>(this);
 	}
+	VisitableImplementation const* This() const{
+		return static_cast<VisitableImplementation*>(this);
+	}
 
 	void accept(VisitorAcyclic::Visitor& visitor){
 		using Visitor = typename VisitableImplementation::Visitor;
 		Visitor* v = dynamic_cast<Visitor*>(&visitor); //crosscast
-//		ConcreteVisitable* visitable = This()->getVisitable();
 
+//		ConcreteVisitable* visitable = This()->getVisitable();
 		decltype(auto) visitable = This()->getVisitable();
+
 		// visitable kann z.B. shared_ptr<ConcreteVisitable> sein
 		// der nicht mehr gültig ist
 		// TODO: einfach nix machen ist das elegant?
-		if(!visitable) return;
+		if(!visitable){
+			//this->logInvalidVisitable(*This(), visitor);
+			return;
+		}
 
 		if(v){
 			this->logAccepted(*visitable, visitor);

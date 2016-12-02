@@ -12,7 +12,7 @@
 #include "MetaFunctions.h"
 
 struct EmptyAccessor{
-	std::string toString(){ return "EmptyAccessor";}
+	virtual std::string toString() const { return "EmptyAccessor";}
 };
 /*
  * Adapter erzeugt einen Visitor für ein Element
@@ -22,15 +22,15 @@ struct EmptyAccessor{
  * besuchten Visitable zugreifen kann
  */
 template<class ToVisit, class Accessor_ = EmptyAccessor>
-class Adapter{
+class VisitorInterface{
 public:
 	std::string toString(){ return "VisitableAdapter";}
 
 	void print(){ std::cout << "VisitableAdapter" << std::endl; }
 	using ConcreteVisitable = ToVisit;
 	using Accessor = Accessor_;
-	using this_type = Adapter<ToVisit, Accessor>;
-	using Visitor = ElementVisitor<this_type>;
+	using this_type = VisitorInterface<ToVisit, Accessor>;
+	using type = ElementVisitor<this_type>;
 };
 
 template<class T, class = void>
@@ -65,7 +65,7 @@ template<class ToVisit, class =
 		>
 struct getVisitorType{
 	// kein Visitor und Accessor in ToVisit verfügbar
-	using type = typename Adapter<ToVisit>::Visitor;
+	using type = typename VisitorInterface<ToVisit>::type;
 };
 template<class ToVisit>
 struct getVisitorType<ToVisit, typename hasVisitor<ToVisit>::type>{
@@ -76,7 +76,7 @@ struct getVisitorType<ToVisit, typename hasVisitor<ToVisit>::type>{
 template<class ToVisit>
 struct getVisitorType<ToVisit, typename hasAccessor<ToVisit>::type>{
 	// ToVisit definiert nur einen Accessor
-	using type = typename Adapter<ToVisit, typename ToVisit::Accessor>::Visitor;
+	using type = typename VisitorInterface<ToVisit, typename ToVisit::Accessor>::type;
 };
 
 template<typename ToVisit>

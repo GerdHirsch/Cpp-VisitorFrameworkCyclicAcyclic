@@ -48,6 +48,7 @@ struct VisitorCyclicBase{
 };
 
 using MyVisitorBase = VisitorCyclicBase;
+//using MyVisitorBase = VisitorCyclic::visits<Element_1, Element_2, NonVisitable, NonVisitableWithAccessor>;
 
 }
 

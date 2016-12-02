@@ -21,8 +21,12 @@
  * Die verschiedenen Visitors implementieren das Interface:
  * class ConcreteVisitor : public ConcreteVisitable::Visitor { ...};
  */
+// für experimente
+//#define VIRTUAL virtual
+#define VIRTUAL
+
 template<class VisitableImpl>
-class ElementVisitor : protected VisitableImpl::Accessor
+class ElementVisitor : protected VIRTUAL VisitableImpl::Accessor
 {
 public:
 	virtual void visit(typename VisitableImpl::ConcreteVisitable& visitable) = 0;

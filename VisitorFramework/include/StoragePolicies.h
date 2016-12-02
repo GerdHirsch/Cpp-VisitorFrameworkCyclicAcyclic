@@ -14,11 +14,12 @@ template<class Adaptee>
 struct StorageByReference{
 	using StorageType = Adaptee&;
 	using ReturnType = Adaptee*;
+	using ConstReturnType = Adaptee const*;
 
 	StorageByReference(StorageType adaptee):adaptee(adaptee){}
 
 	ReturnType get(){ return &adaptee; }
-	ReturnType get() const { return &adaptee; }
+	ConstReturnType get() const { return &adaptee; }
 protected:
 	StorageType adaptee;
 };
@@ -26,10 +27,11 @@ template<class Adaptee>
 struct StorageByWeakPointer{
 	using StorageType = std::weak_ptr<Adaptee>;
 	using ReturnType = std::shared_ptr<Adaptee>;
+	using ConstReturnType = std::shared_ptr<Adaptee const>;
 
 	StorageByWeakPointer(StorageType adaptee):adaptee(adaptee){}
 	ReturnType get(){ return adaptee.lock(); }
-	ReturnType get() const { return adaptee.lock(); }
+	ConstReturnType get() const { return adaptee.lock(); }
 protected:
 	StorageType adaptee;
 };
