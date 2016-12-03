@@ -14,7 +14,8 @@
 
 #include <iostream>
 
-using VisitorBase = VisitorCyclic::visits<Element_1, Element_2, Element_3>;
+using VisitorBase = VisitorCyclic::visitsDefault<Element_1, Element_2, Element_3>;
+//using VisitorBase = VisitorCyclic::visitsAbstract<Element_1, Element_2, Element_3>;
 
 template<class Adaptee>
 using MyAdapter = VisitorCyclic::VisitableAdapter<Adaptee, StorageByReference<Adaptee>, VisitorBase>;
@@ -24,12 +25,13 @@ public:
 	void visit(Element_1& v) override {
 		std::cout << "MyVisitor::visit(" << v.toString() << "& v)" << std::endl;
 	}
-////	void visit(B& v) override {
-////		std::cout << "MyVisitor::visit(B&)" << std::endl;
-////	}
-//	void visit(C&) override {
-//		std::cout << "MyVisitor::visit(C&)" << std::endl;
+//	void visit(Element_2& v) override {
+//		std::cout << "MyVisitor::visit(" << v.toString() << "& v)" << std::endl;
 //	}
+//	void visit(Element_3& v) override {
+//		std::cout << "MyVisitor::visit(" << v.toString() << "& v)" << std::endl;
+//	}
+
 
 	std::string toString() const override{ return "MyVisitor"; }
 };

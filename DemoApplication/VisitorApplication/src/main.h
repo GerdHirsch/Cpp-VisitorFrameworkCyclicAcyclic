@@ -18,7 +18,6 @@
 
 void demoSimpleElements();
 void demoVisitorCyclic();
-//void demoAdapterAcyclic();
 
 #include <iostream>
 

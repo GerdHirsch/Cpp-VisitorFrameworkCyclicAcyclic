@@ -8,7 +8,6 @@
 #ifndef CONFIGUREDEMOVISITOR_H_
 #define CONFIGUREDEMOVISITOR_H_
 
-#include "DemoAdapterAcyclic.h"
 #include "Element_1.h"
 #include "Element_2.h"
 

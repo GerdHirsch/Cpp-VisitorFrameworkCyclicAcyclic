@@ -12,7 +12,6 @@ using namespace std;
 int main(){
 	cout << "VisitorApplication" << endl;
 	demoSimpleElements();
-//	demoVisitorCyclic();
+	demoVisitorCyclic();
 	cout << "================================" << endl;
-//	demoAdapterAcyclic();
 }

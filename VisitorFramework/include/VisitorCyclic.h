@@ -82,33 +82,50 @@ struct VisitableAdapter :
 	}
 };
 
+//---------------------------------------------------------------------
 /**
  * infrastructure to Create the Baseclass of an Cyclic Visitor
  * class A; class B; class C;
- * usage: using VisitorBase = visits<A, B, C>;
+ * usage: using VisitorBase = visitsDefault<A, B, C>;
  */
 template<class ToVisit, class... Rest>
-struct InheritFromPack : public InheritFromPack<Rest...>{
+struct InheritFromDefault : public InheritFromDefault<Rest...>{
 public:
-//	virtual void visit(ToVisit& v) = 0;
 	virtual void visit(ToVisit& visitable){
 		std::cout << this->toString() << "::visit(" << typeid(visitable).name() << " &) is not implemented!" << std::endl;;
 	}
 
-	using InheritFromPack<Rest...>::visit;
+	using InheritFromDefault<Rest...>::visit;
 };
 template<class ToVisit>
-struct InheritFromPack<ToVisit>{
+struct InheritFromDefault<ToVisit>{
 public:
-//	virtual void visit(ToVisit& v) = 0;
 	virtual void visit(ToVisit& visitable){
 		std::cout << this->toString() << "::visit(" << typeid(visitable).name() << " &) is not implemented!" << std::endl;;
 	}
 
 	virtual std::string toString() const = 0;
 };
+//---------------------------------------------------------------------
+template<class ToVisit, class... Rest>
+struct InheritFromAbstract : public InheritFromAbstract<Rest...>{
+public:
+	virtual void visit(ToVisit& v) = 0;
+
+	using InheritFromAbstract<Rest...>::visit;
+};
+template<class ToVisit>
+struct InheritFromAbstract<ToVisit>{
+public:
+	virtual void visit(ToVisit& v) = 0;
+
+	virtual std::string toString() const = 0;
+};
+//---------------------------------------------------------------------
 template<class ToVisit, class...Rest>
-using visits = InheritFromPack<ToVisit, Rest...>;
+using visitsDefault = InheritFromDefault<ToVisit, Rest...>;
+template<class ToVisit, class...Rest>
+using visitsAbstract = InheritFromAbstract<ToVisit, Rest...>;
 
 }
 
