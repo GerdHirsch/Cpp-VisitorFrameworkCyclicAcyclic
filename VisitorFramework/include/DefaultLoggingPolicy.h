@@ -27,7 +27,14 @@ struct DemoLoggingPolicy{
 		message += " did not accept ";
 		message += visitor.toString();
 		std::cout << message << std::endl;
-//		std::clog << message << std::endl;
+	}
+	template<class Visitable, class Visitor>
+	static void logNotVisited(Visitable const& visitable, Visitor const& visitor){
+		std::string message("DemoLoggingPolicy ");
+		message += visitor.toString();
+		message += " did not visit ";
+		message += visitable.toString();
+		std::cout << message << std::endl;
 	}
 	template<class Visitable, class Visitor>
 	static void logAccepted(Visitable const& visitable, Visitor const& visitor){
@@ -47,6 +54,14 @@ struct AdapterLoggingPolicy{
 		message += visitor.toString();
 		std::cout << message << std::endl;
 //		std::clog << message << std::endl;
+	}
+	template<class Visitable, class Visitor>
+	static void logNotVisited(Visitable const& visitable, Visitor const& visitor){
+		std::string message("AdapterLoggingPolicy ");
+		message += visitor.toString();
+		message += " did not visit ";
+		message += visitable.toString();
+		std::cout << message << std::endl;
 	}
 	template<class Visitable, class Visitor>
 	static void logAccepted(Visitable const& visitable, Visitor const& visitor){

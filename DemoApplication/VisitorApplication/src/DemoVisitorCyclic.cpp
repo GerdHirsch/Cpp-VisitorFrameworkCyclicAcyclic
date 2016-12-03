@@ -22,7 +22,7 @@ using MyAdapter = VisitorCyclic::VisitableAdapter<Adaptee, StorageByReference<Ad
 
 class MyVisitor : public VisitorBase {
 public:
-	void visit(Element_1& v) override {
+	void visit(Element_1& v) {
 		std::cout << "MyVisitor::visit(" << v.toString() << "& v)" << std::endl;
 	}
 //	void visit(Element_2& v) override {

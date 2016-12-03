@@ -27,17 +27,20 @@ template
 	<
 		class ConcreteVisitable,
 		class VisitorBase,
+//		class LoggingPolicy,
 		class VisitableImplementation = ConcreteVisitable
 	>
 struct VisitableImpl : Visitable<VisitorBase> {
 	typedef Visitable<VisitorBase> base_type;
 
 	void accept(VisitorBase& visitor){
+		//TODO als LoggingPolicy implementieren
 		std::cout << This()->toString() <<"::accept: " << visitor.toString() << std::endl;
 		visitor.visit(*(This()->getVisitable()) );
 	}
+protected:
 	// Muss überschrieben werden wenn ConcreteVisitable und
-	// VisitableImplementation nicht übereinstimmen
+	// VisitableImplementation nicht übereinstimmen (siehe Adapter)
 	ConcreteVisitable* getVisitable() {
 		return static_cast<ConcreteVisitable*>(this);
 	}
@@ -52,11 +55,16 @@ struct VisitableImpl : Visitable<VisitorBase> {
 		return static_cast<VisitableImplementation const*>(this);
 	}
 };
-
+/**
+ * VisitableAdapter to adapt NonVisitable Types
+ * StoragePolicy from StoragePolicies.h:
+ * StorageByReference, StorageByWeakPointer
+ */
 template
 	<
 		class Adaptee,
 		class StoragePolicy,
+//		class LoggingPolicy,
 		class VisitorBase
 	>
 struct VisitableAdapter :
@@ -84,24 +92,26 @@ struct VisitableAdapter :
 
 //---------------------------------------------------------------------
 /**
- * infrastructure to Create the Baseclass of an Cyclic Visitor
+ * infrastructure to Create the Baseclass of a Cyclic Visitor
  * class A; class B; class C;
- * usage: using VisitorBase = visitsDefault<A, B, C>;
  */
-template<class ToVisit, class... Rest>
-struct InheritFromDefault : public InheritFromDefault<Rest...>{
+template<class LoggingPolicy, class ToVisit, class... Rest>
+struct InheritFromDefault : public InheritFromDefault<LoggingPolicy, Rest...>{
 public:
 	virtual void visit(ToVisit& visitable){
-		std::cout << this->toString() << "::visit(" << typeid(visitable).name() << " &) is not implemented!" << std::endl;;
+//		LoggingPolicy::logNotVisited(visitable, *this);
+		this->logNotVisited(visitable, *this);
 	}
 
-	using InheritFromDefault<Rest...>::visit;
+	using InheritFromDefault<LoggingPolicy, Rest...>::visit;
 };
-template<class ToVisit>
-struct InheritFromDefault<ToVisit>{
+template<class LoggingPolicy, class ToVisit>
+struct InheritFromDefault<LoggingPolicy, ToVisit> : public LoggingPolicy
+{
 public:
 	virtual void visit(ToVisit& visitable){
-		std::cout << this->toString() << "::visit(" << typeid(visitable).name() << " &) is not implemented!" << std::endl;;
+//		LoggingPolicy::logNotVisited(visitable, *this);
+		this->logNotVisited(visitable, *this);
 	}
 
 	virtual std::string toString() const = 0;
@@ -122,8 +132,13 @@ public:
 	virtual std::string toString() const = 0;
 };
 //---------------------------------------------------------------------
-template<class ToVisit, class...Rest>
-using visitsDefault = InheritFromDefault<ToVisit, Rest...>;
+/**
+ * infrastructure to Create the Baseclass of an Cyclic Visitor
+ * class A; class B; class C;
+ * usage: using VisitorBase = visitsDefault<A, B, C>;
+ */
+template<class LogginPolicy, class ToVisit, class...Rest>
+using visitsDefault = InheritFromDefault<LogginPolicy, ToVisit, Rest...>;
 template<class ToVisit, class...Rest>
 using visitsAbstract = InheritFromAbstract<ToVisit, Rest...>;
 

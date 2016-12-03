@@ -18,6 +18,7 @@
 
 void demoSimpleElements();
 void demoVisitorCyclic();
+void demoMyRepository();
 
 #include <iostream>
 
