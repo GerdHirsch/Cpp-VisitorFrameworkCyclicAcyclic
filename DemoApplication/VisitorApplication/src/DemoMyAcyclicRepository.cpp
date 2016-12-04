@@ -21,6 +21,7 @@
 
 
 namespace{
+
 class A;
 class B;
 class C;
@@ -57,11 +58,6 @@ public:
 
 };
 
-template<class Adaptee>
-using AdapterWeak = Repo::VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee>>;
-template<class Adaptee>
-using AdapterReference = Repo::VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
-
 class A //: public Repo::VisitableImpl<A>
 {
 public:
@@ -73,13 +69,36 @@ public:
 	std::string toString() const { return "C"; }
 };
 
+class DemoVisitor2 :
+		public Repo::Visitor,
+		public Repo::implementsVisitor<A>,
+		public Repo::implementsVisitor<Element_1&>
+{
+public:
+	void visit(Element_1& v) {
+		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
+	}
+	void visit(A& v)  {
+		std::cout << toString() << "::visit(" << v.toString() << ")"  << std::endl;
+	}
+	std::string toString() const override { return "DemoVisitor2"; }
+};
+
+template<class Adaptee>
+using AdapterWeak = Repo::VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee>>;
+template<class Adaptee>
+using AdapterReference = Repo::VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
+
+
+
 }
 
 void demoMyAcyclicRepository(){
 	std::cout << "=== demoMyAcyclicRepository() ==="  << std::endl;
 
 	DemoVisitor myVisitor;
-	Repo::VisitorBase & visitor = myVisitor;
+	DemoVisitor2 myVisitor2;
+	Repo::Visitor* visitor = &myVisitor;
 	Element_1 e1;
 	Element_2 e2;
 	A a;
@@ -88,10 +107,24 @@ void demoMyAcyclicRepository(){
 	C c;
 	Repo::AdapterByReference<C> aC(c);
 
-	e1.accept(visitor);
-	aA.accept(visitor);
-	b.accept(visitor);
-	aC.accept(visitor);
+	e1.accept(*visitor);
+	e2.accept(*visitor);
+
+	aA.accept(*visitor);
+	b.accept(*visitor);
+	aC.accept(*visitor);
+	std::cout << "========" << std::endl;
+
+	visitor = &myVisitor2;
+
+	e1.accept(*visitor);
+	e2.accept(*visitor);
+
+	aA.accept(*visitor);
+	b.accept(*visitor);
+	aC.accept(*visitor);
+
+
 	std::cout << "==== end demoMyAcyclicRepository() ====" << std::endl;
 
 

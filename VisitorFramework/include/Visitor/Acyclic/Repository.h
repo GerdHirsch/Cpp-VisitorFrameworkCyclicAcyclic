@@ -11,6 +11,7 @@
 #include "Visitor.h"
 #include "VisitableAdapterAcyclic.h"
 #include "../MakeTypelist.h"
+#include "TypeFunctions.h"
 
 namespace VisitorFramework{
 namespace Acyclic{
@@ -18,9 +19,14 @@ namespace Acyclic{
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>
 struct Repository{
 
+	using Visitor = Acyclic::Visitor;
+
 	using VisitorBase = Acyclic::VisitorBase<Visitables...>;
 
 	using Visitable = Acyclic::Visitable;
+
+	template<class ToVisit>
+	using implementsVisitor = Acyclic::implementsVisitor<ToVisit>;
 
 	template<class ConcreteVisitable>
 	using VisitableImpl =

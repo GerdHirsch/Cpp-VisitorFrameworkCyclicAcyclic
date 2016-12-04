@@ -12,7 +12,7 @@
 
 #ifdef ACYCLIC
 // kann nur includiert werden wenn Elemente_n auch einen Membertype Visitor definieren
-#include "MyVisitorAcyclicBase.h"
+#include "MyVisitableImplAcyclic.h"
 namespace Repository = MyRepositoryAcyclic;
 #else
 #include "MyVisitorCyclicBase.h"

@@ -115,10 +115,12 @@ public:
 		}
 
 		if(v){
-			this->logAccepted(*visitable, visitor);
+			this->logAccepted(*this, visitor);
+//			this->logAccepted(*visitable, visitor);
 			v->visit(*visitable);
 		} else {
-			this->logNotAccepted(*visitable, visitor);
+			this->logNotAccepted(*this, visitor);
+//			this->logNotAccepted(*visitable, visitor);
 		}
 	}
 };

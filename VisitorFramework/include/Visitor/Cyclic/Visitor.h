@@ -165,9 +165,11 @@ struct VisitorBase<LoggingPolicy_, BaseKind::Default>{
 
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>
 struct Repository{
-	using VisitorBase =
+	using Visitor =
 			typename VisitorBase<LoggingPolicy, BaseKind_>::template
 			implementsVisitor<Visitables...>;
+
+	using VisitorBase = Visitor;
 
 	using Visitable = Cyclic::Visitable<VisitorBase>;
 

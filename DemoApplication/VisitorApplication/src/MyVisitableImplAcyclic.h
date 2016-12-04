@@ -9,16 +9,37 @@
 #define MYVISITABLEIMPLACYCLIC_H_
 
 #include <iostream>
+#include "MyTypeList.h"
+
+#include "Element_1.h"
+#include "Element_2.h"
+#include "NonVisitable.h"
+#include "NonVisitableWithAccessor.h"
+
+#include <Visitor/DefaultLoggingPolicy.h>
+#include <Visitor/BaseKind.h>
 
 #include <Visitor/Acyclic/Visitor.h>
-#include <Visitor/DefaultLoggingPolicy.h>
-#include <Visitor/Acyclic/VisitableAdapterAcyclic.h>
+#include <Visitor/Acyclic/TypeFunctions.h>
+#include <Visitor/Acyclic/Repository.h>
 
 class Element_2;
 class NonVisitable;
 
 
 namespace MyRepositoryAcyclic{
+
+namespace VF = VisitorFramework;
+
+using Repo = VF::Acyclic::Repository
+		<
+		VF::DemoLoggingPolicy,
+//		VF::EmptyLoggingPolicy,
+		BaseKind::Default,
+		typelist
+		>;
+
+using MyVisitorBase = Repo::VisitorBase;
 
 using namespace VisitorFramework;
 // ab C++11
@@ -54,10 +75,6 @@ template
 	class StoragePolicy = StorageByReference<Adaptee>
 	>
 using VisitableAdapter = typename MyAdapter<Adaptee, StoragePolicy>::type;
-//using VisitableAdapter =
-//		VisitorAcyclic::VisitableAdapter<Adaptee, StoragePolicy, AdapterLoggingPolicy>;
-
-
 
 //vor C++11
 template<class ConcreteVisitable, class VisitableImplementation = ConcreteVisitable>

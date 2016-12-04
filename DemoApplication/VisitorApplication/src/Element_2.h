@@ -8,7 +8,7 @@
 #ifndef ELEMENT_2_H_
 #define ELEMENT_2_H_
 
-#include "MyVisitableCyclicAcyclic.h"
+#include "DemoSwitchCyclicAcyclic.h"
 
 //vor C++11 via typedef in Template
 //class Element_2 : public Repository::Repository<Element_2>::VisitableImpl{

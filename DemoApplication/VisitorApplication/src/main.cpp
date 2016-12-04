@@ -5,7 +5,7 @@
  *      Author: Gerd
  */
 
-void demoSimpleElements();
+void demoSwitchCyclicAcyclic();
 void demoVisitorCyclic();
 void demoMyCyclicRepository();
 void demoMyAcyclicRepository();
@@ -16,8 +16,8 @@ using namespace std;
 
 int main(){
 	cout << "VisitorApplication" << endl;
-//	demoSimpleElements();
-	demoMyCyclicRepository();
-	demoMyAcyclicRepository();
+	demoSwitchCyclicAcyclic();
+//	demoMyCyclicRepository();
+//	demoMyAcyclicRepository();
 	cout << "================================" << endl;
 }

@@ -13,11 +13,11 @@
 #include "Element_2.h"
 #include "Element_3.h"
 #include "NonVisitableWithAccessor.h"
-#include "MyVisitorCyclicAcyclic.h"
+#include "DemoSwitchCyclicAcyclic.h"
 
 namespace DemoSwitchCyclicAcyclic{
 
-struct VisitorUniversal2 : public Repository::MyVisitorBase {
+struct VisitorUniversal2 : public Repository::VisitorBase {
 
 	void visit(Element_1 &d) override {
 		std::cout << toString() << "::visit: " << d.toString() << std::endl;

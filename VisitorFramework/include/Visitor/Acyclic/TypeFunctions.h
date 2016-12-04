@@ -8,7 +8,6 @@
 #ifndef TYPEFUNCTIONS_H_
 #define TYPEFUNCTIONS_H_
 
-#include "Visitor.h"
 #include "MetaFunctions.h"
 
 namespace VisitorFramework{
