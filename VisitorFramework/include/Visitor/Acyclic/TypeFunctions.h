@@ -8,8 +8,12 @@
 #ifndef TYPEFUNCTIONS_H_
 #define TYPEFUNCTIONS_H_
 
-#include "VisitorAcyclic.h"
+#include "Visitor.h"
 #include "MetaFunctions.h"
+
+namespace VisitorFramework{
+
+namespace Acyclic{
 
 struct EmptyAccessor{
 	virtual std::string toString() const { return "EmptyAccessor";}
@@ -82,5 +86,7 @@ template<typename ToVisit>
 using getVisitor = typename getVisitorType<ToVisit>::type;
 template<typename ToVisit>
 using implementsVisitor = typename getVisitorType<ToVisit>::type;
+
+}} // end namespace
 
 #endif /* TYPEFUNCTIONS_H_ */

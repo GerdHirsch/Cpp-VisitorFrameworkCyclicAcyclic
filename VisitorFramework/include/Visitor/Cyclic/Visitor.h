@@ -13,8 +13,9 @@
 #include "../MakeTypelist.h"
 
 #include <iostream>
+namespace VisitorFramework{
 
-namespace VisitorCyclic {
+namespace Cyclic {
 //---------------------------------------------------------------------
 template<class VisitorBase>
 class Visitable
@@ -157,12 +158,12 @@ using visitsAbstract = InheritFromAbstract<ToVisit, Rest...>;
 template<class LoggingPolicy_, class = BaseKind::Abstract>
 struct VisitorBase{
 	template<class ...Visitables>
-	using implementsVisitor = VisitorCyclic::InheritFromAbstract<Visitables...>;
+	using implementsVisitor = Cyclic::InheritFromAbstract<Visitables...>;
 };
 template<class LoggingPolicy_>
 struct VisitorBase<LoggingPolicy_, BaseKind::Default>{
 	template<class ...Visitables>
-	using implementsVisitor = VisitorCyclic::InheritFromDefault<LoggingPolicy_, Visitables...>;
+	using implementsVisitor = Cyclic::InheritFromDefault<LoggingPolicy_, Visitables...>;
 };
 
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>
@@ -171,15 +172,15 @@ struct Repository{
 			typename VisitorBase<LoggingPolicy, BaseKind_>::template
 			implementsVisitor<Visitables...>;
 
-	using Visitable = VisitorCyclic::Visitable<VisitorBase>;
+	using Visitable = Cyclic::Visitable<VisitorBase>;
 
 	template<class ConcreteVisitable>
 	using VisitableImpl =
-			VisitorCyclic::VisitableImpl<ConcreteVisitable, VisitorBase, LoggingPolicy>;
+			Cyclic::VisitableImpl<ConcreteVisitable, VisitorBase, LoggingPolicy>;
 
 	template<class Adaptee, class StoragePolicy>
 	using VisitableAdapter =
-			VisitorCyclic::VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>;
+			Cyclic::VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>;
 
 	// Convenience Interface
 	template<class Adaptee>
@@ -195,7 +196,7 @@ struct Repository<LoggingPolicy, BaseKind_, Visitor::MakeTypelist<Visitables...>
 
 
 
-} // end namespace VisitorCyclic
+}} // end namespace VisitorCyclic
 
 
 #endif /* VISITORCYCLIC_H_ */

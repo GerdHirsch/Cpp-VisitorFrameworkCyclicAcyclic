@@ -5,13 +5,13 @@
  *      Author: Gerd
  */
 
+#include <Visitor/Cyclic/Visitor.h>
+
 #include "Element_1.h"
 #include "Element_2.h"
 #include "Element_3.h"
 
 #include <Visitor/DefaultLoggingPolicy.h>
-
-#include <Visitor/Cyclic/VisitorCyclic.h>
 
 #include <iostream>
 
@@ -21,13 +21,14 @@ class C;
 
 using typelist = Visitor::MakeTypelist<Element_1, Element_2, A, B, C>;
 
-using Repo = VisitorCyclic::Repository
+namespace VF = VisitorFramework;
+
+using Repo = VF::Cyclic::Repository
 		<
-//			AdapterLoggingPolicy,
-//			DemoLoggingPolicy,
-			EmptyLoggingPolicy,
-			BaseKind::Default,
-			typelist
+//		VisitorFramework::DemoLoggingPolicy,
+		VisitorFramework::EmptyLoggingPolicy,
+		BaseKind::Default,
+		typelist
 		>;
 
 class B: public Repo::VisitableImpl<B>{

@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-#include <Visitor/Acyclic/VisitorAcyclic.h>
+#include <Visitor/Acyclic/Visitor.h>
 #include <Visitor/DefaultLoggingPolicy.h>
 #include <Visitor/Acyclic/VisitableAdapterAcyclic.h>
 
@@ -19,6 +19,7 @@ class NonVisitable;
 
 
 namespace MyRepositoryAcyclic{
+using namespace VisitorFramework;
 // ab C++11
 template
 	<
@@ -26,23 +27,25 @@ template
 	class VisitableImplementation = ConcreteVisitable
 	>
 using VisitableImpl =
-		VisitorAcyclic::VisitableImpl
+		Acyclic::VisitableImpl
 		<
 			ConcreteVisitable,
 			VisitableImplementation,
-			EmptyLoggingPolicy
+			VisitorFramework::EmptyLoggingPolicy
 		>;
 
-using Visitable = VisitorAcyclic::Visitable;
+using Visitable = Acyclic::Visitable;
 
 template<class Adaptee, class StoragePolicy>
 struct MyAdapter{
-	using type = VisitorAcyclic::VisitableAdapter<Adaptee, StoragePolicy, AdapterLoggingPolicy>;
+	using type =
+			Acyclic::VisitableAdapter<Adaptee, StoragePolicy, VisitorFramework::AdapterLoggingPolicy>;
 };
 
 template<class StoragePolicy>
 struct MyAdapter<NonVisitable, StoragePolicy>{
-	using type = VisitorAcyclic::VisitableAdapter<NonVisitable, StoragePolicy, DemoLoggingPolicy>;
+	using type =
+			Acyclic::VisitableAdapter<NonVisitable, StoragePolicy, VisitorFramework::DemoLoggingPolicy>;
 };
 
 template
@@ -59,20 +62,20 @@ using VisitableAdapter = typename MyAdapter<Adaptee, StoragePolicy>::type;
 template<class ConcreteVisitable, class VisitableImplementation = ConcreteVisitable>
 class Repository{
 public:
-	typedef VisitorAcyclic::VisitableImpl
+	typedef Acyclic::VisitableImpl
 	<	ConcreteVisitable,
 		VisitableImplementation,
-		DemoLoggingPolicy
+		VisitorFramework::DemoLoggingPolicy
 	> VisitableImpl;
 };
 //Spezialisierung z.B. Type spezifisches Logging
 template<class VisitableImplementation>
 class Repository<Element_2, VisitableImplementation>{
 public:
-	typedef VisitorAcyclic::VisitableImpl
+	typedef Acyclic::VisitableImpl
 	<	Element_2,
 		VisitableImplementation,
-		ElementLoggingPolicy
+		VisitorFramework::ElementLoggingPolicy
 	> VisitableImpl;
 };
 

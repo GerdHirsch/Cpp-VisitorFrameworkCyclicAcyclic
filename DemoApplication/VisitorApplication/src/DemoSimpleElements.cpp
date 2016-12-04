@@ -18,16 +18,17 @@
 #include "MyVisitableCyclicAcyclic.h"
 #include "DemoRunVisitor.h"
 
-#include <Visitor/Acyclic/VisitorAcyclic.h>
+#include <Visitor/Acyclic/Visitor.h>
 #include <Visitor/Acyclic/VisitableAdapterAcyclic.h>
 
 #include <vector>
 
+using namespace VisitorFramework;
 
 namespace DemoSwitchCyclicAcyclic{
 
 using Visitable = Repository::Visitable;
-using Visitor = VisitorAcyclic::Visitor;
+using Visitor = Acyclic::Visitor;
 
 using SharedPointer = std::shared_ptr<Visitable>;
 using Visitables = std::vector<SharedPointer>;

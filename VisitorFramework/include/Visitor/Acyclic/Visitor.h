@@ -14,7 +14,9 @@
 #include "ElementVisitor.h"
 #include "TypeFunctions.h"
 
-namespace VisitorAcyclic{
+namespace VisitorFramework{
+
+namespace Acyclic{
 
 struct Visitor{
 	virtual ~Visitor(){}
@@ -97,7 +99,7 @@ public:
 		return static_cast<VisitableImplementation*>(this);
 	}
 
-	void accept(VisitorAcyclic::Visitor& visitor){
+	void accept(Acyclic::Visitor& visitor){
 		using Visitor = typename VisitableImplementation::Visitor;
 		Visitor* v = dynamic_cast<Visitor*>(&visitor); //crosscast
 
@@ -121,7 +123,7 @@ public:
 	}
 };
 
-} // end namespace
+}} // end namespace
 
 
 

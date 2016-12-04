@@ -14,14 +14,14 @@
 #include "NonVisitable.h"
 #include "NonVisitableWithAccessor.h"
 
-#include <Visitor/Acyclic/VisitorAcyclic.h>
+#include <Visitor/Acyclic/Visitor.h>
 #include <Visitor/Acyclic/TypeFunctions.h>
 
 
 
 namespace MyRepositoryAcyclic{
 
-using MyVisitorBase = VisitorAcyclic::VisitorBase<Element_1, Element_2, NonVisitable, NonVisitableWithAccessor>;
+using MyVisitorBase = Acyclic::VisitorBase<Element_1, Element_2, NonVisitable, NonVisitableWithAccessor>;
 //using MyVisitorBase = MyVisitorAcyclicBase;
 }
 

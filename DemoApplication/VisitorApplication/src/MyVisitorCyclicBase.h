@@ -17,11 +17,13 @@ class Element_2;
 class Element_3;
 
 #include <iostream>
-#include <Visitor/Cyclic/VisitorCyclic.h>
+#include <Visitor/Cyclic/Visitor.h>
 #include <Visitor/DefaultLoggingPolicy.h>
 
 
 namespace MyRepositoryCyclic{
+
+using namespace VisitorFramework;
 
 using typelist = Visitor::MakeTypelist
 		<
@@ -32,12 +34,12 @@ using typelist = Visitor::MakeTypelist
 		NonVisitableWithAccessor
 		>;
 
-using Repo = VisitorCyclic::Repository
+using Repo = Cyclic::Repository
 		<
-			AdapterLoggingPolicy,
-//			DemoLoggingPolicy,
-			BaseKind::Default,
-			typelist
+		VisitorFramework::AdapterLoggingPolicy,
+//		VisitorFramework::DemoLoggingPolicy,
+		BaseKind::Default,
+		typelist
 		>;
 
 using Visitable = Repo::Visitable;

@@ -8,10 +8,7 @@
 #ifndef DEFAULTLOGGINGPOLICY_H_
 #define DEFAULTLOGGINGPOLICY_H_
 
-/*
- * Makro LOGGING_POLICY auf die gewünschte LoggingPolicy setzen
- * #define LOGGING_POLICY DemoLoggingPolicy
- */
+namespace VisitorFramework{
 
 struct EmptyLoggingPolicy{
 	template<class Visitable, class Visitor>
@@ -93,11 +90,14 @@ struct ElementLoggingPolicy{
 		std::cout << message << std::endl;
 	}
 };
+
+} // end namespace VisitorFramework
+
 #ifndef LOGGING_POLICY
-using DefaultLoggingPolicy = EmptyLoggingPolicy;
+using DefaultLoggingPolicy = VisitorFramework::EmptyLoggingPolicy;
 #else
 using DefaultLoggingPolicy = LOGGING_POLICY;
-//using DefaultLoggingPolicy = DemoLoggingPolicy;
+//using DefaultLoggingPolicy = Visitor::DemoLoggingPolicy;
 #endif
 
 #endif /* DEFAULTLOGGINGPOLICY_H_ */

@@ -8,9 +8,10 @@
 #ifndef MYVISITABLEIMPLCYCLIC_H_
 #define MYVISITABLEIMPLCYCLIC_H_
 
+#include <Visitor/Cyclic/Visitor.h>
+
 #include "MyVisitorCyclicBase.h"
 
-#include <Visitor/Cyclic/VisitorCyclic.h>
 #include <Visitor/StoragePolicies.h>
 
 
