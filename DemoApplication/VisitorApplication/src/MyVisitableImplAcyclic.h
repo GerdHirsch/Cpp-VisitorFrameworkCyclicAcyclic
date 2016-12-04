@@ -19,6 +19,7 @@ class NonVisitable;
 
 
 namespace MyRepositoryAcyclic{
+
 using namespace VisitorFramework;
 // ab C++11
 template

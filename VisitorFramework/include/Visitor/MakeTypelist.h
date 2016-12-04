@@ -8,7 +8,7 @@
 #ifndef VISITOR_MAKETYPELIST_H_
 #define VISITOR_MAKETYPELIST_H_
 
-namespace Visitor{
+namespace VisitorFramework{
 
 template<class ...Types>
 struct MakeTypelist;

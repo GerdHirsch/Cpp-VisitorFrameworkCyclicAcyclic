@@ -1,11 +1,15 @@
 /*
- * DemoMyRepository.cpp
+ * DemoMyAcyclicRepository.cpp
  *
- *  Created on: 03.12.2016
+ *  Created on: 04.12.2016
  *      Author: Gerd
  */
 
-#include <Visitor/Cyclic/Visitor.h>
+
+#include <Visitor/Acyclic/Visitor.h>
+#include <Visitor/Acyclic/Repository.h>
+#include <Visitor/MakeTypelist.h>
+#include <Visitor/BaseKind.h>
 
 #include "Element_1.h"
 #include "Element_2.h"
@@ -15,18 +19,22 @@
 
 #include <iostream>
 
+
+namespace{
 class A;
 class B;
 class C;
 
-using typelist = Visitor::MakeTypelist<Element_1, Element_2, A, B, C>;
+
+using typelist = VisitorFramework::MakeTypelist<Element_2, B>;
+//using typelist = VisitorFramework::MakeTypelist<Element_1, Element_2, A, B, C>;
 
 namespace VF = VisitorFramework;
 
-using Repo = VF::Cyclic::Repository
+using Repo = VF::Acyclic::Repository
 		<
-//		VisitorFramework::DemoLoggingPolicy,
-		VisitorFramework::EmptyLoggingPolicy,
+		VF::DemoLoggingPolicy,
+//		VF::EmptyLoggingPolicy,
 		BaseKind::Default,
 		typelist
 		>;
@@ -65,8 +73,11 @@ public:
 	std::string toString() const { return "C"; }
 };
 
-void demoMyRepository(){
-	std::cout << "==== demoMyRepository() ====" << std::endl;
+}
+
+void demoMyAcyclicRepository(){
+	std::cout << "=== demoMyAcyclicRepository() ==="  << std::endl;
+
 	DemoVisitor myVisitor;
 	Repo::VisitorBase & visitor = myVisitor;
 	Element_1 e1;
@@ -77,11 +88,11 @@ void demoMyRepository(){
 	C c;
 	Repo::AdapterByReference<C> aC(c);
 
-	visitor.visit(e1);
-	visitor.visit(e2);
-
+	e1.accept(visitor);
 	aA.accept(visitor);
 	b.accept(visitor);
 	aC.accept(visitor);
-	std::cout << "==== end demoMyRepository() ====" << std::endl;
+	std::cout << "==== end demoMyAcyclicRepository() ====" << std::endl;
+
+
 }

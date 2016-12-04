@@ -5,13 +5,19 @@
  *      Author: Gerd
  */
 
+void demoSimpleElements();
+void demoVisitorCyclic();
+void demoMyCyclicRepository();
+void demoMyAcyclicRepository();
 
-#include "main.h"
+#include <iostream>
+
 using namespace std;
 
 int main(){
 	cout << "VisitorApplication" << endl;
-	demoSimpleElements();
-	demoMyRepository();
+//	demoSimpleElements();
+	demoMyCyclicRepository();
+	demoMyAcyclicRepository();
 	cout << "================================" << endl;
 }

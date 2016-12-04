@@ -152,9 +152,6 @@ template<class ToVisit, class...Rest>
 using visitsAbstract = InheritFromAbstract<ToVisit, Rest...>;
 //---------------------------------------------------------------------
 
-
-
-
 template<class LoggingPolicy_, class = BaseKind::Abstract>
 struct VisitorBase{
 	template<class ...Visitables>
@@ -189,8 +186,9 @@ struct Repository{
 	using AdapterByReference = VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
 };
 
+
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>
-struct Repository<LoggingPolicy, BaseKind_, Visitor::MakeTypelist<Visitables...>>
+struct Repository<LoggingPolicy, BaseKind_, VisitorFramework::MakeTypelist<Visitables...>>
 // delegates
 : Repository<LoggingPolicy, BaseKind_, Visitables...>{};
 

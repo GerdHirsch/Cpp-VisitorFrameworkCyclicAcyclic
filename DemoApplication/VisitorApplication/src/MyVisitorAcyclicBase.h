@@ -20,9 +20,13 @@
 
 
 namespace MyRepositoryAcyclic{
-
-using MyVisitorBase = Acyclic::VisitorBase<Element_1, Element_2, NonVisitable, NonVisitableWithAccessor>;
-//using MyVisitorBase = MyVisitorAcyclicBase;
+using MyVisitorBase = Acyclic::VisitorBase
+		<
+		Element_1,
+		Element_2,
+		NonVisitable,
+		NonVisitableWithAccessor
+		>;
 }
 
 #endif /* MYVISITORACYCLICBASE_H_ */
