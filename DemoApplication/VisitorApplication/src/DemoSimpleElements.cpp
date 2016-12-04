@@ -18,8 +18,8 @@
 #include "MyVisitableCyclicAcyclic.h"
 #include "DemoRunVisitor.h"
 
-#include <include/VisitorAcyclic.h>
-#include <include/VisitableAdapterAcyclic.h>
+#include <Visitor/VisitorAcyclic.h>
+#include <Visitor/VisitableAdapterAcyclic.h>
 
 #include <vector>
 

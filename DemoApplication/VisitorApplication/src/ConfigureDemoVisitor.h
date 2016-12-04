@@ -13,8 +13,8 @@
 
 #include "NonVisitable.h"
 #include "NonVisitableWithAccessor.h"
-#include <include/TypeFunctions.h>
-#include <include/VisitableAdapterAcyclic.h>
+#include <Visitor/TypeFunctions.h>
+#include <Visitor/VisitableAdapterAcyclic.h>
 #include <iostream>
 
 namespace DemoAdapterAcyclic{

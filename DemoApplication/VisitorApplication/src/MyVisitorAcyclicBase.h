@@ -14,8 +14,8 @@
 #include "NonVisitable.h"
 #include "NonVisitableWithAccessor.h"
 
-#include <include/VisitorAcyclic.h>
-#include <include/TypeFunctions.h>
+#include <Visitor/VisitorAcyclic.h>
+#include <Visitor/TypeFunctions.h>
 
 
 

@@ -9,7 +9,7 @@
 #include "Element_2.h"
 #include "Element_3.h"
 
-#include <include/DefaultLoggingPolicy.h>
+#include <Visitor/DefaultLoggingPolicy.h>
 
 #include "VisitorCyclicRepository.h"
 

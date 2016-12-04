@@ -10,8 +10,8 @@
 
 #include "MyVisitorCyclicBase.h"
 
-#include <include/VisitorCyclic.h>
-#include <include/StoragePolicies.h>
+#include <Visitor/VisitorCyclic.h>
+#include <Visitor/StoragePolicies.h>
 
 #include <iostream>
 

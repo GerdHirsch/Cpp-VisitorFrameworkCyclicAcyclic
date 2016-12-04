@@ -8,8 +8,8 @@
 #ifndef VISITORCYCLICREPOSITORY_H_
 #define VISITORCYCLICREPOSITORY_H_
 
-#include <include/VisitorCyclic.h>
-#include <include/BaseKind.h>
+#include <Visitor/VisitorCyclic.h>
+#include <Visitor/BaseKind.h>
 
 namespace VisitorCyclic{
 
