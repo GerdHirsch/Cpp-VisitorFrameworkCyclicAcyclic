@@ -11,8 +11,7 @@ using namespace std;
 
 int main(){
 	cout << "VisitorApplication" << endl;
-//	demoSimpleElements();
-//	demoVisitorCyclic();
-	demoMyRepository();
+	demoSimpleElements();
+//	demoMyRepository();
 	cout << "================================" << endl;
 }
