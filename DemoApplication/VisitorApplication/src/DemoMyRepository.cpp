@@ -11,7 +11,7 @@
 
 #include <Visitor/DefaultLoggingPolicy.h>
 
-#include <Visitor/CyclicRepository.h>
+#include <Visitor/Cyclic/VisitorCyclic.h>
 
 #include <iostream>
 

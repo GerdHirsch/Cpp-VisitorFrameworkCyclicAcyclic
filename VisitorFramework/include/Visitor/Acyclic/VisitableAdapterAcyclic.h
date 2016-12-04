@@ -9,8 +9,8 @@
 #define VISITABLEADAPTERACYCLIC_H_
 
 #include "VisitorAcyclic.h"
-#include "StoragePolicies.h"
-#include "DefaultLoggingPolicy.h"
+#include "../StoragePolicies.h"
+#include "../DefaultLoggingPolicy.h"
 #include "TypeFunctions.h"
 
 namespace VisitorAcyclic{

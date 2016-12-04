@@ -10,9 +10,9 @@
 
 #include <iostream>
 
-#include <Visitor/VisitorAcyclic.h>
+#include <Visitor/Acyclic/VisitorAcyclic.h>
 #include <Visitor/DefaultLoggingPolicy.h>
-#include <Visitor/VisitableAdapterAcyclic.h>
+#include <Visitor/Acyclic/VisitableAdapterAcyclic.h>
 
 class Element_2;
 class NonVisitable;

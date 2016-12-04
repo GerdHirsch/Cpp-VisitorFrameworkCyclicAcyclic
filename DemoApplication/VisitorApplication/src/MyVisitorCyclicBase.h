@@ -17,9 +17,8 @@ class Element_2;
 class Element_3;
 
 #include <iostream>
-#include <Visitor/VisitorCyclic.h>
+#include <Visitor/Cyclic/VisitorCyclic.h>
 #include <Visitor/DefaultLoggingPolicy.h>
-#include <Visitor/CyclicRepository.h>
 
 
 namespace MyRepositoryCyclic{
