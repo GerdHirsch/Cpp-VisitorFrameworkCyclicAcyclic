@@ -18,37 +18,31 @@ class Element_3;
 
 #include <iostream>
 #include <Visitor/VisitorCyclic.h>
-
+#include <Visitor/DefaultLoggingPolicy.h>
+#include "VisitorCyclicRepository.h"
 
 
 namespace MyRepositoryCyclic{
 
-struct VisitorCyclicBase;
+using typelist = VisitorCyclic::MakeTypelist
+		<
+		Element_1,
+		Element_2,
+		Element_3,
+		NonVisitable,
+		NonVisitableWithAccessor
+		>;
 
-using Visitable = VisitorCyclic::Visitable<VisitorCyclicBase>;
+using Repo = VisitorCyclic::Repository
+		<
+			AdapterLoggingPolicy,
+//			DemoLoggingPolicy,
+			BaseKind::Default,
+			typelist
+		>;
 
-struct VisitorCyclicBase{
-	virtual ~VisitorCyclicBase(){}
-	virtual void visit(Element_1 &e) = 0;
-	virtual void visit(Element_2 &e) = 0;
-//	virtual void visit(Element_3 &e){
-//		//cannot dynamic_cast '& e' source is a pointer to incomplete type
-//		Visitable* vp = dynamic_cast<Visitable*>(&e);
-//		if(vp)
-//			this->visit(*vp);
-//	}
-	virtual void visit(NonVisitable &d) = 0;
-	virtual void visit(Visitable &d){
-		std::cout << this->toString() << "::visit(" << d.toString() <<"&) is not implemented" << std::endl;
-	}
-	virtual void visit(NonVisitableWithAccessor&d){
-		std::cout << this->toString() << "::visit(NonVisitableWithAccessor&) is not implemented" << std::endl;
-	}
-	virtual std::string toString() const = 0;
-};
-
-using MyVisitorBase = VisitorCyclicBase;
-//using MyVisitorBase = VisitorCyclic::visits<Element_1, Element_2, NonVisitable, NonVisitableWithAccessor>;
+using Visitable = Repo::Visitable;
+using MyVisitorBase = Repo::VisitorBase;
 
 }
 

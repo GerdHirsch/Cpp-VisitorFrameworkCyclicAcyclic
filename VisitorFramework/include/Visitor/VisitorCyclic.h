@@ -27,15 +27,16 @@ template
 	<
 		class ConcreteVisitable,
 		class VisitorBase,
-//		class LoggingPolicy,
+		class LoggingPolicy,
 		class VisitableImplementation = ConcreteVisitable
 	>
-struct VisitableImpl : Visitable<VisitorBase> {
+struct VisitableImpl : Visitable<VisitorBase>, LoggingPolicy {
 	typedef Visitable<VisitorBase> base_type;
 
 	void accept(VisitorBase& visitor){
 		//TODO als LoggingPolicy implementieren
-		std::cout << This()->toString() <<"::accept: " << visitor.toString() << std::endl;
+		this->logAccepted(*this, visitor);
+//		std::cout << This()->toString() <<"::accept: " << visitor.toString() << std::endl;
 		visitor.visit(*(This()->getVisitable()) );
 	}
 protected:
@@ -64,14 +65,16 @@ template
 	<
 		class Adaptee,
 		class StoragePolicy,
-//		class LoggingPolicy,
+		class LoggingPolicy,
 		class VisitorBase
 	>
 struct VisitableAdapter :
 	VisitableImpl<
 		Adaptee,
 		VisitorBase,
-		VisitableAdapter<Adaptee, StoragePolicy, VisitorBase>>,
+		LoggingPolicy,
+		VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>>,
+//		VisitableAdapter<Adaptee, StoragePolicy, VisitorBase>>,
 	StoragePolicy
 {
 	using StorageType = typename StoragePolicy::StorageType;

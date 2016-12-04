@@ -13,6 +13,8 @@
 
 #include "VisitorCyclicRepository.h"
 
+#include <iostream>
+
 class A;
 class B;
 class C;
@@ -21,17 +23,14 @@ using typelist = VisitorCyclic::MakeTypelist<Element_1, Element_2, A, B, C>;
 
 using Repo = VisitorCyclic::Repository
 		<
-			AdapterLoggingPolicy,
+//			AdapterLoggingPolicy,
 //			DemoLoggingPolicy,
+			EmptyLoggingPolicy,
 			BaseKind::Default,
 			typelist
 		>;
 
-
-//			Element_1, Element_2,
-//			A, B>;
-
-class B: public Repo::Visitable<B>{
+class B: public Repo::VisitableImpl<B>{
 public:
 	std::string toString() const override { return "B"; }
 };
@@ -54,18 +53,19 @@ using AdapterWeak = Repo::VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee
 template<class Adaptee>
 using AdapterReference = Repo::VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
 
-class A //: public Repo::Visitable<A>
+class A //: public Repo::VisitableImpl<A>
 {
 public:
 	std::string toString() const { return "A"; }
 };
-class C //: public Repo::Visitable<C>
+class C //: public Repo::VisitableImpl<C>
 {
 public:
 	std::string toString() const { return "C"; }
 };
 
 void demoMyRepository(){
+	std::cout << "==== demoMyRepository() ====" << std::endl;
 	DemoVisitor myVisitor;
 	Repo::VisitorBase & visitor = myVisitor;
 	Element_1 e1;
@@ -82,4 +82,5 @@ void demoMyRepository(){
 	aA.accept(visitor);
 	b.accept(visitor);
 	aC.accept(visitor);
+	std::cout << "==== end demoMyRepository() ====" << std::endl;
 }

@@ -34,15 +34,17 @@ struct Repository{
 			typename VisitorBase<LoggingPolicy, BaseKind_>::template
 			implementsVisitor<Visitables...>;
 
+	using Visitable = VisitorCyclic::Visitable<VisitorBase>;
+
 	template<class ConcreteVisitable>
-	using Visitable =
-			VisitorCyclic::VisitableImpl<ConcreteVisitable, VisitorBase>;
+	using VisitableImpl =
+			VisitorCyclic::VisitableImpl<ConcreteVisitable, VisitorBase, LoggingPolicy>;
 //			VisitorCyclic::VisitableImpl<ConcreteVisitable, VisitorBase, DemoLoggingPolicy>;
 
 	template<class Adaptee, class StoragePolicy>
 	using VisitableAdapter =
-			VisitorCyclic::VisitableAdapter<Adaptee, StoragePolicy, VisitorBase>;
-//			VisitorCyclic::VisitableAdapter<Adaptee, StoragePolicy, DemoLoggingPolicy, VisitorBase>;
+//			VisitorCyclic::VisitableAdapter<Adaptee, StoragePolicy, VisitorBase>;
+			VisitorCyclic::VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>;
 
 	// Convenience Interface
 	template<class Adaptee>

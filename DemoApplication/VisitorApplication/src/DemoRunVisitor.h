@@ -13,7 +13,7 @@
 
 template<class Visitor, class Visitables>
 inline
-void demoVisitor(Visitor& visitor, Visitables& visitables){
+void demoRunVisitor(Visitor& visitor, Visitables& visitables){
 	std::cout << std::endl << "==== " << visitor.toString() << " ====" << std::endl;
 	std::for_each
 	(	visitables.begin(),

@@ -11,7 +11,9 @@
 #include "MyVisitableCyclicAcyclic.h"
 
 //vor C++11 via typedef in Template
-class Element_2 : public Repository::Repository<Element_2>::VisitableImpl{
+//class Element_2 : public Repository::Repository<Element_2>::VisitableImpl{
+class Element_2 : public Repository::VisitableImpl<Element_2>
+{
 public:
 
 	std::string toString() const override; //{ return "Element_2";}

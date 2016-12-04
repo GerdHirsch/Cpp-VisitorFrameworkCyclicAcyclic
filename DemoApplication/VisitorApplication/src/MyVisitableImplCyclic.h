@@ -13,33 +13,19 @@
 #include <Visitor/VisitorCyclic.h>
 #include <Visitor/StoragePolicies.h>
 
+
 #include <iostream>
 
 namespace MyRepositoryCyclic{
 // ab C++11
-template
-	<
-	class ConcreteVisitable,
-	class VisitableImplementation = ConcreteVisitable
-	>
-using VisitableImpl = VisitorCyclic::VisitableImpl<ConcreteVisitable, MyVisitorBase>;
-
+template<class ConcreteVisitable>
+using VisitableImpl = Repo::VisitableImpl<ConcreteVisitable>;
 
 template
 	<class Adaptee,
 	class StoragePolicy = StorageByReference<Adaptee>
 	>
-using VisitableAdapter =
-		VisitorCyclic::VisitableAdapter<Adaptee, StoragePolicy, MyVisitorBase>;
-
-
-// bis C++11
-template<class ConcreteVisitable, class VisitableImplementation = ConcreteVisitable>
-class Repository{
-public:
-	typedef VisitorCyclic::VisitableImpl<ConcreteVisitable, MyVisitorBase> VisitableImpl;
-};
-
+using VisitableAdapter = Repo::VisitableAdapter<Adaptee, StoragePolicy>;
 }
 
 #endif /* MYVISITABLEIMPLCYCLIC_H_ */

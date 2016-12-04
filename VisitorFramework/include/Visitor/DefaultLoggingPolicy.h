@@ -17,6 +17,8 @@ struct EmptyLoggingPolicy{
 	template<class Visitable, class Visitor>
 	static void logNotAccepted(Visitable const& visitable, Visitor const& visitor){}
 	template<class Visitable, class Visitor>
+	static void logNotVisited(Visitable const& visitable, Visitor const& visitor){}
+	template<class Visitable, class Visitor>
 	static void logAccepted(Visitable const& visitable, Visitor const& visitor){}
 };
 struct DemoLoggingPolicy{

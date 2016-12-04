@@ -68,8 +68,8 @@ void demoSimpleElements(){
 	VisitorUniversal1 visitor1;
 	VisitorUniversal2 visitor2;
 
-	demoVisitor(visitor1, visitables);
-	demoVisitor(visitor2, visitables);
+	demoRunVisitor(visitor1, visitables);
+	demoRunVisitor(visitor2, visitables);
 
 	cout << "=== end demoSimpleElements" << endl;
 }
