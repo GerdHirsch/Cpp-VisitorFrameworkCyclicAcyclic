@@ -6,7 +6,7 @@ between Cyclic/Acyclic Visitors
 
 between default and abstract implementation of Visitor::visit  
 
-between different LoggingPolicies for Visiors (visit(..) and Visitables (accept(..)
+between different LoggingPolicies for Visior::visit(..) and Visitables::accept(..)
 
 and Adapter with different StoragePolicies (ByReference, ByWeakPointer, BySharedPointer as Defaults)
 
