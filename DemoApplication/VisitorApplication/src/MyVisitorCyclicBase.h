@@ -19,12 +19,12 @@ class Element_3;
 #include <iostream>
 #include <Visitor/VisitorCyclic.h>
 #include <Visitor/DefaultLoggingPolicy.h>
-#include "VisitorCyclicRepository.h"
+#include <Visitor/CyclicRepository.h>
 
 
 namespace MyRepositoryCyclic{
 
-using typelist = VisitorCyclic::MakeTypelist
+using typelist = Visitor::MakeTypelist
 		<
 		Element_1,
 		Element_2,

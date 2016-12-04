@@ -13,7 +13,7 @@
 #include <iostream>
 
 namespace VisitorCyclic {
-
+//---------------------------------------------------------------------
 template<class VisitorBase>
 class Visitable
 {
@@ -22,7 +22,12 @@ public:
 	virtual void accept(VisitorBase& visitor) = 0;
 	virtual std::string toString() const = 0;
 };
-
+//---------------------------------------------------------------------
+/**
+ * Baseclass for all Visitables:
+ * usage: MyVisitable : VisitableImpl<MyVisitable, ...>{...}
+ * is used in Repository
+ */
 template
 	<
 		class ConcreteVisitable,
@@ -34,9 +39,7 @@ struct VisitableImpl : Visitable<VisitorBase>, LoggingPolicy {
 	typedef Visitable<VisitorBase> base_type;
 
 	void accept(VisitorBase& visitor){
-		//TODO als LoggingPolicy implementieren
 		this->logAccepted(*this, visitor);
-//		std::cout << This()->toString() <<"::accept: " << visitor.toString() << std::endl;
 		visitor.visit(*(This()->getVisitable()) );
 	}
 protected:
@@ -56,6 +59,7 @@ protected:
 		return static_cast<VisitableImplementation const*>(this);
 	}
 };
+//---------------------------------------------------------------------
 /**
  * VisitableAdapter to adapt NonVisitable Types
  * StoragePolicy from StoragePolicies.h:
@@ -92,7 +96,6 @@ struct VisitableAdapter :
 		return message;
 	}
 };
-
 //---------------------------------------------------------------------
 /**
  * infrastructure to Create the Baseclass of a Cyclic Visitor
@@ -144,10 +147,14 @@ template<class LogginPolicy, class ToVisit, class...Rest>
 using visitsDefault = InheritFromDefault<LogginPolicy, ToVisit, Rest...>;
 template<class ToVisit, class...Rest>
 using visitsAbstract = InheritFromAbstract<ToVisit, Rest...>;
+//---------------------------------------------------------------------
 
-}
 
 
+
+
+
+} // end namespace VisitorCyclic
 
 
 #endif /* VISITORCYCLIC_H_ */

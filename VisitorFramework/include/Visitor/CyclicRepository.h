@@ -10,12 +10,10 @@
 
 #include <Visitor/VisitorCyclic.h>
 #include <Visitor/BaseKind.h>
+#include <Visitor/MakeTypelist.h>
 
 namespace VisitorCyclic{
 
-
-template<class ...Types>
-struct MakeTypelist;
 
 template<class LoggingPolicy_, class = BaseKind::Abstract>
 struct VisitorBase{
@@ -54,7 +52,7 @@ struct Repository{
 };
 
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>
-struct Repository<LoggingPolicy, BaseKind_, MakeTypelist<Visitables...>>
+struct Repository<LoggingPolicy, BaseKind_, Visitor::MakeTypelist<Visitables...>>
 // delegates
 : Repository<LoggingPolicy, BaseKind_, Visitables...>{};
 

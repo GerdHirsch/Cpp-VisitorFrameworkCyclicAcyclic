@@ -11,7 +11,7 @@
 
 #include <Visitor/DefaultLoggingPolicy.h>
 
-#include "VisitorCyclicRepository.h"
+#include <Visitor/CyclicRepository.h>
 
 #include <iostream>
 
@@ -19,7 +19,7 @@ class A;
 class B;
 class C;
 
-using typelist = VisitorCyclic::MakeTypelist<Element_1, Element_2, A, B, C>;
+using typelist = Visitor::MakeTypelist<Element_1, Element_2, A, B, C>;
 
 using Repo = VisitorCyclic::Repository
 		<
