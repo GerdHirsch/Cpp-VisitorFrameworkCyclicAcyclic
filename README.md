@@ -15,4 +15,4 @@ VF::Cyclic::Repository with VF::Acyclic::Repository
 
 ##hooks
 Application spezific template spezialization is used to realize spezific Logging
-for Elements and Adapters see:MyVisitableImplAcyclic.h
+for Elements and Adapters
