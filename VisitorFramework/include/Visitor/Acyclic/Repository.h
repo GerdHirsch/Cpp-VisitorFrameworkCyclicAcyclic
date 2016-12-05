@@ -22,6 +22,8 @@ struct Repository{
 	using Visitor = Acyclic::Visitor;
 
 	using VisitorBase = Acyclic::VisitorBase<Visitables...>;
+//	using VisitorBase = Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
+//			implementsVisitor<Visitables...>;
 
 	using Visitable = Acyclic::Visitable;
 

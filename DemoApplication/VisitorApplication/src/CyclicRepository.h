@@ -11,6 +11,7 @@
 #include <Visitor/DefaultLoggingPolicy.h>
 #include <visitor/MakeTypelist.h>
 #include <Visitor/Cyclic/Repository.h>
+#include <Visitor/Acyclic/Repository.h>
 
 class NonVisitable;
 

@@ -29,9 +29,11 @@ using AdapterReference = Repository::AdapterByReference<Adaptee>;
 }
 
 using namespace CyclicRepository;
+using namespace std;
 
-void demoMyCyclicRepository(){
-	std::cout << "==== demoMyCyclicRepository() ====" << std::endl;
+void demoCyclicRepository(){
+	cout << "================================" << endl;
+	std::cout << "==== demoCyclicRepository() ====" << std::endl;
 	Visitables visitables;
 
 	DemoVisitor23 visitor1;
@@ -47,5 +49,5 @@ void demoMyCyclicRepository(){
 	demoRunVisitor(visitor2, visitables);
 
 
-	std::cout << "==== end demoMyCyclicRepository() ====" << std::endl;
+	std::cout << "==== end demoCyclicRepository() ====" << std::endl;
 }

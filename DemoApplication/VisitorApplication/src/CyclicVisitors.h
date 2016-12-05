@@ -12,7 +12,6 @@
 #include "NonVisitable.h"
 #include "CyclicRepository.h"
 
-
 namespace CyclicRepository{
 
 class DemoVisitor13 : public Repository::VisitorBase{
@@ -41,7 +40,6 @@ public:
 	std::string toString() const override { return "DemoVisitor23"; }
 
 };
-
 
 } // end namespace
 

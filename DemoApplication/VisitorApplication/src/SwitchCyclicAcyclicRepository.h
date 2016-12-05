@@ -11,11 +11,12 @@
 #include <Visitor/DefaultLoggingPolicy.h>
 #include <visitor/MakeTypelist.h>
 #include <visitor/BaseKind.h>
+#include <Visitor/Cyclic/Repository.h>
 #include <Visitor/Acyclic/Repository.h>
 
 class NonVisitable;
 
-namespace AcyclicRepository{
+namespace CyclicAcyclicRepository{
 class E1;
 class E2;
 class E3;
@@ -29,6 +30,7 @@ using typelist =
 		NonVisitable
 		>;
 
+//using Repository = VF::Cyclic::Repository
 using Repository = VF::Acyclic::Repository
 		<
 //		VF::EmptyLoggingPolicy,

@@ -15,8 +15,9 @@ namespace Cyclic{
 
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>
 struct Repository{
+
 	using Visitor =
-			typename VisitorBase<LoggingPolicy, BaseKind_>::template
+			typename Cyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
 			implementsVisitor<Visitables...>;
 
 	using VisitorBase = Visitor;

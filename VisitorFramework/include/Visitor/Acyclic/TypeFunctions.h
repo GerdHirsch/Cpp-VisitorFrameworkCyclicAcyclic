@@ -18,7 +18,7 @@ struct EmptyAccessor{
 	virtual std::string toString() const { return "EmptyAccessor";}
 };
 /*
- * Adapter erzeugt einen Visitor für ein Element
+ * VisitorInterface erzeugt einen Visitor für ein Element
  * so dass ein ConcreteVisitor davon erben kann
  * und über den Accessor, wenn vorhanden,
  * auf die entsprechenden Member in dem jeweiligen

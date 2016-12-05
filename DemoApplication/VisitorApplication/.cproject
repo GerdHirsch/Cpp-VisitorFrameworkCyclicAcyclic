@@ -45,12 +45,12 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="cdt.managedbuild.config.gnu.cygwin.exe.debug.549754698.1111665369" name="DemoMyAcyclicRepository.cpp" rcbsApplicability="disable" resourcePath="src/DemoMyAcyclicRepository.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.exe.debug.485173077.626901819">
-						<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.exe.debug.485173077.626901819" name="Cygwin C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.exe.debug.485173077"/>
+					<fileInfo id="cdt.managedbuild.config.gnu.cygwin.exe.debug.549754698.1398054095" name="DemoSwitchCyclicAcyclic.cpp" rcbsApplicability="disable" resourcePath="src/DemoSwitchCyclicAcyclic.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.exe.debug.485173077.1332923753">
+						<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.exe.debug.485173077.1332923753" name="Cygwin C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.exe.debug.485173077"/>
 					</fileInfo>
 					<sourceEntries>
 						<entry excluding="src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
-						<entry excluding="Element_X.cpp|DemoSwitchCyclicAcyclic.cpp|DemoVisitorCyclic.cpp|DemoAdapterAcyclic.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry excluding="Element_X.cpp|DemoVisitorCyclic.cpp|DemoAdapterAcyclic.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
