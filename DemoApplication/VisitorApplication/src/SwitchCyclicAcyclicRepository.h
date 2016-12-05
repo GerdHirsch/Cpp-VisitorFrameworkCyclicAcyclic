@@ -1,20 +1,21 @@
 /*
- * CyclicRepository.h
+ * SwitchCyclicAcyclicRepository.h
  *
  *  Created on: 05.12.2016
  *      Author: Gerd
  */
 
-#ifndef CYCLICREPOSITORY_H_
-#define CYCLICREPOSITORY_H_
+#ifndef SWITCHCYCLICACYCLICREPOSITORY_H_
+#define SWITCHCYCLICACYCLICREPOSITORY_H_
 
 #include <Visitor/DefaultLoggingPolicy.h>
 #include <visitor/MakeTypelist.h>
-#include <Visitor/Cyclic/Repository.h>
+#include <visitor/BaseKind.h>
+#include <Visitor/Acyclic/Repository.h>
 
 class NonVisitable;
 
-namespace CyclicRepository{
+namespace AcyclicRepository{
 class E1;
 class E2;
 class E3;
@@ -28,7 +29,7 @@ using typelist =
 		NonVisitable
 		>;
 
-using Repository = VF::Cyclic::Repository
+using Repository = VF::Acyclic::Repository
 		<
 //		VF::EmptyLoggingPolicy,
 		VF::DemoLoggingPolicy,
@@ -38,4 +39,8 @@ using Repository = VF::Cyclic::Repository
 		>;
 }
 
-#endif /* CYCLICREPOSITORY_H_ */
+
+
+
+
+#endif /* SWITCHCYCLICACYCLICREPOSITORY_H_ */

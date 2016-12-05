@@ -163,39 +163,6 @@ struct VisitorBase<LoggingPolicy_, BaseKind::Default>{
 	using implementsVisitor = Cyclic::InheritFromDefault<LoggingPolicy_, Visitables...>;
 };
 
-template<class LoggingPolicy, class BaseKind_, class ...Visitables>
-struct Repository{
-	using Visitor =
-			typename VisitorBase<LoggingPolicy, BaseKind_>::template
-			implementsVisitor<Visitables...>;
-
-	using VisitorBase = Visitor;
-
-	using Visitable = Cyclic::Visitable<VisitorBase>;
-
-	template<class ConcreteVisitable>
-	using VisitableImpl =
-			Cyclic::VisitableImpl<ConcreteVisitable, VisitorBase, LoggingPolicy>;
-
-	template<class Adaptee, class StoragePolicy>
-	using VisitableAdapter =
-			Cyclic::VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>;
-
-	// Convenience Interface
-	template<class Adaptee>
-	using AdapterByWeakpointer = VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee>>;
-	template<class Adaptee>
-	using AdapterByReference = VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
-};
-
-
-template<class LoggingPolicy, class BaseKind_, class ...Visitables>
-struct Repository<LoggingPolicy, BaseKind_, VisitorFramework::MakeTypelist<Visitables...>>
-// delegates
-: Repository<LoggingPolicy, BaseKind_, Visitables...>{};
-
-
-
 }} // end namespace VisitorCyclic
 
 
