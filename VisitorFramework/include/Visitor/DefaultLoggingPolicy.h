@@ -8,6 +8,9 @@
 #ifndef DEFAULTLOGGINGPOLICY_H_
 #define DEFAULTLOGGINGPOLICY_H_
 
+#include <string>
+#include <iostream>
+
 namespace VisitorFramework{
 
 struct EmptyLoggingPolicy{

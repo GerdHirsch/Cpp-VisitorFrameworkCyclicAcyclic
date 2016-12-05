@@ -19,10 +19,11 @@
 #include <Visitor/DefaultLoggingPolicy.h>
 
 namespace VF = VisitorFramework;
-using Repository = VF::Acyclic::Repository
-//using Repository = VF::Cyclic::Repository
+
+//using Repository = VF::Acyclic::Repository
+using Repository = VF::Cyclic::Repository
 		<
-		VisitorFramework::AdapterLoggingPolicy,
+//		VisitorFramework::AdapterLoggingPolicy,
 		VisitorFramework::DemoLoggingPolicy,
 		BaseKind::Default,
 		typelist

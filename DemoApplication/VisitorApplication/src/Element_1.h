@@ -9,6 +9,8 @@
 #define ELEMENT_1_H_
 
 #include "DemoSwitchCyclicAcyclic.h"
+//#include "MyVisitableCyclicAcyclic.h"
+
 //ab C++11 via using ...
 class Element_1 : public Repository::VisitableImpl<Element_1>
 {

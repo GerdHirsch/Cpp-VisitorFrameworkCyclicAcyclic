@@ -9,6 +9,7 @@
 #define MYTYPELIST_H_
 
 #include <Visitor/MakeTypelist.h>
+
 class Element_1;
 class Element_2;
 class NonVisitable;

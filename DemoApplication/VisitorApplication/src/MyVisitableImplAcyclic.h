@@ -9,7 +9,8 @@
 #define MYVISITABLEIMPLACYCLIC_H_
 
 #include <iostream>
-#include "MyTypeList.h"
+//#include "MyTypeList.h"
+
 
 #include "Element_1.h"
 #include "Element_2.h"
@@ -22,10 +23,23 @@
 #include <Visitor/Acyclic/Visitor.h>
 #include <Visitor/Acyclic/TypeFunctions.h>
 #include <Visitor/Acyclic/Repository.h>
+#include <Visitor/MakeTypelist.h>
 
 class Element_2;
 class NonVisitable;
 
+class Element_1;
+class Element_2;
+class NonVisitable;
+class NonVisitableWithAccessor;
+
+using typelist = VisitorFramework::MakeTypelist
+		<
+		Element_1,
+		Element_2,
+		NonVisitable,
+		NonVisitableWithAccessor
+		>;
 
 namespace MyRepositoryAcyclic{
 
@@ -96,7 +110,6 @@ public:
 		VisitorFramework::ElementLoggingPolicy
 	> VisitableImpl;
 };
-
 
 }
 
