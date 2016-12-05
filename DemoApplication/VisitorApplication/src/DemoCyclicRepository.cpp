@@ -36,8 +36,8 @@ void demoCyclicRepository(){
 	std::cout << "==== demoCyclicRepository() ====" << std::endl;
 	Visitables visitables;
 
-	DemoVisitor23 visitor1;
-	DemoVisitor13 visitor2;
+	DemoVisitor13 visitor1;
+	DemoVisitor23 visitor2;
 	NonVisitable nv;
 
 	visitables.push_back(SharedPointer(new E1));

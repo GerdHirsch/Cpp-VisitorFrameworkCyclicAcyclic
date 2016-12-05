@@ -10,7 +10,7 @@
 
 
 #include "AcyclicVisitables.h"
-#include "NonVisitable.h"
+#include "NonVisitableWithAccessor.h"
 #include "AcyclicRepository.h"
 
 
@@ -34,7 +34,7 @@ public:
 class DemoVisitor23 : public Repository::Visitor,
 	public Repository::implementsVisitor<E2>,
 	public Repository::implementsVisitor<E3>,
-	public Repository::implementsVisitor<NonVisitable>
+	public Repository::implementsVisitor<NonVisitableWithAccessor>
 {
 public:
 	void visit(E2& v) {
@@ -43,8 +43,11 @@ public:
 	void visit(E3& v) {
 		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
 	}
-	void visit(NonVisitable& v) {
+	void visit(NonVisitableWithAccessor& v) {
 		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
+		std::cout << this->getData(v) << std::endl;
+		this->setData(v, "DemoVisitor23::Data");
+		std::cout << this->getData(v) << std::endl;
 	}
 	std::string toString() const override { return "DemoVisitor23"; }
 

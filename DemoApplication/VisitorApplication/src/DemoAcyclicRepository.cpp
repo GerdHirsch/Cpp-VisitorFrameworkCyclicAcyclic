@@ -7,6 +7,7 @@
 
 #include "AcyclicVisitables.h"
 #include "NonVisitable.h"
+#include "NonVisitableWithAccessor.h"
 
 #include "AcyclicVisitors.h"
 #include "AcyclicRepository.h"
@@ -36,14 +37,14 @@ void demoAcyclicRepository(){
 	std::cout << "==== demoAcyclicRepository() ====" << std::endl;
 	Visitables visitables;
 
-	DemoVisitor23 visitor1;
-	DemoVisitor13 visitor2;
-	NonVisitable nv;
+	DemoVisitor13 visitor1;
+	DemoVisitor23 visitor2;
+	NonVisitableWithAccessor nv;
 
 	visitables.push_back(SharedPointer(new E1));
 	visitables.push_back(SharedPointer(new E2));
 	visitables.push_back(SharedPointer(new E3));
-	visitables.push_back(SharedPointer(new AdapterReference<NonVisitable>(nv)));
+	visitables.push_back(SharedPointer(new AdapterReference<NonVisitableWithAccessor>(nv)));
 
 	demoRunVisitor(visitor1, visitables);
 	demoRunVisitor(visitor2, visitables);

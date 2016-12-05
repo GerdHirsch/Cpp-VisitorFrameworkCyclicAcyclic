@@ -15,6 +15,7 @@
 #include <Visitor/Acyclic/Repository.h>
 
 class NonVisitable;
+class NonVisitableWithAccessor;
 
 namespace AcyclicRepository{
 class E1;
@@ -27,7 +28,7 @@ using typelist =
 		VisitorFramework::MakeTypelist
 		<
 		E1, E2, E3,
-		NonVisitable
+		NonVisitableWithAccessor
 		>;
 
 using Repository = VF::Acyclic::Repository
