@@ -46,7 +46,7 @@ void demoSwitchCyclicAcyclic(){
 	visitables.push_back(SharedPointer(new AdapterReference<NonVisitable>(nv)));
 
 	demoRunVisitor(visitor13, visitables);
-	demoRunVisitor(visitor23, visitables);
+//	demoRunVisitor(visitor23, visitables);
 
 
 	std::cout << "==== end demoSwitchCyclicAcyclic() ====" << std::endl;

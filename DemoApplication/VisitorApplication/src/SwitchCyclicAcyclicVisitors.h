@@ -19,9 +19,9 @@ public:
 	void visit(E1& v) {
 		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
 	}
-	void visit(E2& v) {
-		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
-	}
+//	void visit(E2& v) {
+//		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
+//	}
 	void visit(E3& v) {
 		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
 	}

@@ -36,8 +36,8 @@ void demoCyclicRepository(){
 	std::cout << "==== demoCyclicRepository() ====" << std::endl;
 	Visitables visitables;
 
-	DemoVisitor13 visitor1;
-	DemoVisitor23 visitor2;
+	DemoVisitor13 visitor13;
+	DemoVisitor23 visitor23;
 	NonVisitable nv;
 
 	visitables.push_back(SharedPointer(new E1));
@@ -45,8 +45,8 @@ void demoCyclicRepository(){
 	visitables.push_back(SharedPointer(new E3));
 	visitables.push_back(SharedPointer(new AdapterReference<NonVisitable>(nv)));
 
-	demoRunVisitor(visitor1, visitables);
-	demoRunVisitor(visitor2, visitables);
+	demoRunVisitor(visitor13, visitables);
+	demoRunVisitor(visitor23, visitables);
 
 
 	std::cout << "==== end demoCyclicRepository() ====" << std::endl;

@@ -23,11 +23,38 @@ struct Visitor{
 	virtual std::string toString() const = 0;
 };
 
-template<class... T>
-class VisitorBase :
+
+template<class LoggingPolicy, class ToVisit>
+struct DefaultVisit : implementsVisitor<ToVisit>{
+	// needed for dynamic_cast
+	virtual ~DefaultVisit(){}
+	void visit(ToVisit& v){
+		LoggingPolicy::logNotVisited(v, dynamic_cast<Acyclic::Visitor&>(*this));
+	}
+};
+
+template<class LoggingPolicy, class... T>
+class InheritFromDefault :
 		public Visitor,
-		public implementsVisitor<T>...
+		public DefaultVisit<LoggingPolicy, T>...
 {};
+
+template<class... T>
+class InheritFromAbstract :
+		public Visitor,
+		public Acyclic::implementsVisitor<T>...
+{};
+
+template<class LoggingPolicy_, class = BaseKind::Abstract>
+struct VisitorBase{
+	template<class ...Visitables>
+	using implementsVisitor = Acyclic::InheritFromAbstract<Visitables...>;
+};
+template<class LoggingPolicy_>
+struct VisitorBase<LoggingPolicy_, BaseKind::Default>{
+	template<class ...Visitables>
+	using implementsVisitor = Acyclic::InheritFromDefault<LoggingPolicy_, Visitables...>;
+};
 
 class Visitable
 {
@@ -35,8 +62,9 @@ public:
     virtual ~Visitable(){};
 	virtual void accept(Visitor& visitor) = 0;
 	virtual std::string toString() const = 0;
-
 };
+
+
 //=====================================================================
 
 /**
