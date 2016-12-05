@@ -30,8 +30,8 @@ using typelist =
 		NonVisitable
 		>;
 
-//using Repository = VF::Cyclic::Repository
-using Repository = VF::Acyclic::Repository
+using Repository = VF::Cyclic::Repository
+//using Repository = VF::Acyclic::Repository
 		<
 //		VF::EmptyLoggingPolicy,
 		VF::DemoLoggingPolicy,
