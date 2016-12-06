@@ -11,7 +11,7 @@
 namespace VisitorFramework{
 
 template<class ...Types>
-struct MakeTypelist;
+struct Typelist;
 
 }
 #endif /* VISITOR_MAKETYPELIST_H_ */

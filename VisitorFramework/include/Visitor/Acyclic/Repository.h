@@ -45,7 +45,7 @@ struct Repository{
 };
 
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>
-struct Repository<LoggingPolicy, BaseKind_, VisitorFramework::MakeTypelist<Visitables...>>
+struct Repository<LoggingPolicy, BaseKind_, VisitorFramework::Typelist<Visitables...>>
 // delegates
 : Repository<LoggingPolicy, BaseKind_, Visitables...>{};
 

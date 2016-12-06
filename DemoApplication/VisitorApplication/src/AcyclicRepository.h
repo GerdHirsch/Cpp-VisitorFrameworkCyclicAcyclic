@@ -25,7 +25,7 @@ class E3;
 namespace VF = VisitorFramework;
 
 using typelist =
-		VisitorFramework::MakeTypelist
+		VisitorFramework::Typelist
 		<
 		E1, E2, E3,
 		NonVisitableWithAccessor
