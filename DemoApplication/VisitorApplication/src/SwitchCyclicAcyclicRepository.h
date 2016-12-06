@@ -9,7 +9,7 @@
 #define SWITCHCYCLICACYCLICREPOSITORY_H_
 
 #include <Visitor/DefaultLoggingPolicy.h>
-#include <visitor/MakeTypelist.h>
+#include <visitor/Typelist.h>
 #include <visitor/BaseKind.h>
 #include <Visitor/Cyclic/Repository.h>
 #include <Visitor/Acyclic/Repository.h>
