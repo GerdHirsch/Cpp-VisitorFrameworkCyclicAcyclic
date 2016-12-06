@@ -8,14 +8,17 @@
 #ifndef TYPEFUNCTIONS_H_
 #define TYPEFUNCTIONS_H_
 
-#include "VisitorAcyclic.h"
 #include "MetaFunctions.h"
+
+namespace VisitorFramework{
+
+namespace Acyclic{
 
 struct EmptyAccessor{
 	virtual std::string toString() const { return "EmptyAccessor";}
 };
 /*
- * Adapter erzeugt einen Visitor für ein Element
+ * VisitorInterface erzeugt einen Visitor für ein Element
  * so dass ein ConcreteVisitor davon erben kann
  * und über den Accessor, wenn vorhanden,
  * auf die entsprechenden Member in dem jeweiligen
@@ -24,9 +27,9 @@ struct EmptyAccessor{
 template<class ToVisit, class Accessor_ = EmptyAccessor>
 class VisitorInterface{
 public:
-	std::string toString(){ return "VisitableAdapter";}
+	std::string toString(){ return "VisitorInterface";}
 
-	void print(){ std::cout << "VisitableAdapter" << std::endl; }
+	void print(){ std::cout << "VisitorInterface" << std::endl; }
 	using ConcreteVisitable = ToVisit;
 	using Accessor = Accessor_;
 	using this_type = VisitorInterface<ToVisit, Accessor>;
@@ -64,18 +67,17 @@ template<class ToVisit, class =
 								>
 		>
 struct getVisitorType{
-	// kein Visitor und Accessor in ToVisit verfügbar
+	// no Visitor and no Accessor in ToVisit available
 	using type = typename VisitorInterface<ToVisit>::type;
 };
 template<class ToVisit>
 struct getVisitorType<ToVisit, typename hasVisitor<ToVisit>::type>{
-	// ToVisit definiert seinen Visitor
+	// ToVisit defines its Visitor
 	using type = typename hasVisitor<ToVisit>::type;
-
 };
 template<class ToVisit>
 struct getVisitorType<ToVisit, typename hasAccessor<ToVisit>::type>{
-	// ToVisit definiert nur einen Accessor
+	// ToVisit defines only an Accessor
 	using type = typename VisitorInterface<ToVisit, typename ToVisit::Accessor>::type;
 };
 
@@ -83,5 +85,7 @@ template<typename ToVisit>
 using getVisitor = typename getVisitorType<ToVisit>::type;
 template<typename ToVisit>
 using implementsVisitor = typename getVisitorType<ToVisit>::type;
+
+}} // end namespace
 
 #endif /* TYPEFUNCTIONS_H_ */

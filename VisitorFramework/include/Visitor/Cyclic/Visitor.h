@@ -8,12 +8,15 @@
 #ifndef VISITORCYCLIC_H_
 #define VISITORCYCLIC_H_
 
-#include "StoragePolicies.h"
+#include "../StoragePolicies.h"
+#include "../BaseKind.h"
+#include "../MakeTypelist.h"
 
 #include <iostream>
+namespace VisitorFramework{
 
-namespace VisitorCyclic {
-
+namespace Cyclic {
+//---------------------------------------------------------------------
 template<class VisitorBase>
 class Visitable
 {
@@ -22,22 +25,29 @@ public:
 	virtual void accept(VisitorBase& visitor) = 0;
 	virtual std::string toString() const = 0;
 };
-
+//---------------------------------------------------------------------
+/**
+ * Baseclass for all Visitables:
+ * usage: MyVisitable : VisitableImpl<MyVisitable, ...>{...}
+ * is used in Repository
+ */
 template
 	<
 		class ConcreteVisitable,
 		class VisitorBase,
+		class LoggingPolicy,
 		class VisitableImplementation = ConcreteVisitable
 	>
-struct VisitableImpl : Visitable<VisitorBase> {
+struct VisitableImpl : Visitable<VisitorBase>, LoggingPolicy {
 	typedef Visitable<VisitorBase> base_type;
 
 	void accept(VisitorBase& visitor){
-		std::cout << This()->toString() <<"::accept: " << visitor.toString() << std::endl;
+		this->logAccepted(*this, visitor);
 		visitor.visit(*(This()->getVisitable()) );
 	}
+protected:
 	// Muss überschrieben werden wenn ConcreteVisitable und
-	// VisitableImplementation nicht übereinstimmen
+	// VisitableImplementation nicht übereinstimmen (siehe Adapter)
 	ConcreteVisitable* getVisitable() {
 		return static_cast<ConcreteVisitable*>(this);
 	}
@@ -52,18 +62,26 @@ struct VisitableImpl : Visitable<VisitorBase> {
 		return static_cast<VisitableImplementation const*>(this);
 	}
 };
-
+//---------------------------------------------------------------------
+/**
+ * VisitableAdapter to adapt NonVisitable Types
+ * StoragePolicy from StoragePolicies.h:
+ * StorageByReference, StorageByWeakPointer
+ */
 template
 	<
 		class Adaptee,
 		class StoragePolicy,
+		class LoggingPolicy,
 		class VisitorBase
 	>
 struct VisitableAdapter :
 	VisitableImpl<
 		Adaptee,
 		VisitorBase,
-		VisitableAdapter<Adaptee, StoragePolicy, VisitorBase>>,
+		LoggingPolicy,
+		VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>>,
+//		VisitableAdapter<Adaptee, StoragePolicy, VisitorBase>>,
 	StoragePolicy
 {
 	using StorageType = typename StoragePolicy::StorageType;
@@ -81,27 +99,28 @@ struct VisitableAdapter :
 		return message;
 	}
 };
-
 //---------------------------------------------------------------------
 /**
- * infrastructure to Create the Baseclass of an Cyclic Visitor
+ * infrastructure to Create the Baseclass of a Cyclic Visitor
  * class A; class B; class C;
- * usage: using VisitorBase = visitsDefault<A, B, C>;
  */
-template<class ToVisit, class... Rest>
-struct InheritFromDefault : public InheritFromDefault<Rest...>{
+template<class LoggingPolicy, class ToVisit, class... Rest>
+struct InheritFromDefault : public InheritFromDefault<LoggingPolicy, Rest...>{
 public:
 	virtual void visit(ToVisit& visitable){
-		std::cout << this->toString() << "::visit(" << typeid(visitable).name() << " &) is not implemented!" << std::endl;;
+//		LoggingPolicy::logNotVisited(visitable, *this);
+		this->logNotVisited(visitable, *this);
 	}
 
-	using InheritFromDefault<Rest...>::visit;
+	using InheritFromDefault<LoggingPolicy, Rest...>::visit;
 };
-template<class ToVisit>
-struct InheritFromDefault<ToVisit>{
+template<class LoggingPolicy, class ToVisit>
+struct InheritFromDefault<LoggingPolicy, ToVisit> : public LoggingPolicy
+{
 public:
 	virtual void visit(ToVisit& visitable){
-		std::cout << this->toString() << "::visit(" << typeid(visitable).name() << " &) is not implemented!" << std::endl;;
+//		LoggingPolicy::logNotVisited(visitable, *this);
+		this->logNotVisited(visitable, *this);
 	}
 
 	virtual std::string toString() const = 0;
@@ -122,14 +141,29 @@ public:
 	virtual std::string toString() const = 0;
 };
 //---------------------------------------------------------------------
-template<class ToVisit, class...Rest>
-using visitsDefault = InheritFromDefault<ToVisit, Rest...>;
+/**
+ * infrastructure to Create the Baseclass of an Cyclic Visitor
+ * class A; class B; class C;
+ * usage: using VisitorBase = visitsDefault<A, B, C>;
+ */
+template<class LogginPolicy, class ToVisit, class...Rest>
+using visitsDefault = InheritFromDefault<LogginPolicy, ToVisit, Rest...>;
 template<class ToVisit, class...Rest>
 using visitsAbstract = InheritFromAbstract<ToVisit, Rest...>;
+//---------------------------------------------------------------------
 
-}
+template<class LoggingPolicy_, class = BaseKind::Abstract>
+struct VisitorBase{
+	template<class ...Visitables>
+	using implementsVisitor = Cyclic::InheritFromAbstract<Visitables...>;
+};
+template<class LoggingPolicy_>
+struct VisitorBase<LoggingPolicy_, BaseKind::Default>{
+	template<class ...Visitables>
+	using implementsVisitor = Cyclic::InheritFromDefault<LoggingPolicy_, Visitables...>;
+};
 
-
+}} // end namespace VisitorCyclic
 
 
 #endif /* VISITORCYCLIC_H_ */

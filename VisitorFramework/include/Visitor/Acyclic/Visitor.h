@@ -14,18 +14,47 @@
 #include "ElementVisitor.h"
 #include "TypeFunctions.h"
 
-namespace VisitorAcyclic{
+namespace VisitorFramework{
+
+namespace Acyclic{
 
 struct Visitor{
 	virtual ~Visitor(){}
 	virtual std::string toString() const = 0;
 };
 
-template<class... T>
-class VisitorBase :
+
+template<class LoggingPolicy, class ToVisit>
+struct DefaultVisit : implementsVisitor<ToVisit>{
+	// needed for dynamic_cast
+	virtual ~DefaultVisit(){}
+	void visit(ToVisit& v){
+		LoggingPolicy::logNotVisited(v, dynamic_cast<Acyclic::Visitor&>(*this));
+	}
+};
+
+template<class LoggingPolicy, class... T>
+class InheritFromDefault :
 		public Visitor,
-		public implementsVisitor<T>...
+		public DefaultVisit<LoggingPolicy, T>...
 {};
+
+template<class... T>
+class InheritFromAbstract :
+		public Visitor,
+		public Acyclic::implementsVisitor<T>...
+{};
+
+template<class LoggingPolicy_, class = BaseKind::Abstract>
+struct VisitorBase{
+	template<class ...Visitables>
+	using implementsVisitor = Acyclic::InheritFromAbstract<Visitables...>;
+};
+template<class LoggingPolicy_>
+struct VisitorBase<LoggingPolicy_, BaseKind::Default>{
+	template<class ...Visitables>
+	using implementsVisitor = Acyclic::InheritFromDefault<LoggingPolicy_, Visitables...>;
+};
 
 class Visitable
 {
@@ -33,8 +62,9 @@ public:
     virtual ~Visitable(){};
 	virtual void accept(Visitor& visitor) = 0;
 	virtual std::string toString() const = 0;
-
 };
+
+
 //=====================================================================
 
 /**
@@ -97,7 +127,7 @@ public:
 		return static_cast<VisitableImplementation*>(this);
 	}
 
-	void accept(VisitorAcyclic::Visitor& visitor){
+	void accept(Acyclic::Visitor& visitor){
 		using Visitor = typename VisitableImplementation::Visitor;
 		Visitor* v = dynamic_cast<Visitor*>(&visitor); //crosscast
 
@@ -113,15 +143,17 @@ public:
 		}
 
 		if(v){
-			this->logAccepted(*visitable, visitor);
+			this->logAccepted(*this, visitor);
+//			this->logAccepted(*visitable, visitor);
 			v->visit(*visitable);
 		} else {
-			this->logNotAccepted(*visitable, visitor);
+			this->logNotAccepted(*this, visitor);
+//			this->logNotAccepted(*visitable, visitor);
 		}
 	}
 };
 
-} // end namespace
+}} // end namespace
 
 
 

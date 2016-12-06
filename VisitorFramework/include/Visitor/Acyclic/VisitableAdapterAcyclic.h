@@ -8,17 +8,19 @@
 #ifndef VISITABLEADAPTERACYCLIC_H_
 #define VISITABLEADAPTERACYCLIC_H_
 
-#include "VisitorAcyclic.h"
-#include "StoragePolicies.h"
-#include "DefaultLoggingPolicy.h"
+#include "Visitor.h"
+#include "../StoragePolicies.h"
+#include "../DefaultLoggingPolicy.h"
 #include "TypeFunctions.h"
 
-namespace VisitorAcyclic{
+namespace VisitorFramework{
+
+namespace Acyclic{
 
 template<
 	class Adaptee,
 	class StoragePolicy = StorageByReference<Adaptee>,
-	class LoggingPolicy = DemoLoggingPolicy
+	class LoggingPolicy = VisitorFramework::DemoLoggingPolicy
 		>
 class VisitableAdapter :
 		public VisitableImpl<
@@ -45,5 +47,5 @@ public:
 		return message;
 	}
 };
-} // namespace VisitorAcyclic
+}} // namespace VisitorAcyclic
 #endif /* VISITABLEADAPTERACYCLIC_H_ */
