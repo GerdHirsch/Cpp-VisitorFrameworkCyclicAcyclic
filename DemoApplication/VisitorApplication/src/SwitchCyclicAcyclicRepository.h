@@ -9,7 +9,7 @@
 #define SWITCHCYCLICACYCLICREPOSITORY_H_
 
 #include <Visitor/DefaultLoggingPolicy.h>
-#include <visitor/MakeTypelist.h>
+#include <visitor/Typelist.h>
 #include <visitor/BaseKind.h>
 #include <Visitor/Cyclic/Repository.h>
 #include <Visitor/Acyclic/Repository.h>
@@ -21,28 +21,24 @@ class E1;
 class E2;
 class E3;
 
-namespace VF = VisitorFramework;
 
 using typelist =
-		VisitorFramework::MakeTypelist
+		VisitorFramework::Typelist
 		<
 		E1, E2, E3,
 		NonVisitable
 		>;
 
-using Repository = VF::Cyclic::Repository
-//using Repository = VF::Acyclic::Repository
+namespace CAR = VisitorFramework::Cyclic;
+//namespace CAR = VisitorFramework::Acyclic;
+
+using Repository = CAR::Repository
 		<
-//		VF::EmptyLoggingPolicy,
-		VF::DemoLoggingPolicy,
+//		VisitorFramework::EmptyLoggingPolicy,
+		VisitorFramework::DemoLoggingPolicy,
 //		BaseKind::Abstract,
 		BaseKind::Default,
 		typelist
 		>;
 }
-
-
-
-
-
 #endif /* SWITCHCYCLICACYCLICREPOSITORY_H_ */
