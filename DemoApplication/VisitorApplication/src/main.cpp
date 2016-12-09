@@ -5,10 +5,9 @@
  *      Author: Gerd
  */
 
-void demoSwitchCyclicAcyclic();
-void demoVisitorCyclic();
 void demoCyclicRepository();
 void demoAcyclicRepository();
+void demoSwitchCyclicAcyclic();
 
 #include <iostream>
 
@@ -16,8 +15,8 @@ using namespace std;
 
 int main(){
 	cout << "VisitorApplication" << endl;
+	demoCyclicRepository();
+	demoAcyclicRepository();
 	demoSwitchCyclicAcyclic();
-//	demoCyclicRepository();
-//	demoAcyclicRepository();
 	cout << "================================" << endl;
 }

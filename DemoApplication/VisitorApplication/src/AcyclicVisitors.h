@@ -16,9 +16,7 @@
 
 namespace AcyclicRepository{
 
-class DemoVisitor13 : public Repository::Visitor,
-	public Repository::implementsVisitor<E1>,
-	public Repository::implementsVisitor<E3>
+class DemoVisitor13 : public Repository::visits<E1, E3>
 {
 public:
 	void visit(E1& v) {
@@ -31,10 +29,7 @@ public:
 
 };
 
-class DemoVisitor23 : public Repository::Visitor,
-	public Repository::implementsVisitor<E2>,
-	public Repository::implementsVisitor<E3>,
-	public Repository::implementsVisitor<NonVisitableWithAccessor>
+class DemoVisitor23 : public Repository::visits<E2, E3, NonVisitableWithAccessor>
 {
 public:
 	void visit(E2& v) {

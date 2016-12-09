@@ -12,23 +12,25 @@
 #include <iostream>
 
 #include "ElementVisitor.h"
-#include "TypeFunctions.h"
+#include "../TypeFunctions.h"
 
 namespace VisitorFramework{
 
 namespace Acyclic{
+//=================================================================
+// Visitors
+//=================================================================
 
 struct Visitor{
 	virtual ~Visitor(){}
 	virtual std::string toString() const = 0;
 };
-
-
+/**
+ *  DefaultVisit uses LoggingPolicy as default Implementation for visit(..)
+ */
 template<class LoggingPolicy, class ToVisit>
 struct DefaultVisit : implementsVisitor<ToVisit>{
-	// needed for dynamic_cast
-	virtual ~DefaultVisit(){}
-	void visit(ToVisit& v){
+	virtual void visit(ToVisit& v){
 		LoggingPolicy::logNotVisited(v, dynamic_cast<Acyclic::Visitor&>(*this));
 	}
 };
@@ -42,7 +44,7 @@ class InheritFromDefault :
 template<class... T>
 class InheritFromAbstract :
 		public Visitor,
-		public Acyclic::implementsVisitor<T>...
+		public implementsVisitor<T>...
 {};
 
 template<class LoggingPolicy_, class = BaseKind::Abstract>
@@ -55,6 +57,9 @@ struct VisitorBase<LoggingPolicy_, BaseKind::Default>{
 	template<class ...Visitables>
 	using implementsVisitor = Acyclic::InheritFromDefault<LoggingPolicy_, Visitables...>;
 };
+//=================================================================
+// Visitables
+//=================================================================
 
 class Visitable
 {
@@ -116,7 +121,7 @@ public:
 		return static_cast<ConcreteVisitable*>(this);
 	}
 	ConcreteVisitable const* getVisitable() const {
-		return static_cast<ConcreteVisitable*>(this);
+		return static_cast<ConcreteVisitable const*>(this);
 	}
 
 	// liefert this als Pointer auf die Spezialisierung
