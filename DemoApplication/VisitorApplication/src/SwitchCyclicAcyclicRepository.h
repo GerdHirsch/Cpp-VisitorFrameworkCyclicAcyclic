@@ -21,7 +21,6 @@ class E1;
 class E2;
 class E3;
 
-namespace VF = VisitorFramework;
 
 using typelist =
 		VisitorFramework::Typelist
@@ -30,11 +29,13 @@ using typelist =
 		NonVisitable
 		>;
 
-using Repository = VF::Cyclic::Repository
-//using Repository = VF::Acyclic::Repository
+namespace CAR = VisitorFramework::Cyclic;
+//namespace CAR = VisitorFramework::Acyclic;
+
+using Repository = CAR::Repository
 		<
-//		VF::EmptyLoggingPolicy,
-		VF::DemoLoggingPolicy,
+//		VisitorFramework::EmptyLoggingPolicy,
+		VisitorFramework::DemoLoggingPolicy,
 //		BaseKind::Abstract,
 		BaseKind::Default,
 		typelist
