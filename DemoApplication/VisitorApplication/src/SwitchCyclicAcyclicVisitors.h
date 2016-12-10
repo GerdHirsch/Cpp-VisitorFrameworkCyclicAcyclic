@@ -14,7 +14,8 @@
 
 namespace CyclicAcyclicRepository{
 
-class DemoVisitor : public Repository::visits<E1, E2, NonVisitable>{
+class DemoVisitor : public Repository::visits<typelist>{
+//class DemoVisitor : public Repository::visits<E1, E2, NonVisitable>{
 public:
 	std::string toString() const override { return "DemoVisitor"; }
 	void visit(E1& v) {

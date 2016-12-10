@@ -27,9 +27,19 @@ struct Repository{
 	using VisitorBase = typename Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
 			implementsVisitor<Visitables...>;
 
+//	template<class ...ToVisit>
+//	using visits = typename Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
+//			implementsVisitor<ToVisit...>;
+
 	template<class ...ToVisit>
-	using visits = typename Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
-			implementsVisitor<ToVisit...>;
+	struct visits
+		: Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
+		  implementsVisitor<ToVisit...>
+	{};
+	template<class ...ToVisit>
+	struct visits<VisitorFramework::Typelist<ToVisit...>>
+	// delegates
+	: visits<ToVisit...>{};
 
 	//=================================================================
 	// Visitables
@@ -49,9 +59,11 @@ struct Repository{
 
 	// Convenience Interfaces
 	template<class Adaptee>
-	using AdapterByWeakpointer = VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee>>;
+	using AdapterByWeakpointer =
+			VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee>>;
 	template<class Adaptee>
-	using AdapterByReference = VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
+	using AdapterByReference =
+			VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
 };
 
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>

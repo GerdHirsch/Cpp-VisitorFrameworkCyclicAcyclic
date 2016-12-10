@@ -158,10 +158,10 @@ public:
  * class A; class B; class C;
  * usage: using VisitorBase = visitsDefault<A, B, C>;
  */
-template<class LogginPolicy, class ToVisit, class...Rest>
-using visitsDefault = InheritFromDefault<LogginPolicy, ToVisit, Rest...>;
-template<class ToVisit, class...Rest>
-using visitsAbstract = InheritFromAbstract<ToVisit, Rest...>;
+//template<class LogginPolicy, class ToVisit, class...Rest>
+//using visitsDefault = InheritFromDefault<LogginPolicy, ToVisit, Rest...>;
+//template<class ToVisit, class...Rest>
+//using visitsAbstract = InheritFromAbstract<ToVisit, Rest...>;
 //---------------------------------------------------------------------
 
 template<class LoggingPolicy_, class = BaseKind::Abstract>

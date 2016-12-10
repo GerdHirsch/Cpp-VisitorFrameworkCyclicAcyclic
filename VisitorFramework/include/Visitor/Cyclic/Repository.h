@@ -25,8 +25,16 @@ struct Repository{
 
 	using VisitorBase = Visitor;
 
+//	template<class ...ToVisit>
+//	using visits = VisitorBase;
+
 	template<class ...ToVisit>
-	using visits = VisitorBase;
+	struct visits : VisitorBase{};
+
+	template<class ...ToVisit>
+	struct visits<VisitorFramework::Typelist<ToVisit...>>
+	// delegates
+	: visits<ToVisit...>{};
 
 	//=================================================================
 	// Visitables
