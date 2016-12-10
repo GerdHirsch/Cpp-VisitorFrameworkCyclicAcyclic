@@ -12,12 +12,17 @@
 
 namespace AcyclicRepository{
 
-class E1 : public Repository::VisitableImpl<E1>
+class AnotherBase{
+public:
+	virtual ~AnotherBase(){}
+};
+
+class E1 : public Repository::VisitableImpl<E1>, public AnotherBase
 {
 public:
 	std::string toString() const { return "E1"; }
 };
-class E2 : public Repository::VisitableImpl<E2>
+class E2 : public AnotherBase, public Repository::VisitableImpl<E2>
 {
 public:
 	std::string toString() const { return "E2"; }

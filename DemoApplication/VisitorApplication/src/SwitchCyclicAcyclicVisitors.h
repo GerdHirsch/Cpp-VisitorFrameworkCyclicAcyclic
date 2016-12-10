@@ -14,7 +14,8 @@
 
 namespace CyclicAcyclicRepository{
 
-class DemoVisitor : public Repository::visits<E1, E2, NonVisitable>{
+class DemoVisitor : public Repository::visits<typelist>{
+//class DemoVisitor : public Repository::visits<E1, E2, NonVisitable>{
 public:
 	std::string toString() const override { return "DemoVisitor"; }
 	void visit(E1& v) {
@@ -23,18 +24,17 @@ public:
 	void visit(NonVisitable& v) {
 		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
 	}
+//	void visit(E2& v) {
+//		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
+//	}
 
 };
 
-
-class DemoVisitor13 : public Repository::VisitorBase{
+class DemoVisitor13 : public Repository::visits<E1, E3, NonVisitable>{
 public:
 	void visit(E1& v) {
 		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
 	}
-//	void visit(E2& v) {
-//		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
-//	}
 	void visit(E3& v) {
 		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
 	}
@@ -45,7 +45,7 @@ public:
 
 };
 
-class DemoVisitor23 : public Repository::VisitorBase{
+class DemoVisitor23 : public Repository::visits<E1, E2, E3, NonVisitable>{
 public:
 	void visit(E1& v) {
 		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;

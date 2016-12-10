@@ -35,8 +35,8 @@ using Repository = VF::Acyclic::Repository
 		<
 //		VF::EmptyLoggingPolicy,
 		VF::DemoLoggingPolicy,
-//		BaseKind::Abstract,
-		BaseKind::Default,
+		BaseKind::Abstract,
+//		BaseKind::Default,
 		typelist
 		>;
 }

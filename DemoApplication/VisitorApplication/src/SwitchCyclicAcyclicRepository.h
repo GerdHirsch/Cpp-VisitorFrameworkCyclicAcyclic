@@ -15,6 +15,7 @@
 #include <Visitor/Acyclic/Repository.h>
 
 class NonVisitable;
+class NonVisitableWithAccessor;
 
 namespace CyclicAcyclicRepository{
 class E1;
@@ -24,13 +25,16 @@ class E3;
 
 using typelist =
 		VisitorFramework::Typelist
-		<
-		E1, E2, E3,
-		NonVisitable
+		< E1
+		, E2
+		, E3
+		, NonVisitable
+		, NonVisitableWithAccessor
 		>;
 
-namespace CAR = VisitorFramework::Cyclic;
-//namespace CAR = VisitorFramework::Acyclic;
+//CAR = CyclicAcyclicRepository
+//namespace CAR = VisitorFramework::Cyclic;
+namespace CAR = VisitorFramework::Acyclic;
 
 using Repository = CAR::Repository
 		<

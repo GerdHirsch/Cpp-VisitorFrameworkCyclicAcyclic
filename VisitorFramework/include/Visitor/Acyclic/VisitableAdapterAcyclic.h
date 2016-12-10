@@ -11,7 +11,7 @@
 #include "Visitor.h"
 #include "../StoragePolicies.h"
 #include "../DefaultLoggingPolicy.h"
-#include "TypeFunctions.h"
+#include "../TypeFunctions.h"
 
 namespace VisitorFramework{
 

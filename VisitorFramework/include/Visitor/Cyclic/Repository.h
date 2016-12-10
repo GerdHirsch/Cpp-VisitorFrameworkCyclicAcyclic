@@ -25,28 +25,40 @@ struct Repository{
 
 	using VisitorBase = Visitor;
 
+//	template<class ...ToVisit>
+//	using visits = VisitorBase;
+
 	template<class ...ToVisit>
-	using visits = VisitorBase;
+	struct visits : VisitorBase{};
+
+	template<class ...ToVisit>
+	struct visits<VisitorFramework::Typelist<ToVisit...>>
+	// delegates
+	: visits<ToVisit...>{};
 
 	//=================================================================
 	// Visitables
 	//=================================================================
-
 	using Visitable = Cyclic::Visitable<VisitorBase>;
 
 	template<class ConcreteVisitable>
 	using VisitableImpl =
 			Cyclic::VisitableImpl<ConcreteVisitable, VisitorBase, LoggingPolicy>;
 
+	//=================================================================
+	// VisitableAdapters
+	//=================================================================
 	template<class Adaptee, class StoragePolicy>
 	using VisitableAdapter =
 			Cyclic::VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>;
 
-	// Convenience Interface
+	// Convenience Interfaces
 	template<class Adaptee>
-	using AdapterByWeakpointer = VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee>>;
+	using AdapterByWeakpointer =
+			VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee>>;
 	template<class Adaptee>
-	using AdapterByReference = VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
+	using AdapterByReference =
+			VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
 };
 
 

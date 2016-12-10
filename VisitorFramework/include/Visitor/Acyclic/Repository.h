@@ -11,7 +11,7 @@
 #include "Visitor.h"
 #include "VisitableAdapterAcyclic.h"
 #include "../Typelist.h"
-#include "TypeFunctions.h"
+#include "../TypeFunctions.h"
 
 namespace VisitorFramework{
 namespace Acyclic{
@@ -27,31 +27,43 @@ struct Repository{
 	using VisitorBase = typename Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
 			implementsVisitor<Visitables...>;
 
-	using Visitable = Acyclic::Visitable;
-
-	template<class ToVisit>
-	using implementsVisitor = Acyclic::implementsVisitor<ToVisit>;
+//	template<class ...ToVisit>
+//	using visits = typename Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
+//			implementsVisitor<ToVisit...>;
 
 	template<class ...ToVisit>
-	using visits = typename Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
-			implementsVisitor<ToVisit...>;
+	struct visits
+		: Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
+		  implementsVisitor<ToVisit...>
+	{};
+	template<class ...ToVisit>
+	struct visits<VisitorFramework::Typelist<ToVisit...>>
+	// delegates
+	: visits<ToVisit...>{};
 
 	//=================================================================
 	// Visitables
 	//=================================================================
+	using Visitable = Acyclic::Visitable;
+
 	template<class ConcreteVisitable>
 	using VisitableImpl =
 			Acyclic::VisitableImpl<ConcreteVisitable, ConcreteVisitable, LoggingPolicy>;
 
+	//=================================================================
+	// VisitableAdapters
+	//=================================================================
 	template<class Adaptee, class StoragePolicy>
 	using VisitableAdapter =
 			Acyclic::VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy>;
 
-	// Convenience Interface
+	// Convenience Interfaces
 	template<class Adaptee>
-	using AdapterByWeakpointer = VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee>>;
+	using AdapterByWeakpointer =
+			VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee>>;
 	template<class Adaptee>
-	using AdapterByReference = VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
+	using AdapterByReference =
+			VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
 };
 
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>

@@ -7,6 +7,7 @@
 
 #include "SwitchCyclicAcyclicVisitables.h"
 #include "NonVisitable.h"
+#include "NonVisitableWithAccessor.h"
 
 #include "SwitchCyclicAcyclicVisitors.h"
 #include "SwitchCyclicAcyclicRepository.h"
@@ -26,6 +27,8 @@ using Visitables = std::vector<SharedPointer>;
 
 template<class Adaptee>
 using AdapterReference = Repository::AdapterByReference<Adaptee>;
+template<class Adaptee>
+using AdapterWeak = Repository::AdapterByWeakpointer<Adaptee>;
 }
 
 using namespace CyclicAcyclicRepository;
@@ -39,16 +42,19 @@ void demoSwitchCyclicAcyclic(){
 	DemoVisitor visitor;
 	DemoVisitor13 visitor13;
 	DemoVisitor23 visitor23;
+
 	NonVisitable nv;
+	auto pNVWA = std::make_shared<NonVisitableWithAccessor>();
 
 	visitables.push_back(SharedPointer(new E1));
 	visitables.push_back(SharedPointer(new E2));
 	visitables.push_back(SharedPointer(new E3));
 	visitables.push_back(SharedPointer(new AdapterReference<NonVisitable>(nv)));
+	visitables.push_back(SharedPointer(new AdapterWeak<NonVisitableWithAccessor>(pNVWA)));
 
 	demoRunVisitor(visitor, visitables);
-//	demoRunVisitor(visitor13, visitables);
-//	demoRunVisitor(visitor23, visitables);
+	demoRunVisitor(visitor13, visitables);
+	demoRunVisitor(visitor23, visitables);
 
 
 	std::cout << "==== end demoSwitchCyclicAcyclic() ====" << std::endl;

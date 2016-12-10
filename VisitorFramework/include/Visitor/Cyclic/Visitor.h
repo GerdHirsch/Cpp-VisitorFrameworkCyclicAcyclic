@@ -11,6 +11,7 @@
 #include "../StoragePolicies.h"
 #include "../BaseKind.h"
 #include "../Typelist.h"
+#include "../TypeFunctions.h"
 
 #include <iostream>
 namespace VisitorFramework{
@@ -81,7 +82,6 @@ struct VisitableAdapter :
 		VisitorBase,
 		LoggingPolicy,
 		VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>>,
-//		VisitableAdapter<Adaptee, StoragePolicy, VisitorBase>>,
 	StoragePolicy
 {
 	using StorageType = typename StoragePolicy::StorageType;
@@ -105,7 +105,11 @@ struct VisitableAdapter :
  * class A; class B; class C;
  */
 template<class LoggingPolicy, class ToVisit, class... Rest>
-struct InheritFromDefault : public InheritFromDefault<LoggingPolicy, Rest...>{
+struct InheritFromDefault
+	:
+//	protected getAccessor<ToVisit>,
+	public InheritFromDefault<LoggingPolicy, Rest...>
+{
 public:
 	virtual void visit(ToVisit& visitable){
 //		LoggingPolicy::logNotVisited(visitable, *this);
@@ -115,7 +119,10 @@ public:
 	using InheritFromDefault<LoggingPolicy, Rest...>::visit;
 };
 template<class LoggingPolicy, class ToVisit>
-struct InheritFromDefault<LoggingPolicy, ToVisit> : public LoggingPolicy
+struct InheritFromDefault<LoggingPolicy, ToVisit>
+	:
+//	protected getAccessor<ToVisit>,
+	public LoggingPolicy
 {
 public:
 	virtual void visit(ToVisit& visitable){
@@ -127,14 +134,19 @@ public:
 };
 //---------------------------------------------------------------------
 template<class ToVisit, class... Rest>
-struct InheritFromAbstract : public InheritFromAbstract<Rest...>{
+struct InheritFromAbstract
+	:
+//	protected getAccessor<ToVisit>,
+	public InheritFromAbstract<Rest...>{
 public:
 	virtual void visit(ToVisit& v) = 0;
 
 	using InheritFromAbstract<Rest...>::visit;
 };
 template<class ToVisit>
-struct InheritFromAbstract<ToVisit>{
+struct InheritFromAbstract<ToVisit>
+//	: protected getAccessor<ToVisit>
+{
 public:
 	virtual void visit(ToVisit& v) = 0;
 
@@ -146,10 +158,10 @@ public:
  * class A; class B; class C;
  * usage: using VisitorBase = visitsDefault<A, B, C>;
  */
-template<class LogginPolicy, class ToVisit, class...Rest>
-using visitsDefault = InheritFromDefault<LogginPolicy, ToVisit, Rest...>;
-template<class ToVisit, class...Rest>
-using visitsAbstract = InheritFromAbstract<ToVisit, Rest...>;
+//template<class LogginPolicy, class ToVisit, class...Rest>
+//using visitsDefault = InheritFromDefault<LogginPolicy, ToVisit, Rest...>;
+//template<class ToVisit, class...Rest>
+//using visitsAbstract = InheritFromAbstract<ToVisit, Rest...>;
 //---------------------------------------------------------------------
 
 template<class LoggingPolicy_, class = BaseKind::Abstract>
