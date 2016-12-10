@@ -36,13 +36,6 @@ struct Repository{
 	//=================================================================
 	using Visitable = Acyclic::Visitable;
 
-	template<class ...ToVisit>
-	using visits = typename Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
-			implementsVisitor<ToVisit...>;
-
-	//=================================================================
-	// Visitables
-	//=================================================================
 	template<class ConcreteVisitable>
 	using VisitableImpl =
 			Acyclic::VisitableImpl<ConcreteVisitable, ConcreteVisitable, LoggingPolicy>;
