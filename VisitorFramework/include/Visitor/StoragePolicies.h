@@ -10,6 +10,9 @@
 
 #include <memory>
 
+namespace VisitorFramework{
+
+
 template<class Adaptee>
 struct StorageByReference{
 	using StorageType = Adaptee&;
@@ -24,16 +27,17 @@ protected:
 	StorageType adaptee;
 };
 template<class Adaptee>
-struct StorageByWeakPointer{
+struct StorageByWeakpointer{
 	using StorageType = std::weak_ptr<Adaptee>;
 	using ReturnType = std::shared_ptr<Adaptee>;
 	using ConstReturnType = std::shared_ptr<Adaptee const>;
 
-	StorageByWeakPointer(StorageType adaptee):adaptee(adaptee){}
+	StorageByWeakpointer(StorageType adaptee):adaptee(adaptee){}
 	ReturnType get(){ return adaptee.lock(); }
 	ConstReturnType get() const { return adaptee.lock(); }
 protected:
 	StorageType adaptee;
 };
 
+} // end namespace
 #endif /* STORAGEPOLICIES_H_ */

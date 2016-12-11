@@ -8,7 +8,7 @@
 #ifndef CYCLICREPOSITORY_H_
 #define CYCLICREPOSITORY_H_
 
-#include <Visitor/DefaultLoggingPolicy.h>
+#include <Visitor/DefaultPolicy.h>
 #include <visitor/Typelist.h>
 #include <Visitor/Cyclic/Repository.h>
 #include <Visitor/Acyclic/Repository.h>
