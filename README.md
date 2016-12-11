@@ -1,6 +1,6 @@
 # Cpp-VisitorTemplateCyclicAcyclic
 
-Prototype for Visitor to switch 
+A Framework for the Visitor Pattern to switch 
 
 between Cyclic/Acyclic Visitors
 
