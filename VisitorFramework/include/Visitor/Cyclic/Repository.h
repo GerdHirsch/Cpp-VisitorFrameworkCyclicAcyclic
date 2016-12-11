@@ -55,7 +55,7 @@ struct Repository{
 	// Convenience Interfaces
 	template<class Adaptee>
 	using AdapterByWeakpointer =
-			VisitableAdapter<Adaptee, StorageByWeakPointer<Adaptee>>;
+			VisitableAdapter<Adaptee, StorageByWeakpointer<Adaptee>>;
 	template<class Adaptee>
 	using AdapterByReference =
 			VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;

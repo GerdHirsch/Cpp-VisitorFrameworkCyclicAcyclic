@@ -9,7 +9,7 @@
 #define ACYCLICREPOSITORY_H_
 
 
-#include <Visitor/DefaultLoggingPolicy.h>
+#include <Visitor/DefaultPolicy.h>
 #include <visitor/Typelist.h>
 #include <visitor/BaseKind.h>
 #include <Visitor/Acyclic/Repository.h>

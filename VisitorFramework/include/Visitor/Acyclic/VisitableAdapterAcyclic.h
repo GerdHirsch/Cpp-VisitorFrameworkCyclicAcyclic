@@ -10,7 +10,7 @@
 
 #include "Visitor.h"
 #include "../StoragePolicies.h"
-#include "../DefaultLoggingPolicy.h"
+#include "../DefaultPolicy.h"
 #include "../TypeFunctions.h"
 
 namespace VisitorFramework{

@@ -20,10 +20,13 @@
 namespace CyclicAcyclicRepository{
 
 using Visitable = Repository::Visitable;
-using Visitor = Repository::Visitor;
 
 using SharedPointer = std::shared_ptr<Visitable>;
 using Visitables = std::vector<SharedPointer>;
+
+template<class Adaptee>
+using MyAdapter =
+		Repository::VisitableAdapter<Adaptee, VisitorFramework::StorageByWeakpointer<Adaptee>>;
 
 template<class Adaptee>
 using AdapterReference = Repository::AdapterByReference<Adaptee>;
