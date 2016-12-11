@@ -34,7 +34,7 @@ using typelist =
 using Repository = VF::Acyclic::Repository
 		<
 //		VF::EmptyLoggingPolicy,
-		VF::DemoLoggingPolicy,
+		VF::StdOutLoggingPolicy,
 		BaseKind::Abstract,
 //		BaseKind::Default,
 		typelist

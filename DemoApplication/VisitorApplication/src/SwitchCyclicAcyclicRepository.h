@@ -39,7 +39,7 @@ namespace CAR = VisitorFramework::Acyclic;
 using Repository = CAR::Repository
 		<
 //		VisitorFramework::EmptyLoggingPolicy,
-		VisitorFramework::DemoLoggingPolicy,
+		VisitorFramework::StdOutLoggingPolicy,
 //		BaseKind::Abstract,
 		BaseKind::Default,
 		typelist

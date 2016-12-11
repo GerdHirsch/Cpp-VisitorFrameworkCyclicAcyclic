@@ -21,7 +21,7 @@ struct EmptyLoggingPolicy{
 	template<class Visitable, class Visitor>
 	static void logAccepted(Visitable const& visitable, Visitor const& visitor){}
 };
-struct DemoLoggingPolicy{
+struct StdOutLoggingPolicy{
 	template<class Visitable, class Visitor>
 	static void logNotAccepted(Visitable const& visitable, Visitor const& visitor){
 		std::string message("DemoLoggingPolicy ");
@@ -95,12 +95,5 @@ struct ElementLoggingPolicy{
 };
 
 } // end namespace VisitorFramework
-
-#ifndef LOGGING_POLICY
-using DefaultLoggingPolicy = VisitorFramework::EmptyLoggingPolicy;
-#else
-using DefaultLoggingPolicy = LOGGING_POLICY;
-//using DefaultLoggingPolicy = Visitor::DemoLoggingPolicy;
-#endif
 
 #endif /* DEFAULTLOGGINGPOLICY_H_ */

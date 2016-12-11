@@ -20,7 +20,7 @@ namespace Acyclic{
 template<
 	class Adaptee,
 	class StoragePolicy = StorageByReference<Adaptee>,
-	class LoggingPolicy = VisitorFramework::DemoLoggingPolicy
+	class LoggingPolicy = VisitorFramework::StdOutLoggingPolicy
 		>
 class VisitableAdapter :
 		public VisitableImpl<
