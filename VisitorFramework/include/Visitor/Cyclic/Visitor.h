@@ -140,8 +140,8 @@ struct InheritFromAbstract
 	public InheritFromAbstract<Rest...>{
 public:
 	virtual void visit(ToVisit& v) = 0;
-
-	using InheritFromAbstract<Rest...>::visit;
+	using base_type = InheritFromAbstract<Rest...>;
+	using base_type::visit;
 };
 template<class ToVisit>
 struct InheritFromAbstract<ToVisit>
@@ -154,7 +154,7 @@ public:
 };
 //---------------------------------------------------------------------
 /**
- * infrastructure to Create the Baseclass of an Cyclic Visitor
+ * infrastructure to Create the Baseclass of a Cyclic Visitor
  * class A; class B; class C;
  * usage: using VisitorBase = visitsDefault<A, B, C>;
  */
@@ -165,12 +165,12 @@ public:
 //---------------------------------------------------------------------
 
 template<class LoggingPolicy_, class = BaseKind::Abstract>
-struct VisitorBase{
+struct SwitchBaseKind{
 	template<class ...Visitables>
 	using implementsVisitor = Cyclic::InheritFromAbstract<Visitables...>;
 };
 template<class LoggingPolicy_>
-struct VisitorBase<LoggingPolicy_, BaseKind::Default>{
+struct SwitchBaseKind<LoggingPolicy_, BaseKind::Default>{
 	template<class ...Visitables>
 	using implementsVisitor = Cyclic::InheritFromDefault<LoggingPolicy_, Visitables...>;
 };

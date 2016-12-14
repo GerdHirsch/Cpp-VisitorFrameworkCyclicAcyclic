@@ -20,20 +20,22 @@ struct Repository{
 	// Visitors
 	//=================================================================
 	using Visitor =
-			typename Cyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
+			typename Cyclic::SwitchBaseKind<LoggingPolicy, BaseKind_>::template
 			implementsVisitor<Visitables...>;
 
 	using VisitorBase = Visitor;
 
+	/**
+	 * Interface compatibility with Acyclic Repository
+	 */
 //	template<class ...ToVisit>
 //	using visits = VisitorBase;
-
 	template<class ...ToVisit>
 	struct visits : VisitorBase{};
 
 	template<class ...ToVisit>
 	struct visits<VisitorFramework::Typelist<ToVisit...>>
-	// delegates
+	// delegates to primary DRY Principle
 	: visits<ToVisit...>{};
 
 	//=================================================================
@@ -64,7 +66,7 @@ struct Repository{
 
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>
 struct Repository<LoggingPolicy, BaseKind_, VisitorFramework::Typelist<Visitables...>>
-// delegates
+// delegates to primary
 : Repository<LoggingPolicy, BaseKind_, Visitables...>{};
 
 }} // end namespace
