@@ -48,12 +48,12 @@ class InheritFromAbstract :
 {};
 
 template<class LoggingPolicy_, class = BaseKind::Abstract>
-struct VisitorBase{
+struct SwitchBaseKind{
 	template<class ...Visitables>
 	using implementsVisitor = Acyclic::InheritFromAbstract<Visitables...>;
 };
 template<class LoggingPolicy_>
-struct VisitorBase<LoggingPolicy_, BaseKind::Default>{
+struct SwitchBaseKind<LoggingPolicy_, BaseKind::Default>{
 	template<class ...Visitables>
 	using implementsVisitor = Acyclic::InheritFromDefault<LoggingPolicy_, Visitables...>;
 };

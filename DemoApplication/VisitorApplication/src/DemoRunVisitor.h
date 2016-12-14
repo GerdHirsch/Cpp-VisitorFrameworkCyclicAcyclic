@@ -15,17 +15,25 @@ template<class Visitor, class Visitables>
 inline
 void demoRunVisitor(Visitor& visitor, Visitables& visitables){
 	std::cout << std::endl << "==== " << visitor.toString() << " ====" << std::endl;
-	std::for_each
-	(	visitables.begin(),
-		visitables.end(),
-		[&visitor](auto& visitable){
+	for(auto& visitable : visitables){
 			std::cout << "---" << std::endl;
 			visitable->accept(visitor);
-		}
-	);
-
+	}
 	std::cout << std::endl << "==== " << visitor.toString() << " ====" << std::endl;
 }
+//void demoRunVisitor(Visitor& visitor, Visitables& visitables){
+//	std::cout << std::endl << "==== " << visitor.toString() << " ====" << std::endl;
+//	std::for_each
+//	(	visitables.begin(),
+//		visitables.end(),
+//		[&visitor](auto& visitable){
+//			std::cout << "---" << std::endl;
+//			visitable->accept(visitor);
+//		}
+//	);
+//
+//	std::cout << std::endl << "==== " << visitor.toString() << " ====" << std::endl;
+//}
 
 
 

@@ -24,7 +24,7 @@ struct Repository{
 	//=================================================================
 	using Visitor = Acyclic::Visitor;
 
-	using VisitorBase = typename Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
+	using VisitorBase = typename Acyclic::SwitchBaseKind<LoggingPolicy, BaseKind_>::template
 			implementsVisitor<Visitables...>;
 
 //	template<class ...ToVisit>
@@ -33,7 +33,7 @@ struct Repository{
 
 	template<class ...ToVisit>
 	struct visits
-		: Acyclic::VisitorBase<LoggingPolicy, BaseKind_>::template
+		: Acyclic::SwitchBaseKind<LoggingPolicy, BaseKind_>::template
 		  implementsVisitor<ToVisit...>
 	{};
 	template<class ...ToVisit>

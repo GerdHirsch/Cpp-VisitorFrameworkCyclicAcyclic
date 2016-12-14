@@ -24,7 +24,7 @@ struct EmptyLoggingPolicy{
 struct StdOutLoggingPolicy{
 	template<class Visitable, class Visitor>
 	static void logNotAccepted(Visitable const& visitable, Visitor const& visitor){
-		std::string message("DemoLoggingPolicy ");
+		std::string message("StdOutLoggingPolicy ");
 		message += visitable.toString();
 		message += " did not accept ";
 		message += visitor.toString();
@@ -32,7 +32,7 @@ struct StdOutLoggingPolicy{
 	}
 	template<class Visitable, class Visitor>
 	static void logNotVisited(Visitable const& visitable, Visitor const& visitor){
-		std::string message("DemoLoggingPolicy ");
+		std::string message("StdOutLoggingPolicy ");
 		message += visitor.toString();
 		message += " did not visit ";
 		message += visitable.toString();
@@ -40,7 +40,7 @@ struct StdOutLoggingPolicy{
 	}
 	template<class Visitable, class Visitor>
 	static void logAccepted(Visitable const& visitable, Visitor const& visitor){
-		std::string message("DemoLoggingPolicy ");
+		std::string message("StdOutLoggingPolicy ");
 		message += visitable.toString();
 		message += " accepted ";
 		message += visitor.toString();
