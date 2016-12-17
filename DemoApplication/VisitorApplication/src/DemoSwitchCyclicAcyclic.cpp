@@ -19,10 +19,8 @@
 
 namespace CyclicAcyclicRepository{
 
-using Visitable = Repository::Visitable;
-
-using SharedPointer = std::shared_ptr<Visitable>;
-using Visitables = std::vector<SharedPointer>;
+using Visitable = std::shared_ptr<Repository::Visitable>;
+using Visitables = std::vector<Visitable>;
 
 template<class Adaptee>
 using MyAdapter =
@@ -49,11 +47,11 @@ void demoSwitchCyclicAcyclic(){
 	NonVisitable nv;
 	auto pNVWA = std::make_shared<NonVisitableWithAccessor>();
 
-	visitables.push_back(SharedPointer(new E1));
-	visitables.push_back(SharedPointer(new E2));
-	visitables.push_back(SharedPointer(new E3));
-	visitables.push_back(SharedPointer(new AdapterReference<NonVisitable>(nv)));
-	visitables.push_back(SharedPointer(new AdapterWeak<NonVisitableWithAccessor>(pNVWA)));
+	visitables.push_back(Visitable(new E1));
+	visitables.push_back(Visitable(new E2));
+	visitables.push_back(Visitable(new E3));
+	visitables.push_back(Visitable(new AdapterReference<NonVisitable>(nv)));
+	visitables.push_back(Visitable(new AdapterWeak<NonVisitableWithAccessor>(pNVWA)));
 
 	demoRunVisitor(visitor, visitables);
 	demoRunVisitor(visitor13, visitables);
