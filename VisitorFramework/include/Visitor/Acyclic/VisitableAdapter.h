@@ -42,8 +42,12 @@ struct VisitableAdapter :
 
 	std::string toString() const {
 		std::string message("AcyclicAdapter::");
-//		message += this->getVisitable()->toString();
-		message += VisitorFramework::toString(*this->getVisitable());
+		//TODO wo gehört die prüfung hin?
+		auto visitable = this->getVisitable();
+		if(visitable)
+			message += VisitorFramework::toString(*this->getVisitable());
+		else
+			message += typeid(Adaptee).name();
 		return message;
 	}
 };

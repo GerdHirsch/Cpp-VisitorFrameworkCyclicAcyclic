@@ -16,7 +16,9 @@
 namespace VisitorFramework{
 
 namespace Cyclic {
-//---------------------------------------------------------------------
+//=================================================================
+// Visitables
+//=================================================================
 template<class VisitorBase>
 class Visitable
 {
@@ -64,8 +66,9 @@ protected:
 		return static_cast<VisitableImplementation const*>(this);
 	}
 };
-
-//---------------------------------------------------------------------
+//=================================================================
+// Visitors
+//=================================================================
 /**
  * infrastructure to Create the Baseclass of a Cyclic Visitor
  * class A; class B; class C;

@@ -44,6 +44,11 @@ void demoAcyclicRepository(){
 	NonVisitableWithAccessor nvwa;
 	auto pNV = std::make_shared<NonVisitable>();
 
+	{
+		auto p = std::make_shared<NonVisitable>();
+		visitables.push_back(SharedPointer(new AdapterWeak<NonVisitable>(p)));
+	}
+
 	visitables.push_back(SharedPointer(new E1));
 	visitables.push_back(SharedPointer(new E2));
 	visitables.push_back(SharedPointer(new E3));
@@ -51,7 +56,7 @@ void demoAcyclicRepository(){
 	visitables.push_back(SharedPointer(new AdapterReference<NonVisitableWithAccessor>(nvwa)));
 
 	demoRunVisitor(visitor13, visitables);
-	demoRunVisitor(visitor23, visitables);
+//	demoRunVisitor(visitor23, visitables);
 
 
 	std::cout << "==== end demoAcyclicRepository() ====" << std::endl;
