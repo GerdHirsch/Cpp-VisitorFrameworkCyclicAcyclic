@@ -8,12 +8,11 @@
 #ifndef VISITORCYCLIC_H_
 #define VISITORCYCLIC_H_
 
-#include "../StoragePolicies.h"
 #include "../BaseKind.h"
-#include "../Typelist.h"
 #include "../TypeFunctions.h"
 
-#include <iostream>
+#include <typeinfo>
+
 namespace VisitorFramework{
 
 namespace Cyclic {
@@ -24,7 +23,9 @@ class Visitable
 public:
     virtual ~Visitable(){};
 	virtual void accept(VisitorBase& visitor) = 0;
-	virtual std::string toString() const = 0;
+	virtual std::string toString() const{
+			return typeid(*this).name();
+	}
 };
 //---------------------------------------------------------------------
 /**
@@ -63,42 +64,7 @@ protected:
 		return static_cast<VisitableImplementation const*>(this);
 	}
 };
-//---------------------------------------------------------------------
-/**
- * VisitableAdapter to adapt NonVisitable Types
- * StoragePolicy from StoragePolicies.h:
- * StorageByReference, StorageByWeakPointer
- */
-template
-	<
-		class Adaptee,
-		class StoragePolicy,
-		class LoggingPolicy,
-		class VisitorBase
-	>
-struct VisitableAdapter :
-	VisitableImpl<
-		Adaptee,
-		VisitorBase,
-		LoggingPolicy,
-		VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>>,
-	StoragePolicy
-{
-	using StorageType = typename StoragePolicy::StorageType;
-	using ReturnType = typename StoragePolicy::ReturnType;
-	using ConstReturnType = typename StoragePolicy::ConstReturnType;
 
-	VisitableAdapter(StorageType element): StoragePolicy(element){}
-
-	ReturnType getVisitable() { return this->get(); }
-	ConstReturnType getVisitable() const { return this->get(); }
-
-	std::string toString() const {
-		std::string message("CyclicAdapter::");
-		message += this->getVisitable()->toString();
-		return message;
-	}
-};
 //---------------------------------------------------------------------
 /**
  * infrastructure to Create the Baseclass of a Cyclic Visitor
@@ -130,7 +96,9 @@ public:
 		this->logNotVisited(visitable, *this);
 	}
 
-	virtual std::string toString() const = 0;
+	virtual std::string toString() const{
+			return typeid(*this).name();
+		}
 };
 //---------------------------------------------------------------------
 template<class ToVisit, class... Rest>
@@ -150,7 +118,9 @@ struct InheritFromAbstract<ToVisit>
 public:
 	virtual void visit(ToVisit& v) = 0;
 
-	virtual std::string toString() const = 0;
+	virtual std::string toString() const{
+			return typeid(*this).name();
+		}
 };
 //---------------------------------------------------------------------
 /**

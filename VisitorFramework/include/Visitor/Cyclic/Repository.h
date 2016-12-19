@@ -9,6 +9,11 @@
 #define VISITOR_CYCLIC_REPOSITORY_H_
 
 #include "Visitor.h"
+#include "VisitableAdapter.h"
+#include "../StoragePolicies.h"
+#include "../Typelist.h"
+
+
 
 namespace VisitorFramework{
 namespace Cyclic{

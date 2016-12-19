@@ -10,6 +10,7 @@
 
 #include <string>
 #include <iostream>
+#include <typeinfo>
 
 #include "ElementVisitor.h"
 #include "../TypeFunctions.h"
@@ -23,7 +24,9 @@ namespace Acyclic{
 
 struct Visitor{
 	virtual ~Visitor(){}
-	virtual std::string toString() const = 0;
+	virtual std::string toString() const{
+		return typeid(*this).name();
+	}
 };
 /**
  *  DefaultVisit uses LoggingPolicy as default Implementation for visit(..)
@@ -66,7 +69,9 @@ class Visitable
 public:
     virtual ~Visitable(){};
 	virtual void accept(Visitor& visitor) = 0;
-	virtual std::string toString() const = 0;
+	virtual std::string toString() const{
+			return typeid(*this).name();
+		}
 };
 
 
