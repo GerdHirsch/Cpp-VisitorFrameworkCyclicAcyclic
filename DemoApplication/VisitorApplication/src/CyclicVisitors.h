@@ -23,7 +23,6 @@ public:
 		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
 	}
 	std::string toString() const override { return "DemoVisitor13"; }
-
 };
 
 class DemoVisitor23 : public Repository::VisitorBase{
@@ -35,10 +34,9 @@ public:
 		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
 	}
 	void visit(NonVisitable& v) {
-		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
+		std::cout << toString() << "::visit(" << VisitorFramework::toString(v) << ")" << std::endl;
 	}
 	std::string toString() const override { return "DemoVisitor23"; }
-
 };
 
 } // end namespace

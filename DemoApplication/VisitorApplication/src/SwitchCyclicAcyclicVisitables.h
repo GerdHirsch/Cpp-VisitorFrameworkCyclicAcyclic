@@ -14,7 +14,7 @@ namespace CyclicAcyclicRepository{
 class E1 : public Repository::VisitableImpl<E1>
 {
 public:
-	std::string toString() const { return "E1"; }
+//	std::string toString() const { return "E1"; } // defaut: typeid(*this).name()
 };
 class E2 : public Repository::VisitableImpl<E2>
 {

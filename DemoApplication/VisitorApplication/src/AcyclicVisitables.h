@@ -20,7 +20,7 @@ public:
 class E1 : public Repository::VisitableImpl<E1>, public AnotherBase
 {
 public:
-	std::string toString() const { return "E1"; }
+//	std::string toString() const { return "E1"; }
 };
 class E2 : public AnotherBase, public Repository::VisitableImpl<E2>
 {

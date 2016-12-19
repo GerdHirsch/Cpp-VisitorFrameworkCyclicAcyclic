@@ -9,9 +9,9 @@
 #define VISITOR_ACYCLIC_REPOSITORY_H_
 
 #include "Visitor.h"
-#include "VisitableAdapterAcyclic.h"
 #include "../Typelist.h"
 #include "../TypeFunctions.h"
+#include "VisitableAdapter.h"
 
 namespace VisitorFramework{
 namespace Acyclic{

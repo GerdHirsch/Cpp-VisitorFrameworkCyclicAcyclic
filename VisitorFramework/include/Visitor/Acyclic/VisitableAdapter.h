@@ -12,9 +12,9 @@
 #include "../StoragePolicies.h"
 #include "../DefaultPolicy.h"
 #include "../TypeFunctions.h"
+#include "../has_method_toString.h"
 
 namespace VisitorFramework{
-
 namespace Acyclic{
 
 template<
@@ -22,14 +22,13 @@ template<
 	class StoragePolicy = StorageByReference<Adaptee>,
 	class LoggingPolicy = VisitorFramework::StdOutLoggingPolicy
 		>
-class VisitableAdapter :
-		public VisitableImpl<
+struct VisitableAdapter :
+		VisitableImpl<
 				Adaptee, //ConcreteVisitable
 				VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy>,//VisitableImplementation
 				LoggingPolicy>,
-		public StoragePolicy
+		StoragePolicy
 {
-public:
 	using StorageType = typename StoragePolicy::StorageType;
 	using ReturnType = typename StoragePolicy::ReturnType;
 	using ConstReturnType = typename StoragePolicy::ConstReturnType;
@@ -43,7 +42,8 @@ public:
 
 	std::string toString() const {
 		std::string message("AcyclicAdapter::");
-		message += this->getVisitable()->toString();
+//		message += this->getVisitable()->toString();
+		message += VisitorFramework::toString(*this->getVisitable());
 		return message;
 	}
 };

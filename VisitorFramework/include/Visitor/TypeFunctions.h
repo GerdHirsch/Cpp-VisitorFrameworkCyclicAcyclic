@@ -16,7 +16,7 @@ namespace VisitorFramework{
 //namespace Acyclic{
 
 struct EmptyAccessor{
-	virtual std::string toString() const { return "EmptyAccessor";}
+//	virtual std::string toString() const { return "EmptyAccessor";}
 };
 /*
  * VisitorInterface erzeugt einen Visitor für ein Element

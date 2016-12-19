@@ -8,6 +8,8 @@
 #ifndef DEFAULTLOGGINGPOLICY_H_
 #define DEFAULTLOGGINGPOLICY_H_
 
+#include "has_method_toString.h"
+
 #include <string>
 #include <iostream>
 
@@ -25,7 +27,7 @@ struct StdOutLoggingPolicy{
 	template<class Visitable, class Visitor>
 	static void logNotAccepted(Visitable const& visitable, Visitor const& visitor){
 		std::string message("StdOutLoggingPolicy ");
-		message += visitable.toString();
+		message += VisitorFramework::toString(visitable);
 		message += " did not accept ";
 		message += visitor.toString();
 		std::cout << message << std::endl;
@@ -35,64 +37,19 @@ struct StdOutLoggingPolicy{
 		std::string message("StdOutLoggingPolicy ");
 		message += visitor.toString();
 		message += " did not visit ";
-		message += visitable.toString();
+		message += VisitorFramework::toString(visitable);
 		std::cout << message << std::endl;
 	}
 	template<class Visitable, class Visitor>
 	static void logAccepted(Visitable const& visitable, Visitor const& visitor){
 		std::string message("StdOutLoggingPolicy ");
-		message += visitable.toString();
+		message += VisitorFramework::toString(visitable);
 		message += " accepted ";
 		message += visitor.toString();
 		std::cout << message << std::endl;
 	}
 };
-struct AdapterLoggingPolicy{
-	template<class Visitable, class Visitor>
-	static void logNotAccepted(Visitable const& visitable, Visitor const& visitor){
-		std::string message("AdapterLoggingPolicy ");
-		message += visitable.toString();
-		message += " did not accept ";
-		message += visitor.toString();
-		std::cout << message << std::endl;
-//		std::clog << message << std::endl;
-	}
-	template<class Visitable, class Visitor>
-	static void logNotVisited(Visitable const& visitable, Visitor const& visitor){
-		std::string message("AdapterLoggingPolicy ");
-		message += visitor.toString();
-		message += " did not visit ";
-		message += visitable.toString();
-		std::cout << message << std::endl;
-	}
-	template<class Visitable, class Visitor>
-	static void logAccepted(Visitable const& visitable, Visitor const& visitor){
-		std::string message("AdapterLoggingPolicy ");
-		message += visitable.toString();
-		message += " accepted ";
-		message += visitor.toString();
-		std::cout << message << std::endl;
-	}
-};
-struct ElementLoggingPolicy{
-	template<class Visitable, class Visitor>
-	static void logNotAccepted(Visitable const& visitable, Visitor const& visitor){
-		std::string message("ElementLoggingPolicy ");
-		message += visitable.toString();
-		message += " did not accept ";
-		message += visitor.toString();
-		std::cout << message << std::endl;
-//		std::clog << message << std::endl;
-	}
-	template<class Visitable, class Visitor>
-	static void logAccepted(Visitable const& visitable, Visitor const& visitor){
-		std::string message("ElementLoggingPolicy ");
-		message += visitable.toString();
-		message += " accepted ";
-		message += visitor.toString();
-		std::cout << message << std::endl;
-	}
-};
+
 
 } // end namespace VisitorFramework
 
