@@ -39,7 +39,7 @@ public:
 		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
 	}
 	void visit(NonVisitableWithAccessor& v) {
-		std::cout << toString() << "::visit(" << v.toString() << ")" << std::endl;
+		std::cout << toString() << "::visit(" << VisitorFramework::toString(v) << ")" << std::endl;
 		std::cout << this->getData(v) << std::endl;
 		this->setData(v, "DemoVisitor23::Data");
 		std::cout << this->getData(v) << std::endl;

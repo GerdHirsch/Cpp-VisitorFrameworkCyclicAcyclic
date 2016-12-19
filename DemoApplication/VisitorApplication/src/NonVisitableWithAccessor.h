@@ -21,7 +21,7 @@ public:
 	~NonVisitableWithAccessor(){
 		std::cout << "NonVisitableWithAccessor::~NonVisitableWithAccessor() data: " << data << std::endl;
 	}
-	std::string toString() const {
+	std::string toString_() const {
 		std::string retVal("NonVisitableWithAccessor ");
 		retVal += data;
 		return retVal;

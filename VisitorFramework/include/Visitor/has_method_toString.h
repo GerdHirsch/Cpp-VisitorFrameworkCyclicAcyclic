@@ -11,6 +11,7 @@
 #include <typeinfo>
 #include <string>
 
+namespace VisitorFramework{
 
 template<typename T>
 struct has_method_toString
@@ -61,6 +62,6 @@ auto toString(ToPrint const& p){
 	return ToString<ToPrint>::toString(p);
 }
 
-
+} //end namespace
 
 #endif /* HAS_METHOD_TOSTRING_H_ */

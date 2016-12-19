@@ -9,6 +9,8 @@
 #define VISITOR_CYCLIC_VISITABLEADAPTER_H_
 
 #include "Visitor.h"
+#include "../has_method_toString.h"
+
 
 namespace VisitorFramework{
 namespace Cyclic{
@@ -45,7 +47,8 @@ struct VisitableAdapter :
 	std::string toString() const {
 		std::string message("CyclicAdapter::");
 		//TODO check has_toString_member
-		message += this->getVisitable()->toString();
+//		message += this->getVisitable()->toString();
+		message += VisitorFramework::toString(*this->getVisitable());
 		return message;
 	}
 };
