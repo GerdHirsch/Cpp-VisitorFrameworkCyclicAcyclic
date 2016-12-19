@@ -47,6 +47,14 @@ struct VisitableImpl : Visitable<VisitorBase>, LoggingPolicy {
 
 	void accept(VisitorBase& visitor){
 		this->logAccepted(*this, visitor);
+		decltype(auto) visitable = This()->getVisitable();
+
+		// visitable kann z.B. shared_ptr<ConcreteVisitable> sein
+		// der nicht mehr gültig ist
+		if(!visitable){
+			this->logInvalidVisitable(*this, visitor);
+			return;
+		}
 		visitor.visit(*(This()->getVisitable()) );
 	}
 protected:

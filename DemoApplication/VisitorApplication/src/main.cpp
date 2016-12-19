@@ -15,8 +15,8 @@ using namespace std;
 
 int main(){
 	cout << "VisitorApplication" << endl;
-//	demoCyclicRepository();
-	demoAcyclicRepository();
+	demoCyclicRepository();
+//	demoAcyclicRepository();
 //	demoSwitchCyclicAcyclic();
 	cout << "================================" << endl;
 }

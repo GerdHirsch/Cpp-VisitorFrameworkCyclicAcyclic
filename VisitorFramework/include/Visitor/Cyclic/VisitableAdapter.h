@@ -46,10 +46,12 @@ struct VisitableAdapter :
 
 	std::string toString() const {
 		std::string message("CyclicAdapter::");
-		//TODO check has_toString_member
-//		message += this->getVisitable()->toString();
-		message += VisitorFramework::toString(*this->getVisitable());
-		return message;
+		//TODO wo gehört die prüfung hin?
+		auto visitable = this->getVisitable();
+		if(visitable)
+			message += VisitorFramework::toString(*this->getVisitable());
+		else
+			message += typeid(Adaptee).name();		return message;
 	}
 };
 

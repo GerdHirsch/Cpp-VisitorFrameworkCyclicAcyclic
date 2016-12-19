@@ -103,7 +103,6 @@ public:
 
 		// visitable kann z.B. shared_ptr<ConcreteVisitable> sein
 		// der nicht mehr gültig ist
-		// TODO: einfach nix machen ist das elegant?
 		if(!visitable){
 			this->logInvalidVisitable(*this, visitor);
 			return;
