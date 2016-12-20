@@ -15,11 +15,6 @@
  * Accessor kann eine protected Schnittstelle
  * für den Zugriff auf die privaten Elemente des ConcreteVisitable
  * zur Verfügung stellen, die der ConcreteVisitor nutzen kann
- * Das template wird in den ConcreteVisitable Klassen
- * wie folgt genutzt:
- * using Visitor = ElementVisitor<ConcreteVisitable>
- * Die verschiedenen Visitors implementieren das Interface:
- * class ConcreteVisitor : public ConcreteVisitable::Visitor { ...};
  */
 // für experimente
 //#define VIRTUAL virtual

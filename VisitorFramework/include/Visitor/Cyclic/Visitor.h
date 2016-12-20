@@ -32,7 +32,6 @@ struct InheritFromDefault
 {
 public:
 	virtual void visit(ToVisit& visitable){
-//		LoggingPolicy::logNotVisited(visitable, *this);
 		this->logNotVisited(visitable, *this);
 	}
 
@@ -46,7 +45,6 @@ struct InheritFromDefault<LoggingPolicy, ToVisit>
 {
 public:
 	virtual void visit(ToVisit& visitable){
-//		LoggingPolicy::logNotVisited(visitable, *this);
 		this->logNotVisited(visitable, *this);
 	}
 
