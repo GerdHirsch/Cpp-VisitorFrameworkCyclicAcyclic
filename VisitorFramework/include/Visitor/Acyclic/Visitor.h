@@ -26,6 +26,7 @@ struct Visitor{
 		return typeid(*this).name();
 	}
 };
+//---------------------------------------------------------------------
 /**
  *  DefaultVisit uses LoggingPolicy as default Implementation for visit(..)
  */
@@ -35,7 +36,7 @@ struct DefaultVisit : implementsVisitor<ToVisit>{
 		LoggingPolicy::logNotVisited(v, dynamic_cast<Acyclic::Visitor&>(*this));
 	}
 };
-
+//---------------------------------------------------------------------
 template<class LoggingPolicy, class... T>
 class InheritFromDefault :
 		public Visitor,
@@ -47,7 +48,7 @@ class InheritFromAbstract :
 		public Visitor,
 		public implementsVisitor<T>...
 {};
-
+//---------------------------------------------------------------------
 template<class LoggingPolicy_, class = BaseKind::Abstract>
 struct SwitchBaseKind{
 	template<class ...Visitables>
@@ -58,6 +59,7 @@ struct SwitchBaseKind<LoggingPolicy_, BaseKind::Default>{
 	template<class ...Visitables>
 	using implementsVisitor = Acyclic::InheritFromDefault<LoggingPolicy_, Visitables...>;
 };
+//---------------------------------------------------------------------
 
 }} // end namespace
 

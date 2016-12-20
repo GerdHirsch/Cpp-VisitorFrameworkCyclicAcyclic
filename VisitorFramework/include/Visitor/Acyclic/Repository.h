@@ -68,6 +68,7 @@ struct Repository{
 			VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
 };
 
+// Convenience Interface Spezialization for Typelist
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>
 struct Repository<LoggingPolicy, BaseKind_, VisitorFramework::Typelist<Visitables...>>
 // delegates
