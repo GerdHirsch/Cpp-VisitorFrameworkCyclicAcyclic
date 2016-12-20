@@ -13,9 +13,9 @@
 
 class NonVisitable{
 public:
-//	std::string toString() const {
-//		return "NonVisitable";
-//	}
+	std::string toString() const {
+		return "NonVisitable";
+	}
 };
 
 

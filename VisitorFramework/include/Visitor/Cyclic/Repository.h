@@ -9,6 +9,7 @@
 #define VISITOR_CYCLIC_REPOSITORY_H_
 
 #include "Visitor.h"
+#include "Visitable.h"
 #include "VisitableAdapter.h"
 #include "../StoragePolicies.h"
 #include "../Typelist.h"

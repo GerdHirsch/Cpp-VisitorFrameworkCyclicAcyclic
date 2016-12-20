@@ -8,7 +8,9 @@
 #ifndef VISITOR_ACYCLIC_REPOSITORY_H_
 #define VISITOR_ACYCLIC_REPOSITORY_H_
 
+#include "Visitable.h"
 #include "Visitor.h"
+
 #include "../Typelist.h"
 #include "../TypeFunctions.h"
 #include "VisitableAdapter.h"
