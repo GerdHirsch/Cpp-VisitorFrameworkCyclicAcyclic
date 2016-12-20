@@ -1,0 +1,147 @@
+VisitorApplication
+================================
+==== demoCyclicRepository() ====
+
+==== DemoVisitor13 ====
+---
+StdOutLoggingPolicy CyclicAdapter::12NonVisitable accepted DemoVisitor13
+StdOutLoggingPolicy CyclicAdapter::12NonVisitable invalid Visitable DemoVisitor13
+---
+StdOutLoggingPolicy E1 accepted DemoVisitor13
+DemoVisitor13::visit(E1)
+---
+StdOutLoggingPolicy E2 accepted DemoVisitor13
+StdOutLoggingPolicy DemoVisitor13 did not visit E2
+---
+StdOutLoggingPolicy E3 accepted DemoVisitor13
+DemoVisitor13::visit(E3)
+---
+StdOutLoggingPolicy CyclicAdapter::NonVisitable accepted DemoVisitor13
+StdOutLoggingPolicy DemoVisitor13 did not visit NonVisitable
+
+==== DemoVisitor13 ====
+
+==== DemoVisitor23 ====
+---
+StdOutLoggingPolicy CyclicAdapter::12NonVisitable accepted DemoVisitor23
+StdOutLoggingPolicy CyclicAdapter::12NonVisitable invalid Visitable DemoVisitor23
+---
+StdOutLoggingPolicy E1 accepted DemoVisitor23
+StdOutLoggingPolicy DemoVisitor23 did not visit E1
+---
+StdOutLoggingPolicy E2 accepted DemoVisitor23
+DemoVisitor23::visit(E2)
+---
+StdOutLoggingPolicy E3 accepted DemoVisitor23
+DemoVisitor23::visit(E3)
+---
+StdOutLoggingPolicy CyclicAdapter::NonVisitable accepted DemoVisitor23
+DemoVisitor23::visit(NonVisitable)
+
+==== DemoVisitor23 ====
+==== end demoCyclicRepository() ====
+================================
+==== demoAcyclicRepository() ====
+NonVisitableWithAccessor::NonVisitableWithAccessor() data: default
+
+==== DemoVisitor13 ====
+---
+StdOutLoggingPolicy AcyclicAdapter::12NonVisitable invalid Visitable DemoVisitor13
+---
+StdOutLoggingPolicy N17AcyclicRepository2E1E accepted DemoVisitor13
+DemoVisitor13::visit(N17AcyclicRepository2E1E)
+---
+StdOutLoggingPolicy E2 did not accept DemoVisitor13
+---
+StdOutLoggingPolicy E3 accepted DemoVisitor13
+DemoVisitor13::visit(E3)
+---
+StdOutLoggingPolicy AcyclicAdapter::NonVisitable did not accept DemoVisitor13
+---
+StdOutLoggingPolicy AcyclicAdapter::24NonVisitableWithAccessor did not accept DemoVisitor13
+
+==== DemoVisitor13 ====
+
+==== DemoVisitor23 ====
+---
+StdOutLoggingPolicy AcyclicAdapter::12NonVisitable invalid Visitable DemoVisitor23
+---
+StdOutLoggingPolicy N17AcyclicRepository2E1E did not accept DemoVisitor23
+---
+StdOutLoggingPolicy E2 accepted DemoVisitor23
+DemoVisitor23::visit(E2)
+---
+StdOutLoggingPolicy E3 accepted DemoVisitor23
+DemoVisitor23::visit(E3)
+---
+StdOutLoggingPolicy AcyclicAdapter::NonVisitable did not accept DemoVisitor23
+---
+StdOutLoggingPolicy AcyclicAdapter::24NonVisitableWithAccessor accepted DemoVisitor23
+DemoVisitor23::visit(24NonVisitableWithAccessor)
+default
+DemoVisitor23::Data
+
+==== DemoVisitor23 ====
+==== end demoAcyclicRepository() ====
+NonVisitableWithAccessor::~NonVisitableWithAccessor() data: DemoVisitor23::Data
+================================
+==== demoSwitchCyclicAcyclic() ====
+NonVisitableWithAccessor::NonVisitableWithAccessor() data: default
+
+==== N23CyclicAcyclicRepository11DemoVisitorE ====
+---
+StdOutLoggingPolicy N23CyclicAcyclicRepository2E1E accepted N23CyclicAcyclicRepository11DemoVisitorE
+N23CyclicAcyclicRepository11DemoVisitorE::visit(N23CyclicAcyclicRepository2E1E)
+---
+StdOutLoggingPolicy E2 accepted N23CyclicAcyclicRepository11DemoVisitorE
+StdOutLoggingPolicy N23CyclicAcyclicRepository11DemoVisitorE did not visit E2
+---
+StdOutLoggingPolicy E3 accepted N23CyclicAcyclicRepository11DemoVisitorE
+StdOutLoggingPolicy N23CyclicAcyclicRepository11DemoVisitorE did not visit E3
+---
+StdOutLoggingPolicy AcyclicAdapter::NonVisitable accepted N23CyclicAcyclicRepository11DemoVisitorE
+N23CyclicAcyclicRepository11DemoVisitorE::visit(NonVisitable)
+---
+StdOutLoggingPolicy AcyclicAdapter::24NonVisitableWithAccessor accepted N23CyclicAcyclicRepository11DemoVisitorE
+StdOutLoggingPolicy N23CyclicAcyclicRepository11DemoVisitorE did not visit 24NonVisitableWithAccessor
+
+==== N23CyclicAcyclicRepository11DemoVisitorE ====
+
+==== DemoVisitor13 ====
+---
+StdOutLoggingPolicy N23CyclicAcyclicRepository2E1E accepted DemoVisitor13
+DemoVisitor13::visit(N23CyclicAcyclicRepository2E1E)
+---
+StdOutLoggingPolicy E2 did not accept DemoVisitor13
+---
+StdOutLoggingPolicy E3 accepted DemoVisitor13
+DemoVisitor13::visit(E3)
+---
+StdOutLoggingPolicy AcyclicAdapter::NonVisitable accepted DemoVisitor13
+DemoVisitor13::visit(NonVisitable)
+---
+StdOutLoggingPolicy AcyclicAdapter::24NonVisitableWithAccessor did not accept DemoVisitor13
+
+==== DemoVisitor13 ====
+
+==== DemoVisitor23 ====
+---
+StdOutLoggingPolicy N23CyclicAcyclicRepository2E1E accepted DemoVisitor23
+DemoVisitor23::visit(N23CyclicAcyclicRepository2E1E)
+---
+StdOutLoggingPolicy E2 accepted DemoVisitor23
+DemoVisitor23::visit(E2)
+---
+StdOutLoggingPolicy E3 accepted DemoVisitor23
+DemoVisitor23::visit(E3)
+---
+StdOutLoggingPolicy AcyclicAdapter::NonVisitable accepted DemoVisitor23
+StdOutLoggingPolicy DemoVisitor23 did not visit NonVisitable
+---
+StdOutLoggingPolicy AcyclicAdapter::24NonVisitableWithAccessor accepted DemoVisitor23
+DemoVisitor23::visit(24NonVisitableWithAccessor)
+
+==== DemoVisitor23 ====
+==== end demoSwitchCyclicAcyclic() ====
+NonVisitableWithAccessor::~NonVisitableWithAccessor() data: default
+================================

@@ -43,13 +43,13 @@ void demoCyclicRepository(){
 		auto p = std::make_shared<NonVisitable>();
 		visitables.push_back(Visitable(new AdapterWeak<NonVisitable>(p)));
 	}
-//	visitables.push_back(Visitable(new E1));
-//	visitables.push_back(Visitable(new E2));
-//	visitables.push_back(Visitable(new E3));
-//	visitables.push_back(Visitable(new AdapterReference<NonVisitable>(nv)));
+	visitables.push_back(Visitable(new E1));
+	visitables.push_back(Visitable(new E2));
+	visitables.push_back(Visitable(new E3));
+	visitables.push_back(Visitable(new AdapterReference<NonVisitable>(nv)));
 
 	demoRunVisitor(visitor13, visitables);
-//	demoRunVisitor(visitor23, visitables);
+	demoRunVisitor(visitor23, visitables);
 
 
 	std::cout << "==== end demoCyclicRepository() ====" << std::endl;

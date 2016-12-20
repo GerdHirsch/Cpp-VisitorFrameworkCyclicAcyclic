@@ -19,7 +19,6 @@
 
 namespace AcyclicRepository{
 
-
 using Visitable = std::shared_ptr<Repository::Visitable>;
 using Visitables = std::vector<Visitable>;
 
@@ -54,7 +53,7 @@ void demoAcyclicRepository(){
 	visitables.push_back(Visitable(new AdapterReference<NonVisitableWithAccessor>(nvwa)));
 
 	demoRunVisitor(visitor13, visitables);
-//	demoRunVisitor(visitor23, visitables);
+	demoRunVisitor(visitor23, visitables);
 
 
 	std::cout << "==== end demoAcyclicRepository() ====" << std::endl;
