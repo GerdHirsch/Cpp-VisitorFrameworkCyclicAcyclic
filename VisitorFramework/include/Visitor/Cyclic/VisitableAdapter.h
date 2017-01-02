@@ -51,7 +51,8 @@ struct VisitableAdapter :
 		if(visitable)
 			message += VisitorFramework::toString(*this->getVisitable());
 		else
-			message += typeid(Adaptee).name();		return message;
+			message += typeid(Adaptee).name();
+		return message;
 	}
 };
 

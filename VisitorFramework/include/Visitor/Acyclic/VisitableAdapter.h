@@ -29,6 +29,7 @@ struct VisitableAdapter :
 				LoggingPolicy>,
 		StoragePolicy
 {
+	//TODO merge Cyclci/Acyclic Implementation
 	using StorageType = typename StoragePolicy::StorageType;
 	using ReturnType = typename StoragePolicy::ReturnType;
 	using ConstReturnType = typename StoragePolicy::ConstReturnType;

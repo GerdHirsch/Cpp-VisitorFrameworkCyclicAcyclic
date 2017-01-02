@@ -11,7 +11,14 @@
 #include "CyclicRepository.h"
 
 namespace CyclicRepository{
+class Base : public Repository::VisitableImpl<Base>
+{
+public:
+	std::string toString() const { return "Base"; }
+};
 
+//TODO introduce Base as parameter
+//class E1 : public Repository::VisitableImpl<E1, Base>
 class E1 : public Repository::VisitableImpl<E1>
 {
 public:

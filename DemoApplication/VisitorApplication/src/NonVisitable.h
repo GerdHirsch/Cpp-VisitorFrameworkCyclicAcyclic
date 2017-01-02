@@ -11,7 +11,15 @@
 #include <string>
 #include <iostream>
 
-class NonVisitable{
+class Base{
+public:
+	//virtual // experimental
+	std::string toString() const {
+		return "Base";
+	}
+};
+//TODO introduce Base as parameter
+class NonVisitable : public Base{
 public:
 	std::string toString() const {
 		return "NonVisitable";

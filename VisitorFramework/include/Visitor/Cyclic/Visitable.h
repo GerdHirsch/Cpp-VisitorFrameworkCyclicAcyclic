@@ -36,6 +36,7 @@ template
 		class LoggingPolicy,
 		class VisitableImplementation = ConcreteVisitable
 	>
+//TODO introduce ConcreteVisitableBase as parameter base = Visitable<VisitorBase>
 struct VisitableImpl : Visitable<VisitorBase>, LoggingPolicy {
 	typedef Visitable<VisitorBase> base_type;
 

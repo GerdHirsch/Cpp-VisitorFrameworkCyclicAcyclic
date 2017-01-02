@@ -49,6 +49,7 @@ struct Repository{
 	//=================================================================
 	using Visitable = Cyclic::Visitable<VisitorBase>;
 
+	//TODO introduce ConcreteVisitableBase as parameter base = Visitable
 	template<class ConcreteVisitable>
 	using VisitableImpl =
 			Cyclic::VisitableImpl<ConcreteVisitable, VisitorBase, LoggingPolicy>;
