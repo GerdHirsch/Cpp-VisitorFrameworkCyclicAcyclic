@@ -24,6 +24,9 @@ using Visitables = std::vector<Visitable>;
 template<class Adaptee>
 using AdapterReference = Repository::AdapterByReference<Adaptee>;
 template<class Adaptee>
+using AdapterValue = Repository::AdapterByValue<Adaptee>;
+
+template<class Adaptee>
 using AdapterWeak = Repository::AdapterByWeakpointer<Adaptee>;
 }
 
@@ -47,6 +50,7 @@ void demoCyclicRepository(){
 	visitables.push_back(Visitable(new E2));
 	visitables.push_back(Visitable(new E3));
 	visitables.push_back(Visitable(new AdapterReference<NonVisitable>(nv)));
+	visitables.push_back(Visitable(new AdapterValue<NonVisitable>(nv)));
 
 	demoRunVisitor(visitor13, visitables);
 	demoRunVisitor(visitor23, visitables);

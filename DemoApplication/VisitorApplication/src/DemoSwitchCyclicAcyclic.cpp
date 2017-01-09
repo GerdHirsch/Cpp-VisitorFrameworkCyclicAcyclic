@@ -29,6 +29,8 @@ using MyAdapter =
 template<class Adaptee>
 using AdapterReference = Repository::AdapterByReference<Adaptee>;
 template<class Adaptee>
+using AdapterValue = Repository::AdapterByValue<Adaptee>;
+template<class Adaptee>
 using AdapterWeak = Repository::AdapterByWeakpointer<Adaptee>;
 }
 
@@ -44,13 +46,18 @@ void demoSwitchCyclicAcyclic(){
 	DemoVisitor13 visitor13;
 	DemoVisitor23 visitor23;
 
+	std::cout << "==== NonVisitable nv ====" << std::endl;
 	NonVisitable nv;
 	auto pNVWA = std::make_shared<NonVisitableWithAccessor>();
 
 	visitables.push_back(Visitable(new E1));
 	visitables.push_back(Visitable(new E2));
 	visitables.push_back(Visitable(new E3));
+	std::cout << "==== new AdapterReference<NonVisitable>(nv) ====" << std::endl;
 	visitables.push_back(Visitable(new AdapterReference<NonVisitable>(nv)));
+	std::cout << "==== new AdapterValue<NonVisitable>(nv) ====" << std::endl;
+	visitables.push_back(Visitable(new AdapterValue<NonVisitable>(nv)));
+	std::cout << "==== new AdapterWeak<NonVisitableWithAccessor>(pNVWA) ====" << std::endl;
 	visitables.push_back(Visitable(new AdapterWeak<NonVisitableWithAccessor>(pNVWA)));
 
 	demoRunVisitor(visitor, visitables);

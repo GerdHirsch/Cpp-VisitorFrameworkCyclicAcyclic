@@ -30,13 +30,14 @@ struct VisitableAdapter :
 		StoragePolicy
 {
 	//TODO merge Cyclci/Acyclic Implementation
-	using StorageType = typename StoragePolicy::StorageType;
+	using ReferenceType = typename StoragePolicy::ReferenceType;
 	using ReturnType = typename StoragePolicy::ReturnType;
 	using ConstReturnType = typename StoragePolicy::ConstReturnType;
 
 	using Visitor = getVisitor<Adaptee>;
 
-	VisitableAdapter(StorageType element): StoragePolicy(element){}
+//	VisitableAdapter(StorageType element): StoragePolicy(element){}
+	VisitableAdapter(ReferenceType element): StoragePolicy(element){}
 
 	ReturnType getVisitable() { return this->get(); }
 	ConstReturnType getVisitable()const { return this->get(); }

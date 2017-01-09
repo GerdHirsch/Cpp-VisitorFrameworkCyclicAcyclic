@@ -11,6 +11,8 @@
 #include "MetaFunctions.h"
 #include "Acyclic/ElementVisitor.h"
 
+#include <string>
+
 namespace VisitorFramework{
 
 //namespace Acyclic{
@@ -30,7 +32,7 @@ class VisitorInterface{
 public:
 	std::string toString(){ return "VisitorInterface";}
 
-	void print(){ std::cout << "VisitorInterface" << std::endl; }
+//	void print(){ std::cout << "VisitorInterface" << std::endl; }
 	using ConcreteVisitable = ToVisit;
 	using Accessor = Accessor_;
 	using this_type = VisitorInterface<ToVisit, Accessor>;

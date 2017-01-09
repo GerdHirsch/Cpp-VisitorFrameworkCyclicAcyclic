@@ -16,6 +16,7 @@ namespace VisitorFramework{
 template<class Adaptee>
 struct StorageByReference{
 	using StorageType = Adaptee&;
+	using ReferenceType = Adaptee&;
 	using ReturnType = Adaptee*;
 	using ConstReturnType = Adaptee const*;
 
@@ -27,8 +28,23 @@ protected:
 	StorageType adaptee;
 };
 template<class Adaptee>
+struct StorageByValue{
+	using StorageType = Adaptee;
+	using ReferenceType = Adaptee&;
+	using ReturnType = Adaptee*;
+	using ConstReturnType = Adaptee const*;
+
+	StorageByValue(StorageType& adaptee):adaptee(adaptee){}
+
+	ReturnType get(){ return &adaptee; }
+	ConstReturnType get() const { return &adaptee; }
+protected:
+	StorageType adaptee;
+};
+template<class Adaptee>
 struct StorageByWeakpointer{
 	using StorageType = std::weak_ptr<Adaptee>;
+	using ReferenceType = std::shared_ptr<Adaptee>&;
 	using ReturnType = std::shared_ptr<Adaptee>;
 	using ConstReturnType = std::shared_ptr<Adaptee const>;
 

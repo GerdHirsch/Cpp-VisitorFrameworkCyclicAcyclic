@@ -21,6 +21,15 @@ public:
 //TODO introduce Base as parameter
 class NonVisitable : public Base{
 public:
+	NonVisitable(){
+		std::cout << "NonVisitable()" << std::endl;
+	}
+	NonVisitable(NonVisitable const&){
+		std::cout << "NonVisitable(NonVisitable const&)" << std::endl;
+	}
+	virtual ~NonVisitable(){
+		std::cout << "~NonVisitable()" << std::endl;
+	}
 	std::string toString() const {
 		return "NonVisitable";
 	}

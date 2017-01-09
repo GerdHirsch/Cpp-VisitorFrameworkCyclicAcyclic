@@ -35,11 +35,11 @@ struct VisitableAdapter :
 		VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>>,
 	StoragePolicy
 {
-	using StorageType = typename StoragePolicy::StorageType;
+	using ReferenceType = typename StoragePolicy::ReferenceType;
 	using ReturnType = typename StoragePolicy::ReturnType;
 	using ConstReturnType = typename StoragePolicy::ConstReturnType;
 
-	VisitableAdapter(StorageType element): StoragePolicy(element){}
+	VisitableAdapter(ReferenceType element): StoragePolicy(element){}
 
 	ReturnType getVisitable() { return this->get(); }
 	ConstReturnType getVisitable() const { return this->get(); }
