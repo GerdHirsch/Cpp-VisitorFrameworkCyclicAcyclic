@@ -10,6 +10,7 @@
 #include "NonVisitableWithAccessor.h"
 
 #include "SwitchCyclicAcyclicVisitors.h"
+#include "MockVisitor.h"
 #include "SwitchCyclicAcyclicRepository.h"
 #include "DemoRunVisitor.h"
 
@@ -29,10 +30,13 @@ using MyAdapter =
 template<class Adaptee>
 using AdapterReference = Repository::AdapterByReference<Adaptee>;
 template<class Adaptee>
+using AdapterValue = Repository::AdapterByValue<Adaptee>;
+template<class Adaptee>
 using AdapterWeak = Repository::AdapterByWeakpointer<Adaptee>;
 }
 
 using namespace CyclicAcyclicRepository;
+using namespace VisitorTestMock;
 using namespace std;
 
 void demoSwitchCyclicAcyclic(){
@@ -40,22 +44,30 @@ void demoSwitchCyclicAcyclic(){
 	std::cout << "==== demoSwitchCyclicAcyclic() ====" << std::endl;
 	Visitables visitables;
 
-	DemoVisitor visitor;
+//	DemoVisitor visitor;
 	DemoVisitor13 visitor13;
-	DemoVisitor23 visitor23;
+//	DemoVisitor23 visitor23;
+//	MockVisitor<Repository, NonVisitable, E1> mock;
+	MockVisitor<Repository, E1, NonVisitable> mock;
 
+	std::cout << "==== NonVisitable nv ====" << std::endl;
 	NonVisitable nv;
 	auto pNVWA = std::make_shared<NonVisitableWithAccessor>();
 
 	visitables.push_back(Visitable(new E1));
 	visitables.push_back(Visitable(new E2));
 	visitables.push_back(Visitable(new E3));
+	std::cout << "==== new AdapterReference<NonVisitable>(nv) ====" << std::endl;
 	visitables.push_back(Visitable(new AdapterReference<NonVisitable>(nv)));
+	std::cout << "==== new AdapterValue<NonVisitable>(nv) ====" << std::endl;
+	visitables.push_back(Visitable(new AdapterValue<NonVisitable>(nv)));
+	std::cout << "==== new AdapterWeak<NonVisitableWithAccessor>(pNVWA) ====" << std::endl;
 	visitables.push_back(Visitable(new AdapterWeak<NonVisitableWithAccessor>(pNVWA)));
 
-	demoRunVisitor(visitor, visitables);
+//	demoRunVisitor(visitor, visitables);
 	demoRunVisitor(visitor13, visitables);
-	demoRunVisitor(visitor23, visitables);
+	demoRunVisitor(mock, visitables);
+//	demoRunVisitor(visitor23, visitables);
 
 
 	std::cout << "==== end demoSwitchCyclicAcyclic() ====" << std::endl;

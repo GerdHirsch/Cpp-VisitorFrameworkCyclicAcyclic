@@ -11,12 +11,18 @@
 #include "AcyclicRepository.h"
 
 namespace AcyclicRepository{
+class Base : public Repository::VisitableImpl<Base>
+{
+public:
+	std::string toString() const { return "Base"; }
+};
 
 class AnotherBase{
 public:
 	virtual ~AnotherBase(){}
 };
-
+//TODO introduce Base as parameter
+//class E1 : public Repository::VisitableImpl<E1, Base> public AnotherBase
 class E1 : public Repository::VisitableImpl<E1>, public AnotherBase
 {
 public:

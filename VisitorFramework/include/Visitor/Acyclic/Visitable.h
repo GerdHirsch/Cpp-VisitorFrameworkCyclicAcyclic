@@ -57,6 +57,7 @@ template<
 	class VisitableImplementation_,
 	class LoggingPolicy
 	>
+//TODO introduce ConcreteVisitableBase as parameter base = Visitable
 class VisitableImpl : public Visitable, public LoggingPolicy{
 
 public:

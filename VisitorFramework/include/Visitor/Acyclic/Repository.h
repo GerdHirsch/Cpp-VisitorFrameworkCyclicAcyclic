@@ -47,7 +47,7 @@ struct Repository{
 	// Visitables
 	//=================================================================
 	using Visitable = Acyclic::Visitable;
-
+	//TODO introduce ConcreteVisitableBase as parameter base = Visitable
 	template<class ConcreteVisitable>
 	using VisitableImpl =
 			Acyclic::VisitableImpl<ConcreteVisitable, ConcreteVisitable, LoggingPolicy>;
@@ -66,6 +66,9 @@ struct Repository{
 	template<class Adaptee>
 	using AdapterByReference =
 			VisitableAdapter<Adaptee, StorageByReference<Adaptee>>;
+	template<class Adaptee>
+	using AdapterByValue =
+			VisitableAdapter<Adaptee, StorageByValue<Adaptee>>;
 };
 
 // Convenience Interface Spezialization for Typelist
