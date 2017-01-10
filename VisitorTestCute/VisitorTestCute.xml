@@ -1,0 +1,72 @@
+<testsuites>
+	<testsuite name="Visitor::visit" tests="11">
+		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclic"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicLogAccepted"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicLogNotVisited"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicVisitableWithAccessor">
+			<failure message="..\src\../include/VisitorTest.h:88 visitCyclicVisitableWithAccessor: Todo: implement test">
+visitCyclicVisitableWithAccessor: Todo: implement test
+			</failure>
+		</testcase>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicNonVisitableWithAccessor">
+			<failure message="..\src\../include/VisitorTest.h:92 visitCyclicNonVisitableWithAccessor: Todo: implement test">
+visitCyclicNonVisitableWithAccessor: Todo: implement test
+			</failure>
+		</testcase>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclic"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogAccepted"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogNotAccepted"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogNotVisited"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicVisitableWithAccessor">
+			<failure message="..\src\../include/VisitorTest.h:96 visitAcyclicVisitableWithAccessor: Todo: implement test">
+visitAcyclicVisitableWithAccessor: Todo: implement test
+			</failure>
+		</testcase>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicNonVisitableWithAccessor">
+			<failure message="..\src\../include/VisitorTest.h:100 visitAcyclicNonVisitableWithAccessor: Todo: implement test">
+visitAcyclicNonVisitableWithAccessor: Todo: implement test
+			</failure>
+		</testcase>
+	</testsuite>
+	<testsuite name="Visitor abstract" tests="2">
+		<testcase classname="Visitor abstract" name="VisitorAbstractTest::cyclicAbstract"/>
+		<testcase classname="Visitor abstract" name="VisitorAbstractTest::acyclicAbstract"/>
+	</testsuite>
+	<testsuite name="Default Policy init" tests="4">
+		<testcase classname="Default Policy init" name="DefaultPolicyTest::initCyclicVisitorDefaultPolicy"/>
+		<testcase classname="Default Policy init" name="DefaultPolicyTest::initCyclicVisitableDefaultPolicy"/>
+		<testcase classname="Default Policy init" name="DefaultPolicyTest::initAcyclicVisitorDefaultPolicy">
+			<failure message="..\src\../include/DefaultPolicyTest.h:77 initAcyclicDefaultPolicyImpl: DefaultPolicy logAccepted not initialized">
+initAcyclicDefaultPolicyImpl: DefaultPolicy logAccepted not initialized
+			</failure>
+		</testcase>
+		<testcase classname="Default Policy init" name="DefaultPolicyTest::initAcyclicVisitableDefaultPolicy"/>
+	</testsuite>
+	<testsuite name="Adapter NonVisitable" tests="8">
+		<testcase classname="Adapter NonVisitable" name="AdapterTest::visitCyclicAdapterByReference"/>
+		<testcase classname="Adapter NonVisitable" name="AdapterTest::visitCyclicAdapterByValue"/>
+		<testcase classname="Adapter NonVisitable" name="AdapterTest::visitCyclicAdapterByWeakpointer"/>
+		<testcase classname="Adapter NonVisitable" name="AdapterTest::visitCyclicAdapterInvalidVisitable"/>
+		<testcase classname="Adapter NonVisitable" name="AdapterTest::visitAcyclicAdapterByReference"/>
+		<testcase classname="Adapter NonVisitable" name="AdapterTest::visitAcyclicAdapterByValue"/>
+		<testcase classname="Adapter NonVisitable" name="AdapterTest::visitAcyclicAdapterByWeakpointer"/>
+		<testcase classname="Adapter NonVisitable" name="AdapterTest::visitAcyclicAdapterInvalidVisitable"/>
+	</testsuite>
+	<testsuite name="Visitable Factory" tests="3">
+		<testcase classname="Visitable Factory" name="VisitableFactoryTest::makeVisitableByReference">
+			<failure message="..\src\../include/VisitableFactoryTest.h:33 makeVisitableByReference: Todo: implement test">
+makeVisitableByReference: Todo: implement test
+			</failure>
+		</testcase>
+		<testcase classname="Visitable Factory" name="VisitableFactoryTest::makeVisitableByValue">
+			<failure message="..\src\../include/VisitableFactoryTest.h:37 makeVisitableByValue: Todo: implement test">
+makeVisitableByValue: Todo: implement test
+			</failure>
+		</testcase>
+		<testcase classname="Visitable Factory" name="VisitableFactoryTest::makeVisitableByWeakpointer">
+			<failure message="..\src\../include/VisitableFactoryTest.h:41 makeVisitableByWeakpointer: Todo: implement test">
+makeVisitableByWeakpointer: Todo: implement test
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>
