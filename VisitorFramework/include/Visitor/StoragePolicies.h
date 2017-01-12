@@ -27,6 +27,7 @@ struct StorageByReference{
 protected:
 	StorageType adaptee;
 };
+//------------------------------------------
 template<class Adaptee>
 struct StorageByValue{
 	using StorageType = Adaptee;
@@ -34,13 +35,15 @@ struct StorageByValue{
 	using ReturnType = Adaptee*;
 	using ConstReturnType = Adaptee const*;
 
-	StorageByValue(StorageType& adaptee):adaptee(adaptee){}
+//	StorageByValue(StorageType& adaptee):adaptee(adaptee){}
+	StorageByValue(StorageType adaptee):adaptee(adaptee){}
 
 	ReturnType get(){ return &adaptee; }
 	ConstReturnType get() const { return &adaptee; }
 protected:
 	StorageType adaptee;
 };
+//------------------------------------------
 template<class Adaptee>
 struct StorageByWeakpointer{
 	using StorageType = std::weak_ptr<Adaptee>;

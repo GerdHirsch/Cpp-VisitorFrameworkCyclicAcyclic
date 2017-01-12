@@ -11,6 +11,8 @@
 #include <Visitor/DefaultPolicy.h>
 //#include <visitor/Typelist.h>
 //#include <visitor/BaseKind.h>
+
+#include <Visitor/VisitableFactory.h>
 #include <Visitor/Cyclic/Repository.h>
 #include <Visitor/Acyclic/Repository.h>
 
@@ -44,5 +46,8 @@ using Repository = CAR::Repository
 //		BaseKind::Default,
 		typelist
 		>;
+
+using Factory = VisitorFramework::VisitableFactory<Repository>;
+
 }
 #endif /* SWITCHCYCLICACYCLICREPOSITORY_H_ */
