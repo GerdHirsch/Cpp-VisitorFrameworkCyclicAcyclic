@@ -29,15 +29,17 @@ struct VisitableAdapter :
 				LoggingPolicy>,
 		StoragePolicy
 {
-	//TODO merge Cyclci/Acyclic Implementation
-	using ReferenceType = typename StoragePolicy::ReferenceType;
+	//TODO merge Cyclic/Acyclic Implementation
+	using LValueReferenceType = typename StoragePolicy::LValueReferenceType;
+	using RValueReferenceType = typename StoragePolicy::RValueReferenceType;
+
 	using ReturnType = typename StoragePolicy::ReturnType;
 	using ConstReturnType = typename StoragePolicy::ConstReturnType;
 
 	using Visitor = getVisitor<Adaptee>;
 
-//	VisitableAdapter(StorageType element): StoragePolicy(element){}
-	VisitableAdapter(ReferenceType element): StoragePolicy(element){}
+	VisitableAdapter(LValueReferenceType element): StoragePolicy(element){}
+	VisitableAdapter(RValueReferenceType element): StoragePolicy(std::forward<RValueReferenceType>(element)){}
 
 	ReturnType getVisitable() { return this->get(); }
 	ConstReturnType getVisitable()const { return this->get(); }

@@ -8,12 +8,15 @@
 #ifndef VISITOR_VISITABLEFACTORY_H_
 #define VISITOR_VISITABLEFACTORY_H_
 
+#include <memory>
+#include <iostream>
+
 namespace VisitorFramework{
 
 
 template<class Repository>
 class VisitableFactory{
-
+public:
 	using this_type = VisitableFactory<Repository>;
 
 	template<class ToVisit>
@@ -27,16 +30,21 @@ public:
 	using ReturnType = std::shared_ptr<typename Repository::Visitable>;
 
 	template<class ToVisit>
-	ReturnType makeVisitable(ToVisit& toVisit){
-		return std::make_shared<AdapterRef>(toVisit);
+	static ReturnType makeVisitable(ToVisit& toVisit){
+		return std::make_shared<AdapterRef<ToVisit>>(toVisit);
+//		ReturnType retVal(new AdapterRef<ToVisit>(toVisit));
+//		return retVal;
 	}
 	template<class ToVisit>
-	ReturnType makeVisitable(ToVisit&& toVisit){
-		return std::make_shared<AdapterVal>(std::move(toVisit));
+	static ReturnType makeVisitable(ToVisit&& toVisit){
+//		std::cout << "makeVisitable(ToVisit&& toVisit)" << std::endl;
+//		return std::make_shared<AdapterVal<ToVisit>>(std::move(toVisit));
+		return std::make_shared<AdapterVal<ToVisit>>(std::forward<ToVisit>(toVisit));
+//		return std::make_shared<AdapterVal<ToVisit>>(toVisit);
 	}
 	template<class ToVisit>
-	ReturnType makeVisitable(std::shared_ptr<ToVisit> toVisit){
-		return std::make_shared<AdapterWeak>(toVisit);
+	static ReturnType makeVisitable(std::shared_ptr<ToVisit> toVisit){
+		return std::make_shared<AdapterWeak<ToVisit>>(toVisit);
 	}
 };
 

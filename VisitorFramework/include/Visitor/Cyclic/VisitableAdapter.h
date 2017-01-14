@@ -35,11 +35,14 @@ struct VisitableAdapter :
 		VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>>,
 	StoragePolicy
 {
-	using ReferenceType = typename StoragePolicy::ReferenceType;
+	using LValueReferenceType = typename StoragePolicy::LValueReferenceType;
+	using RValueReferenceType = typename StoragePolicy::RValueReferenceType;
+
 	using ReturnType = typename StoragePolicy::ReturnType;
 	using ConstReturnType = typename StoragePolicy::ConstReturnType;
 
-	VisitableAdapter(ReferenceType element): StoragePolicy(element){}
+	VisitableAdapter(LValueReferenceType element): StoragePolicy(element){}
+	VisitableAdapter(RValueReferenceType element): StoragePolicy(std::forward<RValueReferenceType>(element)){}
 
 	ReturnType getVisitable() { return this->get(); }
 	ConstReturnType getVisitable() const { return this->get(); }

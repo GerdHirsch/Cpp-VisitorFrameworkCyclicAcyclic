@@ -69,11 +69,11 @@ void DefaultPolicyTest::initAcyclicVisitableDefaultPolicy(){
 	using V = AR::E1;
 	initAcyclicDefaultPolicyImpl<V>();
 }
-template<class Visitor>
+template<class V>
 inline
 void DefaultPolicyTest::initAcyclicDefaultPolicyImpl(){
 	setDefaultPolicyInitValues();
-	Visitor visitor;
+	V v;
 	ASSERTM("DefaultPolicy logAccepted not initialized", !VTM::MockLoggingPolicy::accepted);
 	ASSERTM("DefaultPolicy logNotAccepted not initialized", !VTM::MockLoggingPolicy::accepted);
 	ASSERTM("DefaultPolicy logNotVisited not initialized", !VTM::MockLoggingPolicy::notVisited);

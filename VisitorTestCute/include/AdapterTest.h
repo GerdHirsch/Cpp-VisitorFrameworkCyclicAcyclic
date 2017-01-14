@@ -28,20 +28,27 @@ namespace AR = AcyclicRepository;
 
 class AdapterTest{
 	using this_type = AdapterTest;
+
+	// TODO how to test this property?
+	void notConstructibleWithRValueSharedPtr();
 	//=====================================
 	// Cyclic
 	//=====================================
 	void visitCyclicAdapterByReference();
 	void visitCyclicAdapterByValue();
+
 	void visitCyclicAdapterByWeakpointer();
 	void visitCyclicAdapterInvalidVisitable();
+	void cyclicAdapterWeakpointerStayValid();
 	//=====================================
 	// Acyclic
 	//=====================================
 	void visitAcyclicAdapterByReference();
 	void visitAcyclicAdapterByValue();
+
 	void visitAcyclicAdapterByWeakpointer();
 	void visitAcyclicAdapterInvalidVisitable();
+	void acyclicAdapterWeakpointerStayValid();
 
 public:
 	template<class DerivedTest = this_type>
@@ -54,6 +61,7 @@ public:
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicAdapterByValue));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicAdapterByWeakpointer));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicAdapterInvalidVisitable));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, cyclicAdapterWeakpointerStayValid));
 		//=====================================
 		// Acyclic
 		//=====================================
@@ -61,6 +69,7 @@ public:
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicAdapterByValue));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicAdapterByWeakpointer));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicAdapterInvalidVisitable));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, acyclicAdapterWeakpointerStayValid));
 
 		return s;
 	}
@@ -84,8 +93,8 @@ inline
 void AdapterTest::visitCyclicAdapterByValue(){
 	NonVisitable nonVisitable;
 	CR::Repository::AdapterByValue<NonVisitable> adapter(nonVisitable);
-	//TODO temporäre objekte Adapter Ctor
-//	CR::Repository::AdapterByValue<NonVisitable> adapter((NonVisitable()) );
+	//temporäre objekte Adapter Ctor
+	CR::Repository::AdapterByValue<NonVisitable> adapterWithTemp((NonVisitable()) );
 
 	using Visitor = VTM::MockVisitor<CR::Repository, CR::E1, NonVisitable>;
 	Visitor visitor;
@@ -122,6 +131,18 @@ void AdapterTest::visitCyclicAdapterInvalidVisitable(){
 	pAdapter->accept(visitor);
 
 	ASSERTM("DefaultPolicy logInvalidVisitable not called", VTM::MockLoggingPolicy::invalidVisitable);
+}
+inline
+void AdapterTest::cyclicAdapterWeakpointerStayValid(){
+	using Adapter = CR::Repository::AdapterByWeakpointer<NonVisitable>;
+	auto nonVisitable = std::make_shared<NonVisitable>();
+
+	std::weak_ptr<NonVisitable> pWeak(nonVisitable);
+
+	auto pAdapter = std::make_shared<Adapter>(pWeak);;
+	auto p = pWeak.lock();
+
+	ASSERTM("Weak_ptr not copied", p != nullptr );
 }
 //=====================================
 // Acyclic
@@ -180,5 +201,16 @@ void AdapterTest::visitAcyclicAdapterInvalidVisitable(){
 
 	ASSERTM("DefaultPolicy logInvalidVisitable not called", VTM::MockLoggingPolicy::invalidVisitable);
 }
+inline
+void AdapterTest::acyclicAdapterWeakpointerStayValid(){
+	using Adapter = AR::Repository::AdapterByWeakpointer<NonVisitable>;
+	auto nonVisitable = std::make_shared<NonVisitable>();
 
+	std::weak_ptr<NonVisitable> pWeak(nonVisitable);
+
+	auto pAdapter = std::make_shared<Adapter>(pWeak);;
+	auto p = pWeak.lock();
+
+	ASSERTM("Weak_ptr not copied", p != nullptr );
+}
 #endif /* INCLUDE_ADAPTERTEST_H_ */

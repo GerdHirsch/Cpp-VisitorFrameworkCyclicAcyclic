@@ -35,6 +35,7 @@ public:
 	// Cyclic
 	//=====================================
 	void visitCyclic();
+	void visitCyclicDerivedBase();
 	// Default Policies
 	void visitCyclicLogAccepted();
 	void visitCyclicLogNotVisited();
@@ -44,6 +45,7 @@ public:
 	// Acyclic
 	//=====================================
 	void visitAcyclic();
+	void visitAcyclicDerivedBase();
 	// Default Policies
 	void visitAcyclicLogAccepted();
 	void visitAcyclicLogNotAccepted();
@@ -63,6 +65,7 @@ public:
 		// Cyclic
 		//=====================================
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclic));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicDerivedBase));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogAccepted));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogNotVisited));
 
@@ -72,6 +75,7 @@ public:
 		// Acyclic
 		//=====================================
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclic));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicDerivedBase));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogAccepted));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotAccepted));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotVisited));
@@ -100,6 +104,14 @@ void VisitorTest::visitAcyclicNonVisitableWithAccessor(){
 	ASSERTM("Todo: implement test", false);
 }
 
+inline
+void VisitorTest::visitAcyclicDerivedBase(){
+	ASSERTM("Todo: implement test", false);
+}
+inline
+void VisitorTest::visitCyclicDerivedBase(){
+	ASSERTM("Todo: implement test", false);
+}
 //=====================================
 // Cyclic
 //=====================================
