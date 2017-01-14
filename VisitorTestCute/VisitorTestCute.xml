@@ -53,11 +53,7 @@ visitAcyclicNonVisitableWithAccessor: Todo: implement test
 	<testsuite name="Default Policy init" tests="4">
 		<testcase classname="Default Policy init" name="DefaultPolicyTest::initCyclicVisitorDefaultPolicy"/>
 		<testcase classname="Default Policy init" name="DefaultPolicyTest::initCyclicVisitableDefaultPolicy"/>
-		<testcase classname="Default Policy init" name="DefaultPolicyTest::initAcyclicVisitorDefaultPolicy">
-			<failure message="..\src\../include/DefaultPolicyTest.h:77 initAcyclicDefaultPolicyImpl: DefaultPolicy logAccepted not initialized">
-initAcyclicDefaultPolicyImpl: DefaultPolicy logAccepted not initialized
-			</failure>
-		</testcase>
+		<testcase classname="Default Policy init" name="DefaultPolicyTest::initAcyclicVisitorDefaultPolicy"/>
 		<testcase classname="Default Policy init" name="DefaultPolicyTest::initAcyclicVisitableDefaultPolicy"/>
 	</testsuite>
 	<testsuite name="Adapter NonVisitable" tests="10">
