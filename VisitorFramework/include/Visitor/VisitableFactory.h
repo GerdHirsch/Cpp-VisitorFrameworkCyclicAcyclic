@@ -16,7 +16,7 @@ namespace VisitorFramework{
 
 template<class Repository>
 class VisitableFactory{
-
+public:
 	using this_type = VisitableFactory<Repository>;
 
 	template<class ToVisit>
@@ -44,7 +44,7 @@ public:
 	}
 	template<class ToVisit>
 	static ReturnType makeVisitable(std::shared_ptr<ToVisit> toVisit){
-		return std::make_shared<AdapterWeak>(toVisit);
+		return std::make_shared<AdapterWeak<ToVisit>>(toVisit);
 	}
 };
 

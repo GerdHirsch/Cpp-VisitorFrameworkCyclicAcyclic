@@ -14,6 +14,7 @@
 #include <visitor/Typelist.h>
 #include <visitor/BaseKind.h>
 #include <Visitor/Acyclic/Repository.h>
+#include <Visitor/VisitableFactory.h>
 
 class NonVisitable;
 class NonVisitableWithAccessor;
@@ -23,7 +24,6 @@ class E1;
 class E2;
 class E3;
 
-namespace VF = VisitorFramework;
 namespace VTM = VisitorTestMock;
 
 using typelist =
@@ -33,19 +33,20 @@ using typelist =
 		NonVisitableWithAccessor
 		>;
 
-using Repository = VF::Acyclic::Repository
+using Repository = VisitorFramework::Acyclic::Repository
 		<
 		VTM::MockLoggingPolicy,
 		BaseKind::Default,
 		typelist
 		>;
 
-using AbstractRepository = VF::Acyclic::Repository
+using AbstractRepository = VisitorFramework::Acyclic::Repository
 		<
 		VisitorFramework::EmptyLoggingPolicy,
 		BaseKind::Abstract,
 		typelist
 		>;
+using Factory = VisitorFramework::VisitableFactory<Repository>;
 }
 
 

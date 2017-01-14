@@ -11,32 +11,42 @@
 #include <memory>
 
 namespace VisitorFramework{
-
-
 template<class Adaptee>
 struct StorageByReference{
+private:
+	class DisableCtor;
+public:
 	using StorageType = Adaptee&;
-	using ReferenceType = Adaptee&;
+
+	using LValueReferenceType = Adaptee&;
+	using RValueReferenceType = DisableCtor&;
+
 	using ReturnType = Adaptee*;
 	using ConstReturnType = Adaptee const*;
 
-	StorageByReference(StorageType adaptee):adaptee(adaptee){}
+	StorageByReference(LValueReferenceType adaptee):adaptee(adaptee){}
 
 	ReturnType get(){ return &adaptee; }
 	ConstReturnType get() const { return &adaptee; }
 protected:
 	StorageType adaptee;
 };
+
 //------------------------------------------
 template<class Adaptee>
 struct StorageByValue{
 	using StorageType = Adaptee;
-	using ReferenceType = Adaptee&;
+
+	using LValueReferenceType = Adaptee&;
+	using RValueReferenceType = Adaptee&&;
+
 	using ReturnType = Adaptee*;
 	using ConstReturnType = Adaptee const*;
 
-//	StorageByValue(StorageType& adaptee):adaptee(adaptee){}
-	StorageByValue(StorageType adaptee):adaptee(adaptee){}
+	StorageByValue(LValueReferenceType adaptee):adaptee(adaptee){}
+	StorageByValue(RValueReferenceType adaptee):adaptee(std::move(adaptee)){}
+	// to many copy ctors
+//	StorageByValue(StorageType adaptee):adaptee(adaptee){}
 
 	ReturnType get(){ return &adaptee; }
 	ConstReturnType get() const { return &adaptee; }
@@ -46,12 +56,20 @@ protected:
 //------------------------------------------
 template<class Adaptee>
 struct StorageByWeakpointer{
+private:
+	class DisableCtor;
+public:
 	using StorageType = std::weak_ptr<Adaptee>;
-	using ReferenceType = std::shared_ptr<Adaptee>&;
+
+	using LValueReferenceType = std::shared_ptr<Adaptee>&;
+	using RValueReferenceType = StorageType&;
+
 	using ReturnType = std::shared_ptr<Adaptee>;
 	using ConstReturnType = std::shared_ptr<Adaptee const>;
 
-	StorageByWeakpointer(StorageType adaptee):adaptee(adaptee){}
+	StorageByWeakpointer(LValueReferenceType adaptee):adaptee(adaptee){}
+	StorageByWeakpointer(StorageType& adaptee):adaptee(adaptee){}
+
 	ReturnType get(){ return adaptee.lock(); }
 	ConstReturnType get() const { return adaptee.lock(); }
 protected:

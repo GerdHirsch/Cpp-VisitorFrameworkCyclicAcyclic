@@ -21,11 +21,9 @@
 #include <Visitor/VisitableFactory.h>
 
 namespace VisitorTestMock{
-namespace CR = CyclicRepository;
-namespace AR = AcyclicRepository;
 
-using CyclicFactory = VisitorFramework::VisitableFactory<CR::Repository>;
-using AcyclicFactory = VisitorFramework::VisitableFactory<AR::Repository>;
+using CyclicFactory = VisitorFramework::VisitableFactory<CyclicRepository::Repository>;
+using AcyclicFactory = VisitorFramework::VisitableFactory<AcyclicRepository::Repository>;
 
 }
 

@@ -42,8 +42,8 @@ using Repository = CAR::Repository
 		<
 //		VisitorFramework::EmptyLoggingPolicy,
 		VisitorFramework::StdOutLoggingPolicy,
-		BaseKind::Abstract,
-//		BaseKind::Default,
+//		BaseKind::Abstract,
+		BaseKind::Default,
 		typelist
 		>;
 
