@@ -25,8 +25,6 @@ class E1;
 class E2;
 class E3;
 
-namespace VTM = VisitorTestMock;
-
 using typelist =
 		VisitorFramework::Typelist
 		<
@@ -36,7 +34,7 @@ using typelist =
 
 using Repository = VisitorFramework::Acyclic::Repository
 		<
-		VTM::MockLoggingPolicy,
+		VisitorTestMock::MockLoggingPolicy,
 		BaseKind::Default,
 		typelist
 		>;
@@ -47,7 +45,6 @@ using AbstractRepository = VisitorFramework::Acyclic::Repository
 		BaseKind::Abstract,
 		typelist
 		>;
-using Factory = VisitorFramework::VisitableFactory<Repository>;
 }
 
 

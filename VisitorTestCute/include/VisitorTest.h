@@ -20,10 +20,6 @@
 
 #include <iostream>
 
-namespace CR = CyclicRepository;
-namespace AR = AcyclicRepository;
-namespace VTM = VisitorTestMock;
-
 class VisitorTest{
 public:
 	using this_type = VisitorTest;
@@ -47,15 +43,6 @@ public:
 	void visitAcyclicLogNotAccepted();
 	void visitAcyclicLogNotVisited();
 
-	//=====================================
-	// Inheritance
-	//=====================================
-	void visitCyclicDerivedBase();
-	void visitCyclicBase();
-	void visitCyclicDerived();
-	void visitAcyclicDerivedBase();
-	void visitAcyclicBase();
-	void visitAcyclicDerived();
 	//=====================================
 	// Accessor
 	//=====================================
@@ -88,22 +75,12 @@ public:
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotVisited));
 
 		//=====================================
-		// Inheritance
-		//=====================================
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicDerivedBase));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicBase));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicDerived));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicDerivedBase));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicBase));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicDerived));
-
-		//=====================================
 		// Accessor
 		//=====================================
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicVisitableWithAccessor));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicNonVisitableWithAccessor));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicVisitableWithAccessor));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicNonVisitableWithAccessor));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicVisitableWithAccessor));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicNonVisitableWithAccessor));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicVisitableWithAccessor));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicNonVisitableWithAccessor));
 
 
 		return s;
@@ -127,100 +104,79 @@ void VisitorTest::visitAcyclicNonVisitableWithAccessor(){
 	ASSERTM("Todo: implement test", false);
 }
 
-inline // implements Base and Derived visit method
-void VisitorTest::visitAcyclicDerivedBase(){
-//	ASSERTM("Todo: implement many more tests", false);
-
-	using namespace AcyclicRepository;
-
-	using Visitor = VisitorTestMock::MockVisitor<Repository, E1, E2>;
-	{
-		using Visitable = E1;
-
-		Visitor visitor;
-		Visitable visitable;
-
-		visitable.accept(visitor);
-
-		ASSERTM("Acyclic Visitor::visit(E1&) not called", visitor.visitableVisited);
-		ASSERTM("E1 not visited: ", visitable.wasVisited());
-
-		ASSERTM("DefaultPolicy logNotVisited called", !VisitorTestMock::MockLoggingPolicy::notAccepted);
-		ASSERTM("DefaultPolicy logNotVisited called", !VisitorTestMock::MockLoggingPolicy::notVisited);
-	}
-	{
-		using Visitable = E2;
-
-		Visitor visitor;
-		Visitable visitable;
-
-		visitable.accept(visitor);
-
-
-		ASSERTM("Acyclic Visitor::visit(E2&) not called", visitor.visitableVisited);
-		ASSERTM("E1 not visited: ", visitable.wasVisited());
-
-		ASSERTM("DefaultPolicy logNotVisited called", !VisitorTestMock::MockLoggingPolicy::notAccepted);
-		ASSERTM("DefaultPolicy logNotVisited called", VisitorTestMock::MockLoggingPolicy::notVisited);
-
-	}
-}
-inline
-void VisitorTest::visitCyclicDerivedBase(){
-	ASSERTM("Todo: implement test", false);
-}
 //=====================================
 // Cyclic
 //=====================================
 inline
 void VisitorTest::visitCyclic(){
+	using namespace CyclicRepository;
+	using namespace VisitorTestMock;
+
 	bool result = false;
-	using CVisitor = VTM::MockVisitor<CR::Repository, CR::E1>;
-	result = visitVisitablesImpl<CVisitor, CR::E1>();
+	using Visitor = MockVisitor<Repository, E1>;
+	result = visitVisitablesImpl<Visitor, E1>();
 	ASSERTM("Cyclic Visitor::visit(E1&) not called", result);
 }
 inline
 void VisitorTest::visitCyclicLogAccepted(){
-	using CVisitor = VTM::MockVisitor<CR::Repository, CR::E1>;
-	visitVisitablesImpl<CVisitor, CR::E1>();
-	ASSERTM("DefaultPolicy logAccepted not called", VTM::MockLoggingPolicy::accepted);
+	using namespace CyclicRepository;
+	using namespace VisitorTestMock;
+
+	using Visitor = MockVisitor<Repository, E1>;
+	visitVisitablesImpl<Visitor, E1>();
+	ASSERTM("DefaultPolicy logAccepted not called", MockLoggingPolicy::accepted);
 }
 inline
 void VisitorTest::visitCyclicLogNotVisited(){
-	using CVisitor = VTM::MockVisitor<CR::Repository, CR::E1>;
-	visitVisitablesImpl<CVisitor, CR::E2>();
-	ASSERTM("DefaultPolicy logNotVisited not called", VTM::MockLoggingPolicy::notVisited);
+	using namespace CyclicRepository;
+	using namespace VisitorTestMock;
+
+	using Visitor = MockVisitor<Repository, E1>;
+	visitVisitablesImpl<Visitor, E2>();
+	ASSERTM("DefaultPolicy logNotVisited not called", MockLoggingPolicy::notVisited);
 }
 //=====================================
 // Acyclic
 //=====================================
 inline
 void VisitorTest::visitAcyclic(){
-	bool result = false;
-	using Visitor = VTM::MockVisitor<AR::Repository, AR::E1, AR::E2>;
+	using namespace AcyclicRepository;
+	using namespace VisitorTestMock;
 
-	result = visitVisitablesImpl<Visitor, AR::E1>();
+	bool result = false;
+	using Visitor = MockVisitor<Repository, E1, E2>;
+
+	result = visitVisitablesImpl<Visitor, E1>();
 	ASSERTM("Acyclic Visitor::visit(E1&) not called", result);
 
-	ASSERTM("DefaultPolicy logNotVisited called", !VTM::MockLoggingPolicy::notVisited);
+	ASSERTM("DefaultPolicy logNotVisited called", !MockLoggingPolicy::notVisited);
 }
 inline
 void VisitorTest::visitAcyclicLogAccepted(){
-	using Visitor = VTM::MockVisitor<AR::Repository, AR::E1, AR::E2>;
-	visitVisitablesImpl<Visitor, AR::E1>();
-	ASSERTM("DefaultPolicy logAccepted not called", VTM::MockLoggingPolicy::accepted);
+	using namespace AcyclicRepository;
+	using namespace VisitorTestMock;
+
+	using Visitor = MockVisitor<Repository, E1, E2>;
+	visitVisitablesImpl<Visitor, E1>();
+	ASSERTM("DefaultPolicy logAccepted not called", MockLoggingPolicy::accepted);
 }
 inline
 void VisitorTest::visitAcyclicLogNotAccepted(){
-	using Visitor = VTM::MockVisitor<AR::Repository, AR::E1>;
-	visitVisitablesImpl<Visitor, AR::E2>();
-	ASSERTM("DefaultPolicy logNotAccepted not called", VTM::MockLoggingPolicy::notAccepted);
+	using namespace AcyclicRepository;
+	using namespace VisitorTestMock;
+
+	using Visitor = MockVisitor<Repository, E1>;
+	visitVisitablesImpl<Visitor, E2>();
+	ASSERTM("DefaultPolicy logNotAccepted not called", MockLoggingPolicy::notAccepted);
 }
 inline
 void VisitorTest::visitAcyclicLogNotVisited(){
-	using Visitor = VTM::MockVisitor<CR::Repository, CR::E1>;
-	visitVisitablesImpl<Visitor, CR::E2>();
-	ASSERTM("DefaultPolicy logNotVisited not called", VTM::MockLoggingPolicy::notVisited);
+	using namespace AcyclicRepository;
+	using namespace VisitorTestMock;
+
+	using Visitor = MockVisitor<Repository, E1, E2>;
+	visitVisitablesImpl<Visitor, E2>();
+	ASSERTM("DefaultPolicy logNotVisited not called", MockLoggingPolicy::notVisited);
 }
 //=====================================
 template<class Visitor, class Visitable>
@@ -234,7 +190,6 @@ bool VisitorTest::visitVisitablesImpl(){
 
 //	ASSERTM("Visitor::visit(Visitable&) not called", visitor.visitableVisited);
 	return visitor.visitableVisited;
-
 }
 
 #endif /* INCLUDE_VISITORTEST_H_ */

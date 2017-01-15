@@ -20,9 +20,6 @@ class E1;
 class E2;
 class E3;
 
-namespace VF = VisitorFramework;
-namespace VTM = VisitorTestMock;
-
 using typelist =
 		VisitorFramework::Typelist
 		<
@@ -30,10 +27,9 @@ using typelist =
 		NonVisitable
 		>;
 
-using Repository = VF::Cyclic::Repository
+using Repository = VisitorFramework::Cyclic::Repository
 		<
-		VTM::MockLoggingPolicy,
-//		BaseKind::Abstract,
+		VisitorTestMock::MockLoggingPolicy,
 		BaseKind::Default,
 		typelist
 		>;
@@ -43,8 +39,6 @@ using AbstractRepository = VisitorFramework::Cyclic::Repository
 		BaseKind::Abstract,
 		typelist
 		>;
-
-
 }
 
 #endif /* CYCLICREPOSITORY_H_ */

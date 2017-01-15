@@ -19,18 +19,40 @@ struct MockVisitor : public Repository:: template visits<Visitable, pack...>{
 public:
 	bool visitableVisited = false;
 	bool nonVisitableVisited = false;
-//	std::string toString() const override { return "MockVisitor"; }
+	std::string toString() const override { return "MockVisitor"; }
 
 	void visit(Visitable& v) {
 //		std::cout << this->toString() << "::visit("
 //				<< VisitorFramework::toString(v) << ")" << std::endl;
 		visitableVisited = true;
+		v.visitorVisited();
 	}
 	void visit(NonVisitable& v) {
 //		std::cout << this->toString() << "::visit(" << VisitorFramework::toString(v) << ")" << std::endl;
 		nonVisitableVisited = true;
 	}
-	std::string toString() const override{ return "MockVisitor";}
+};
+template<class Repository, class Visitable1, class Visitable2, class ...pack>
+struct MockVisitorInheritance : public Repository:: template visits<Visitable1, Visitable2, pack...>{
+public:
+	bool visitableVisited1 = false;
+	bool visitableVisited2 = false;
+
+	std::string toString() const override { return "MockVisitorInheritance"; }
+
+	void visit(Visitable1& v) {
+		std::cout << this->toString() << "::visit("
+				<< VisitorFramework::toString(v) << ")" << std::endl;
+		visitableVisited1 = true;
+		v.visitorVisited();
+	}
+	void visit(Visitable2& v) {
+		std::cout << this->toString() << "::visit("
+				<< VisitorFramework::toString(v) << ")" << std::endl;
+		visitableVisited2 = true;
+		v.visitorVisited();
+	}
+
 };
 
 }

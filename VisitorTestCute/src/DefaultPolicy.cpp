@@ -12,6 +12,7 @@ bool MockLoggingPolicy::notAccepted = false;
 bool MockLoggingPolicy::accepted = false;
 bool MockLoggingPolicy::notVisited = false;
 bool MockLoggingPolicy::invalidVisitable = false;
+bool MockLoggingPolicy::trace = false;
 
 }
 
