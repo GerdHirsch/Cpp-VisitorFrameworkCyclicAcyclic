@@ -7,6 +7,7 @@
 
 #ifndef SWITCHCYCLICACYCLICVISITABLES_H_
 #define SWITCHCYCLICACYCLICVISITABLES_H_
+
 #include "SwitchCyclicAcyclicRepository.h"
 
 namespace CyclicAcyclicRepository{

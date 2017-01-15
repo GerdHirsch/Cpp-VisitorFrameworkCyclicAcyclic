@@ -50,9 +50,14 @@ struct Repository{
 	using Visitable = Cyclic::Visitable<VisitorBase>;
 
 	//TODO introduce ConcreteVisitableBase as parameter base = Visitable
-	template<class ConcreteVisitable>
+	template<class ConcreteVisitable, class BaseType = Visitable>
 	using VisitableImpl =
-			Cyclic::VisitableImpl<ConcreteVisitable, VisitorBase, LoggingPolicy>;
+			Cyclic::VisitableImpl<
+				ConcreteVisitable,
+				VisitorBase,
+				LoggingPolicy,
+				BaseType,
+				ConcreteVisitable>;
 
 	//=================================================================
 	// VisitableAdapters
@@ -74,7 +79,7 @@ struct Repository{
 
 };
 
-// Convenience Interface Spezialization for Typelist
+// Convenience Interface Specialization for Typelist
 template<class LoggingPolicy, class BaseKind_, class ...Visitables>
 struct Repository<LoggingPolicy, BaseKind_, VisitorFramework::Typelist<Visitables...>>
 // delegates to primary

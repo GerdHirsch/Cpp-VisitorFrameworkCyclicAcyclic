@@ -14,7 +14,7 @@ namespace VisitorTestMock{
 
 struct MockLoggingPolicy{
 	MockLoggingPolicy(){
-		std::cout << "MockLoggingPolicy()" << std::endl;
+//		if(trace) std::cout << "MockLoggingPolicy()" << std::endl;
 		notAccepted = false;
 		accepted = false;
 		notVisited = false;
@@ -24,22 +24,40 @@ struct MockLoggingPolicy{
 	static bool accepted;
 	static bool notVisited;
 	static bool invalidVisitable;
+	static bool trace;
+
+	static void reset(){
+		notAccepted = false;
+		accepted = false;
+		notVisited = false;
+		invalidVisitable = false;
+	}
 
 	template<class Visitable, class Visitor>
-	static void logNotAccepted(Visitable const& visitable, Visitor const& visitor){
+	void logNotAccepted(Visitable const& visitable, Visitor const& visitor){
 		notAccepted = true;
+		if(trace)
+			std::cout
+				<< "logNotAccepted( "
+				<< visitable.toString() << ", "
+				<< visitor.toString() << ")"
+				<< std::endl;
 	}
 	template<class Visitable, class Visitor>
-	static void logAccepted(Visitable const& visitable, Visitor const& visitor){
+	void logAccepted(Visitable const& visitable, Visitor const& visitor){
 		accepted = true;
+		if(trace) std::cout << "logAccepted( " << visitable.toString() << ", " << visitor.toString() << ")" << std::endl;
 	}
 	template<class Visitable, class Visitor>
-	static void logNotVisited(Visitable const& visitable, Visitor const& visitor){
+	void logNotVisited(Visitable & visitable, Visitor const& visitor){
 		notVisited = true;
+		visitable.defaultVisited();
+		if(trace) std::cout << "logNotVisited( " << visitable.toString() << ", " << visitor.toString() << ")" << std::endl;
 	}
 	template<class Visitable, class Visitor>
-	static void logInvalidVisitable(Visitable const& visitable, Visitor const& visitor){
+	void logInvalidVisitable(Visitable const& visitable, Visitor const& visitor){
 		invalidVisitable = true;
+		if(trace) std::cout << "logInvalidVisitable( " << visitable.toString() << ", " << visitor.toString() << ")" << std::endl;
 	}
 };
 

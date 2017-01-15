@@ -8,7 +8,7 @@
 #ifndef VISITABLEADAPTERACYCLIC_H_
 #define VISITABLEADAPTERACYCLIC_H_
 
-#include "Visitor.h"
+#include "Visitable.h"
 #include "../StoragePolicies.h"
 #include "../DefaultPolicy.h"
 #include "../TypeFunctions.h"
@@ -25,8 +25,10 @@ template<
 struct VisitableAdapter :
 		VisitableImpl<
 				Adaptee, //ConcreteVisitable
-				VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy>,//VisitableImplementation
-				LoggingPolicy>,
+				LoggingPolicy,
+				Visitable,
+				VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy>//VisitableImplementation
+				>,
 		StoragePolicy
 {
 	//TODO merge Cyclic/Acyclic Implementation

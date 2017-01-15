@@ -30,21 +30,21 @@ struct Visitor{
 /**
  *  DefaultVisit uses LoggingPolicy as default Implementation for visit(..)
  */
-//template<class LoggingPolicy, class ToVisit, class BaseType>
-template<class LoggingPolicy, class ToVisit>
+template<class DerivedType, class ToVisit>
 struct DefaultVisit : implementsVisitor<ToVisit>{
+
 	virtual void visit(ToVisit& v){
-//TODO		static_cast<BaseType>(this)->logNotVisited(v, dynamic_cast<Acyclic::Visitor&>(*this))
-		LoggingPolicy::logNotVisited(v, dynamic_cast<Acyclic::Visitor&>(*this));
+		static_cast<DerivedType*>(this)->logNotVisited(v, static_cast<DerivedType&>(*this));
+//		static_cast<BaseType*>(this)->logNotVisited(v, dynamic_cast<Acyclic::Visitor&>(*this));
+//		LoggingPolicy::logNotVisited(v, dynamic_cast<Acyclic::Visitor&>(*this));
 	}
 };
 //---------------------------------------------------------------------
 template<class LoggingPolicy, class... T>
 class InheritFromDefault :
-//TODO		public LoggingPolicy,
+		public LoggingPolicy,
 		public Visitor,
-		public DefaultVisit<LoggingPolicy, T>...
-//TODO		public DefaultVisit<LoggingPolicy, T, InheritFromDefault<LoggingPolicy, T...>>...
+		public DefaultVisit< InheritFromDefault<LoggingPolicy, T...>, T>...
 {};
 
 template<class... T>

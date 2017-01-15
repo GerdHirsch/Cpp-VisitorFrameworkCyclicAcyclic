@@ -8,13 +8,6 @@
 #ifndef MOCKS_VISITABLEFACTORY_H_
 #define MOCKS_VISITABLEFACTORY_H_
 
-#include "../Mocks/DefaultPolicy.h"
-
-#include "../Mocks/MockVisitor.h"
-
-#include "../Mocks/CyclicVisitables.h"
-#include "../Mocks/AcyclicVisitables.h"
-
 #include "../Mocks/CyclicRepository.h"
 #include "../Mocks/AcyclicRepository.h"
 

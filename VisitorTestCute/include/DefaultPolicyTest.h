@@ -21,9 +21,6 @@
 
 #include <iostream>
 
-namespace CR = CyclicRepository;
-namespace AR = AcyclicRepository;
-
 class DefaultPolicyTest{
 
 	using this_type = DefaultPolicyTest;
@@ -37,6 +34,9 @@ class DefaultPolicyTest{
 	void setDefaultPolicyInitValues();
 
 public:
+//	DefaultPolicyTest(){
+//		std::cout << "DefaultPolicyTest()"  << std::endl;
+//	}
 	template<class DerivedTest = this_type>
 	static cute::suite make_suite(){
 		cute::suite s { };
@@ -50,7 +50,9 @@ public:
 };
 inline
 void DefaultPolicyTest::initCyclicVisitorDefaultPolicy(){
-	using Visitor = VisitorTestMock::MockVisitor<CR::Repository, CR::E1>;
+	using namespace CyclicRepository;
+	using namespace VisitorTestMock;
+	using Visitor = MockVisitor<Repository, E1>;
 	initAcyclicDefaultPolicyImpl<Visitor>();
 }
 inline
@@ -60,13 +62,14 @@ void DefaultPolicyTest::initCyclicVisitableDefaultPolicy(){
 }
 inline
 void DefaultPolicyTest::initAcyclicVisitorDefaultPolicy(){
-	using Visitor = VTM::MockVisitor<AR::Repository, AR::E1>;
-	// von DefaultPolicy wird nicht geerbt und daher kein Ctor gerufen!
+	using namespace AcyclicRepository;
+	using namespace VisitorTestMock;
+	using Visitor = MockVisitor<Repository, E1>;
 	initAcyclicDefaultPolicyImpl<Visitor>();
 }
 inline
 void DefaultPolicyTest::initAcyclicVisitableDefaultPolicy(){
-	using V = AR::E1;
+	using V = AR::E2;
 	initAcyclicDefaultPolicyImpl<V>();
 }
 template<class V>
