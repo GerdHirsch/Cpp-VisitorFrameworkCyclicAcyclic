@@ -35,21 +35,32 @@ public:
 	// Cyclic
 	//=====================================
 	void visitCyclic();
-	void visitCyclicDerivedBase();
 	// Default Policies
 	void visitCyclicLogAccepted();
 	void visitCyclicLogNotVisited();
-	void visitCyclicVisitableWithAccessor();
-	void visitCyclicNonVisitableWithAccessor();
 	//=====================================
 	// Acyclic
 	//=====================================
 	void visitAcyclic();
-	void visitAcyclicDerivedBase();
 	// Default Policies
 	void visitAcyclicLogAccepted();
 	void visitAcyclicLogNotAccepted();
 	void visitAcyclicLogNotVisited();
+
+	//=====================================
+	// Inheritance
+	//=====================================
+	void visitCyclicDerivedBase();
+	void visitCyclicBase();
+	void visitCyclicDerived();
+	void visitAcyclicDerivedBase();
+	void visitAcyclicBase();
+	void visitAcyclicDerived();
+	//=====================================
+	// Accessor
+	//=====================================
+	void visitCyclicVisitableWithAccessor();
+	void visitCyclicNonVisitableWithAccessor();
 	void visitAcyclicVisitableWithAccessor();
 	void visitAcyclicNonVisitableWithAccessor();
 
@@ -65,21 +76,32 @@ public:
 		// Cyclic
 		//=====================================
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclic));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicDerivedBase));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogAccepted));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogNotVisited));
 
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicVisitableWithAccessor));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicNonVisitableWithAccessor));
 		//=====================================
 		// Acyclic
 		//=====================================
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclic));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicDerivedBase));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogAccepted));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotAccepted));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotVisited));
 
+		//=====================================
+		// Inheritance
+		//=====================================
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicDerivedBase));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicBase));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicDerived));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicDerivedBase));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicBase));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicDerived));
+
+		//=====================================
+		// Accessor
+		//=====================================
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicVisitableWithAccessor));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicNonVisitableWithAccessor));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicVisitableWithAccessor));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicNonVisitableWithAccessor));
 
@@ -87,6 +109,7 @@ public:
 		return s;
 	}
 };
+
 inline
 void VisitorTest::visitCyclicVisitableWithAccessor(){
 	ASSERTM("Todo: implement test", false);
@@ -104,9 +127,43 @@ void VisitorTest::visitAcyclicNonVisitableWithAccessor(){
 	ASSERTM("Todo: implement test", false);
 }
 
-inline
+inline // implements Base and Derived visit method
 void VisitorTest::visitAcyclicDerivedBase(){
-	ASSERTM("Todo: implement test", false);
+//	ASSERTM("Todo: implement many more tests", false);
+
+	using namespace AcyclicRepository;
+
+	using Visitor = VisitorTestMock::MockVisitor<Repository, E1, E2>;
+	{
+		using Visitable = E1;
+
+		Visitor visitor;
+		Visitable visitable;
+
+		visitable.accept(visitor);
+
+		ASSERTM("Acyclic Visitor::visit(E1&) not called", visitor.visitableVisited);
+		ASSERTM("E1 not visited: ", visitable.wasVisited());
+
+		ASSERTM("DefaultPolicy logNotVisited called", !VisitorTestMock::MockLoggingPolicy::notAccepted);
+		ASSERTM("DefaultPolicy logNotVisited called", !VisitorTestMock::MockLoggingPolicy::notVisited);
+	}
+	{
+		using Visitable = E2;
+
+		Visitor visitor;
+		Visitable visitable;
+
+		visitable.accept(visitor);
+
+
+		ASSERTM("Acyclic Visitor::visit(E2&) not called", visitor.visitableVisited);
+		ASSERTM("E1 not visited: ", visitable.wasVisited());
+
+		ASSERTM("DefaultPolicy logNotVisited called", !VisitorTestMock::MockLoggingPolicy::notAccepted);
+		ASSERTM("DefaultPolicy logNotVisited called", VisitorTestMock::MockLoggingPolicy::notVisited);
+
+	}
 }
 inline
 void VisitorTest::visitCyclicDerivedBase(){

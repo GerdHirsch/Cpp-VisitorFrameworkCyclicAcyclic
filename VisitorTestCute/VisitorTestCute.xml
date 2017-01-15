@@ -9,39 +9,39 @@
 	</testsuite>
 	<testsuite name="Visitor::visit" tests="13">
 		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclic"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicLogAccepted"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicLogNotVisited"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclic"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogAccepted"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogNotAccepted"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogNotVisited"/>
 		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicDerivedBase">
-			<failure message="..\src\../include/VisitorTest.h:113 visitCyclicDerivedBase: Todo: implement test">
+			<failure message="..\src\../include/VisitorTest.h:170 visitCyclicDerivedBase: Todo: implement test">
 visitCyclicDerivedBase: Todo: implement test
 			</failure>
 		</testcase>
-		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicLogAccepted"/>
-		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicLogNotVisited"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicDerivedBase">
+			<failure message="..\src\../include/VisitorTest.h:160 visitAcyclicDerivedBase: Acyclic Visitor::visit(E2&amp;) not called">
+visitAcyclicDerivedBase: Acyclic Visitor::visit(E2&amp;) not called
+			</failure>
+		</testcase>
 		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicVisitableWithAccessor">
-			<failure message="..\src\../include/VisitorTest.h:92 visitCyclicVisitableWithAccessor: Todo: implement test">
+			<failure message="..\src\../include/VisitorTest.h:115 visitCyclicVisitableWithAccessor: Todo: implement test">
 visitCyclicVisitableWithAccessor: Todo: implement test
 			</failure>
 		</testcase>
 		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicNonVisitableWithAccessor">
-			<failure message="..\src\../include/VisitorTest.h:96 visitCyclicNonVisitableWithAccessor: Todo: implement test">
+			<failure message="..\src\../include/VisitorTest.h:119 visitCyclicNonVisitableWithAccessor: Todo: implement test">
 visitCyclicNonVisitableWithAccessor: Todo: implement test
 			</failure>
 		</testcase>
-		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclic"/>
-		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicDerivedBase">
-			<failure message="..\src\../include/VisitorTest.h:109 visitAcyclicDerivedBase: Todo: implement test">
-visitAcyclicDerivedBase: Todo: implement test
-			</failure>
-		</testcase>
-		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogAccepted"/>
-		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogNotAccepted"/>
-		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogNotVisited"/>
 		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicVisitableWithAccessor">
-			<failure message="..\src\../include/VisitorTest.h:100 visitAcyclicVisitableWithAccessor: Todo: implement test">
+			<failure message="..\src\../include/VisitorTest.h:123 visitAcyclicVisitableWithAccessor: Todo: implement test">
 visitAcyclicVisitableWithAccessor: Todo: implement test
 			</failure>
 		</testcase>
 		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicNonVisitableWithAccessor">
-			<failure message="..\src\../include/VisitorTest.h:104 visitAcyclicNonVisitableWithAccessor: Todo: implement test">
+			<failure message="..\src\../include/VisitorTest.h:127 visitAcyclicNonVisitableWithAccessor: Todo: implement test">
 visitAcyclicNonVisitableWithAccessor: Todo: implement test
 			</failure>
 		</testcase>

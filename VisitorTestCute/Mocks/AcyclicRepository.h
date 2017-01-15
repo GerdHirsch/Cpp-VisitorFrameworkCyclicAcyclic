@@ -20,6 +20,7 @@ class NonVisitable;
 class NonVisitableWithAccessor;
 
 namespace AcyclicRepository{
+
 class E1;
 class E2;
 class E3;

@@ -33,7 +33,17 @@ public:
 		}
 };
 //=====================================================================
-
+// Inherit only once from LoggingPolicy
+template <class BaseType, class LoggingPolicy>
+class VisitableBase
+	: public BaseType
+{ };
+template<class LoggingPolicy>
+class VisitableBase<Visitable, LoggingPolicy>
+	:
+	public Visitable,
+	public LoggingPolicy
+{ };
 /**
  * VisitableImpl stellt eine allgemeine Implementierung
  * für alle ConcreteVisitables zur Verfügung.
@@ -55,10 +65,11 @@ public:
 template<
 	class ConcreteVisitable_,
 	class VisitableImplementation_,
-	class LoggingPolicy
+	class LoggingPolicy,
+	class BaseType = Visitable
 	>
-//TODO introduce ConcreteVisitableBase as parameter base = Visitable
-class VisitableImpl : public Visitable, public LoggingPolicy{
+class VisitableImpl : public VisitableBase<BaseType, LoggingPolicy>
+{
 
 public:
 	// Default Accessor für ElementVisitor,
@@ -117,6 +128,7 @@ public:
 		}
 	}
 };
+
 }} // end namespace
 
 

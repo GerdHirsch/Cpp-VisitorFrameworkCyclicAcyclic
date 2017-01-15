@@ -24,6 +24,12 @@ public:
 	std::string toString() const {
 		return "NonVisitable";
 	}
+	bool visited;
+	bool wasVisited() const { return visited; }
+	void defaultVisited(){
+		visited = true;
+	}
+
 };
 
 

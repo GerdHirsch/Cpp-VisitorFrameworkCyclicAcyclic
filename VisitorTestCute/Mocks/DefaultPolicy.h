@@ -26,19 +26,20 @@ struct MockLoggingPolicy{
 	static bool invalidVisitable;
 
 	template<class Visitable, class Visitor>
-	static void logNotAccepted(Visitable const& visitable, Visitor const& visitor){
+	void logNotAccepted(Visitable const& visitable, Visitor const& visitor){
 		notAccepted = true;
 	}
 	template<class Visitable, class Visitor>
-	static void logAccepted(Visitable const& visitable, Visitor const& visitor){
+	void logAccepted(Visitable const& visitable, Visitor const& visitor){
 		accepted = true;
 	}
 	template<class Visitable, class Visitor>
-	static void logNotVisited(Visitable const& visitable, Visitor const& visitor){
+	void logNotVisited(Visitable & visitable, Visitor const& visitor){
 		notVisited = true;
+		visitable.defaultVisited();
 	}
 	template<class Visitable, class Visitor>
-	static void logInvalidVisitable(Visitable const& visitable, Visitor const& visitor){
+	void logInvalidVisitable(Visitable const& visitable, Visitor const& visitor){
 		invalidVisitable = true;
 	}
 };

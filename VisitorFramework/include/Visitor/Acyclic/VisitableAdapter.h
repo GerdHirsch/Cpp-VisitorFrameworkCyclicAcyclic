@@ -8,7 +8,7 @@
 #ifndef VISITABLEADAPTERACYCLIC_H_
 #define VISITABLEADAPTERACYCLIC_H_
 
-#include "Visitor.h"
+#include "Visitable.h"
 #include "../StoragePolicies.h"
 #include "../DefaultPolicy.h"
 #include "../TypeFunctions.h"

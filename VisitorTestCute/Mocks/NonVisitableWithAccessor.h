@@ -26,6 +26,12 @@ public:
 		retVal += data;
 		return retVal;
 	}
+	bool visited;
+	bool wasVisited() const { return visited; }
+	void defaultVisited(){
+		visited = true;
+	}
+
 	class Accessor{
 	protected:
 		static void setData(this_type& This, std::string data){
