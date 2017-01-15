@@ -32,6 +32,7 @@ struct VisitableAdapter :
 		Adaptee,
 		VisitorBase,
 		LoggingPolicy,
+		Visitable<VisitorBase>,
 		VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy, VisitorBase>>,
 	StoragePolicy
 {

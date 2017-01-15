@@ -50,7 +50,11 @@ struct Repository{
 	//TODO introduce ConcreteVisitableBase as parameter base = Visitable
 	template<class ConcreteVisitable, class BaseType = Visitable>
 	using VisitableImpl =
-			Acyclic::VisitableImpl<ConcreteVisitable, ConcreteVisitable, LoggingPolicy, BaseType>;
+			Acyclic::VisitableImpl<
+				ConcreteVisitable,
+				ConcreteVisitable,
+				LoggingPolicy,
+				BaseType>;
 
 	//=================================================================
 	// VisitableAdapters

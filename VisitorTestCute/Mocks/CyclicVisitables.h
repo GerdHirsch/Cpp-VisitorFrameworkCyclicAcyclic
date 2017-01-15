@@ -19,7 +19,7 @@ public:
 
 //TODO introduce Base as parameter
 //class E1 : public Repository::VisitableImpl<E1, Base>
-class E1 : public Repository::VisitableImpl<E1>
+class E1 : public Repository::VisitableImpl<E1, Base>
 {
 public:
 	std::string toString() const { return "E1"; }
@@ -33,7 +33,7 @@ public:
 		wasVisitorVisited = true;
 	}
 };
-class E2 : public Repository::VisitableImpl<E2>
+class E2 : public Repository::VisitableImpl<E2, E1>
 {
 public:
 	std::string toString() const { return "E2"; }

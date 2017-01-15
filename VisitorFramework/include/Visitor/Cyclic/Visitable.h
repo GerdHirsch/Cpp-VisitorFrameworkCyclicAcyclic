@@ -34,6 +34,7 @@ template
 		class ConcreteVisitable,
 		class VisitorBase,
 		class LoggingPolicy,
+		class BaseType = Visitable<VisitorBase>,
 		class VisitableImplementation = ConcreteVisitable
 	>
 //TODO introduce ConcreteVisitableBase as parameter base = Visitable<VisitorBase>

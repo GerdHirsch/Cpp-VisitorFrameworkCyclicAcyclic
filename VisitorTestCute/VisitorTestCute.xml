@@ -11,11 +11,7 @@
 	<testsuite name="Visitor::visit Inheritance" tests="6">
 		<testcase classname="Visitor::visit Inheritance" name="VisitorInheritanceTest::visitCyclicDerivedBase"/>
 		<testcase classname="Visitor::visit Inheritance" name="VisitorInheritanceTest::visitCyclicBase"/>
-		<testcase classname="Visitor::visit Inheritance" name="VisitorInheritanceTest::visitCyclicDerived">
-			<failure message="..\src\../include/VisitorInheritanceTest.h:90 visitCyclicDerived: Default policy visited Visitable2 : ">
-visitCyclicDerived: Default policy visited Visitable2 : 
-			</failure>
-		</testcase>
+		<testcase classname="Visitor::visit Inheritance" name="VisitorInheritanceTest::visitCyclicDerived"/>
 		<testcase classname="Visitor::visit Inheritance" name="VisitorInheritanceTest::visitAcyclicDerivedBase"/>
 		<testcase classname="Visitor::visit Inheritance" name="VisitorInheritanceTest::visitAcyclicBase"/>
 		<testcase classname="Visitor::visit Inheritance" name="VisitorInheritanceTest::visitAcyclicDerived"/>

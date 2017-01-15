@@ -37,7 +37,8 @@ public:
 template <class BaseType, class LoggingPolicy>
 class VisitableBase
 	: public BaseType
-{ };
+{ // TODO Assert BaseType is derived from Visitable
+};
 template<class LoggingPolicy>
 class VisitableBase<Visitable, LoggingPolicy>
 	:

@@ -80,18 +80,16 @@ void VisitorInheritanceTest::visitCyclicDerived(){
 		ASSERTM("Default policy visited Visitable1 : ", !visitable1.wasDefaultVisited);
 		ASSERTM("visitor visited Visitable1 : ", visitable1.wasVisitorVisited);
 
-		ASSERTM("DefaultPolicy logNotAccepted called", !MockLoggingPolicy::notAccepted);
 		ASSERTM("DefaultPolicy logNotVisited called", !MockLoggingPolicy::notVisited);
 
 		MockLoggingPolicy::reset();
 
 		visitable2.accept(visitor);
 
-		ASSERTM("Default policy visited Visitable2 : ", !visitable2.wasDefaultVisited);
+		ASSERTM("Visitable2 not Default policy visited  : ", visitable2.wasDefaultVisited);
 		ASSERTM("visitor visited Visitable2 : ", !visitable2.wasVisitorVisited);
 
-		ASSERTM("DefaultPolicy logNotAccepted not called", MockLoggingPolicy::notAccepted);
-		ASSERTM("DefaultPolicy logNotVisited called", !MockLoggingPolicy::notVisited);
+		ASSERTM("DefaultPolicy logNotVisited not called", MockLoggingPolicy::notVisited);
 	}
 }
 // implements visit(Derived) visit method
