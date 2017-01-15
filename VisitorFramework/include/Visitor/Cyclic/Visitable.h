@@ -24,6 +24,19 @@ public:
 	}
 };
 //---------------------------------------------------------------------
+//=====================================================================
+// Inherit only once from LoggingPolicy
+template <class BaseType, class VisitorBase, class LoggingPolicy>
+class VisitableBase
+	: public BaseType
+{ // TODO Assert BaseType is derived from Visitable
+};
+template<class VisitorBase, class LoggingPolicy>
+class VisitableBase<Visitable<VisitorBase>, VisitorBase, LoggingPolicy>
+	:
+	public Visitable<VisitorBase>,
+	public LoggingPolicy
+{ };
 /**
  * Baseclass for all Visitables:
  * usage: MyVisitable : VisitableImpl<MyVisitable, ...>{...}
@@ -37,8 +50,9 @@ template
 		class BaseType = Visitable<VisitorBase>,
 		class VisitableImplementation = ConcreteVisitable
 	>
-//TODO introduce ConcreteVisitableBase as parameter base = Visitable<VisitorBase>
-struct VisitableImpl : Visitable<VisitorBase>, LoggingPolicy {
+struct VisitableImpl : VisitableBase<BaseType, VisitorBase, LoggingPolicy>
+//struct VisitableImpl : Visitable<VisitorBase>, LoggingPolicy
+{
 	typedef Visitable<VisitorBase> base_type;
 
 	void accept(VisitorBase& visitor){

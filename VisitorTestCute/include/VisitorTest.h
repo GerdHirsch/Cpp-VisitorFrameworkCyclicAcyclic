@@ -77,10 +77,10 @@ public:
 		//=====================================
 		// Accessor
 		//=====================================
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicVisitableWithAccessor));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicNonVisitableWithAccessor));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicVisitableWithAccessor));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicNonVisitableWithAccessor));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicVisitableWithAccessor));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicNonVisitableWithAccessor));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicVisitableWithAccessor));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicNonVisitableWithAccessor));
 
 
 		return s;
@@ -104,9 +104,9 @@ void VisitorTest::visitAcyclicNonVisitableWithAccessor(){
 	ASSERTM("Todo: implement test", false);
 }
 
-//=====================================
-// Cyclic
-//=====================================
+////=====================================
+//// Cyclic
+////=====================================
 inline
 void VisitorTest::visitCyclic(){
 	using namespace CyclicRepository;
@@ -131,7 +131,7 @@ void VisitorTest::visitCyclicLogNotVisited(){
 	using namespace CyclicRepository;
 	using namespace VisitorTestMock;
 
-	using Visitor = MockVisitor<Repository, E1>;
+	using Visitor = MockVisitor<Repository, E3>;
 	visitVisitablesImpl<Visitor, E2>();
 	ASSERTM("DefaultPolicy logNotVisited not called", MockLoggingPolicy::notVisited);
 }

@@ -1,5 +1,5 @@
 <testsuites>
-	<testsuite name="Visitor::visit" tests="7">
+	<testsuite name="Visitor::visit" tests="11">
 		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclic"/>
 		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicLogAccepted"/>
 		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicLogNotVisited"/>
@@ -7,6 +7,26 @@
 		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogAccepted"/>
 		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogNotAccepted"/>
 		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicLogNotVisited"/>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicVisitableWithAccessor">
+			<failure message="..\src\../include/VisitorTest.h:92 visitCyclicVisitableWithAccessor: Todo: implement test">
+visitCyclicVisitableWithAccessor: Todo: implement test
+			</failure>
+		</testcase>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitCyclicNonVisitableWithAccessor">
+			<failure message="..\src\../include/VisitorTest.h:96 visitCyclicNonVisitableWithAccessor: Todo: implement test">
+visitCyclicNonVisitableWithAccessor: Todo: implement test
+			</failure>
+		</testcase>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicVisitableWithAccessor">
+			<failure message="..\src\../include/VisitorTest.h:100 visitAcyclicVisitableWithAccessor: Todo: implement test">
+visitAcyclicVisitableWithAccessor: Todo: implement test
+			</failure>
+		</testcase>
+		<testcase classname="Visitor::visit" name="VisitorTest::visitAcyclicNonVisitableWithAccessor">
+			<failure message="..\src\../include/VisitorTest.h:104 visitAcyclicNonVisitableWithAccessor: Todo: implement test">
+visitAcyclicNonVisitableWithAccessor: Todo: implement test
+			</failure>
+		</testcase>
 	</testsuite>
 	<testsuite name="Visitor::visit Inheritance" tests="6">
 		<testcase classname="Visitor::visit Inheritance" name="VisitorInheritanceTest::visitCyclicDerivedBase"/>

@@ -65,31 +65,34 @@ void VisitorInheritanceTest::visitCyclicDerived(){
 	using namespace CyclicRepository;
 	using namespace VisitorTestMock;
 
-	using Visitor = MockVisitorInheritance<Repository, E2, NonVisitable>;
+	using Visitor = MockVisitorInheritance<Repository, NonVisitable, E4>;
 	{
-		using Visitable1 = E2;
-		using Visitable2 = E1;
+		using Visitable1 = E3;
 
 		Visitor visitor;
 		Visitable1 visitable1;
-		Visitable2 visitable2;
 
 		visitable1.accept(visitor);
 
-		ASSERTM("Visitor::visit(Visitable1&) not called", visitor.visitableVisited1);
-		ASSERTM("Default policy visited Visitable1 : ", !visitable1.wasDefaultVisited);
-		ASSERTM("visitor visited Visitable1 : ", visitable1.wasVisitorVisited);
+		ASSERTM("Visitor::visit(Visitable1&) called", !visitor.visitableVisited1);
+		ASSERTM("Default policy visited Visitable1 : ", visitable1.wasDefaultVisited);
+		ASSERTM("visitor visited Visitable1 : ", !visitable1.wasVisitorVisited);
 
-		ASSERTM("DefaultPolicy logNotVisited called", !MockLoggingPolicy::notVisited);
-
+		ASSERTM("DefaultPolicy logNotVisited called", MockLoggingPolicy::notVisited);
+	}
+	{
 		MockLoggingPolicy::reset();
+		Visitor visitor;
+		using Visitable2 = E4;
+		Visitable2 visitable2;
 
 		visitable2.accept(visitor);
 
-		ASSERTM("Visitable2 not Default policy visited  : ", visitable2.wasDefaultVisited);
-		ASSERTM("visitor visited Visitable2 : ", !visitable2.wasVisitorVisited);
+		ASSERTM("Visitor::visit(Visitable2&) not called", visitor.visitableVisited2);
+		ASSERTM("visitor visited Visitable2 : ", visitable2.wasVisitorVisited);
+		ASSERTM("Visitable2 not Default policy visited  : ", !visitable2.wasDefaultVisited);
 
-		ASSERTM("DefaultPolicy logNotVisited not called", MockLoggingPolicy::notVisited);
+		ASSERTM("DefaultPolicy logNotVisited called", !MockLoggingPolicy::notVisited);
 	}
 }
 // implements visit(Derived) visit method
@@ -99,14 +102,13 @@ void VisitorInheritanceTest::visitCyclicBase(){
 	using namespace CyclicRepository;
 	using namespace VisitorTestMock;
 
-	using Visitor = MockVisitorInheritance<Repository, E1, NonVisitable>;
+	using Visitor = MockVisitorInheritance<Repository, E3, NonVisitable>;
 	{
-		using Visitable1 = E1;
-		using Visitable2 = E2;
+		using Visitable1 = E3;
+
 
 		Visitor visitor;
 		Visitable1 visitable1;
-		Visitable2 visitable2;
 
 //		MockLoggingPolicy::trace = true;
 
@@ -117,8 +119,13 @@ void VisitorInheritanceTest::visitCyclicBase(){
 		ASSERTM("visitor visited not Visitable1 : ", visitable1.wasVisitorVisited);
 
 		ASSERTM("DefaultPolicy logNotVisited called", !MockLoggingPolicy::notVisited);
-
+	}
+	{
 		MockLoggingPolicy::reset();
+		using Visitable2 = E4;
+
+		Visitor visitor;
+		Visitable2 visitable2;
 
 		visitable2.accept(visitor);
 
@@ -127,10 +134,8 @@ void VisitorInheritanceTest::visitCyclicBase(){
 		// All visit methods must be implemented either default or special
 		ASSERTM("DefaultPolicy logNotVisited not called", MockLoggingPolicy::notVisited);
 		ASSERTM("Visitable2 Default policy not visited : ", visitable2.wasDefaultVisited);
-
 		ASSERTM("visitor visited Visitable2 : ", !visitable2.wasVisitorVisited);
 	}
-
 }
 
 // implements visit(Base) and visit(Derived) visit method
@@ -142,30 +147,30 @@ void VisitorInheritanceTest::visitCyclicDerivedBase(){
 	using Visitor = MockVisitorInheritance<Repository, E1, E2>;
 	{
 		using Visitable1 = E1;
-		using Visitable2 = E2;
 
 		Visitor visitor;
 		Visitable1 visitable1;
-		Visitable2 visitable2;
 
 		visitable1.accept(visitor);
 
 		ASSERTM("Visitor::visit(Visitable1&) not called", visitor.visitableVisited1);
 		ASSERTM("Default policy visited Visitable1 : ", !visitable1.wasDefaultVisited);
 		ASSERTM("visitor visited Visitable1 : ", visitable1.wasVisitorVisited);
+	}
+	{
+		using Visitable2 = E2;
 
-		ASSERTM("DefaultPolicy logNotAccepted called", !VisitorTestMock::MockLoggingPolicy::notAccepted);
-		ASSERTM("DefaultPolicy logNotVisited called", !VisitorTestMock::MockLoggingPolicy::notVisited);
+		Visitor visitor;
+		Visitable2 visitable2;
 
 		MockLoggingPolicy::reset();
 
 		visitable2.accept(visitor);
-
-		ASSERTM("Acyclic Visitor::visit(Visitable2&) not called", visitor.visitableVisited2);
+		// visit(E1&) is used cause inheritance E2 : E1
+		ASSERTM("Acyclic Visitor::visit(Visitable1&) not called", visitor.visitableVisited1);
 		ASSERTM("Default policy visited Visitable2 : ", !visitable2.wasDefaultVisited);
 		ASSERTM("visitor visited Visitable2 : ", visitable2.wasVisitorVisited);
-
-		ASSERTM("DefaultPolicy logNotAccepted called", !VisitorTestMock::MockLoggingPolicy::notAccepted);
+		// would be called from default implementation
 		ASSERTM("DefaultPolicy logNotVisited called", !VisitorTestMock::MockLoggingPolicy::notVisited);
 	}
 }

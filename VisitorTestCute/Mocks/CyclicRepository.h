@@ -19,11 +19,13 @@ namespace CyclicRepository{
 class E1;
 class E2;
 class E3;
+class E4;
 
 using typelist =
 		VisitorFramework::Typelist
 		<
-		E1, E2, E3,
+		E1, E3, E4,
+//		E1, E2, E3,
 		NonVisitable
 		>;
 
