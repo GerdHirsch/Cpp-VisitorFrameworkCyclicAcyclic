@@ -65,9 +65,9 @@ class VisitableBase<Visitable, LoggingPolicy>
  */
 template<
 	class ConcreteVisitable_,
-	class VisitableImplementation_,
 	class LoggingPolicy,
-	class BaseType = Visitable
+	class BaseType = Visitable,
+	class VisitableImplementation_ = ConcreteVisitable_
 	>
 class VisitableImpl : public VisitableBase<BaseType, LoggingPolicy>
 {

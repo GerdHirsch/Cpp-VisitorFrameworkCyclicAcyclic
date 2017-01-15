@@ -25,8 +25,10 @@ template<
 struct VisitableAdapter :
 		VisitableImpl<
 				Adaptee, //ConcreteVisitable
-				VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy>,//VisitableImplementation
-				LoggingPolicy>,
+				LoggingPolicy,
+				Visitable,
+				VisitableAdapter<Adaptee, StoragePolicy, LoggingPolicy>//VisitableImplementation
+				>,
 		StoragePolicy
 {
 	//TODO merge Cyclic/Acyclic Implementation

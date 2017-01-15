@@ -52,9 +52,10 @@ struct Repository{
 	using VisitableImpl =
 			Acyclic::VisitableImpl<
 				ConcreteVisitable,
-				ConcreteVisitable,
 				LoggingPolicy,
-				BaseType>;
+				BaseType,
+				ConcreteVisitable
+				>;
 
 	//=================================================================
 	// VisitableAdapters
