@@ -17,20 +17,17 @@ class NonVisitable;
 class NonVisitableWithAccessor;
 
 namespace MakeVisitable{
-class E1;
-class E2;
-class E3;
-
 
 using typelist =
 		VisitorFramework::Typelist
-		< E1, E2, E3
-		, NonVisitable, NonVisitableWithAccessor
+		<
+		NonVisitable
 		, int, double
 		>;
+
 //CAR = CyclicAcyclicRepository
-//namespace CAR = VisitorFramework::Cyclic;
-namespace CAR = VisitorFramework::Acyclic;
+namespace CAR = VisitorFramework::Cyclic;
+//namespace CAR = VisitorFramework::Acyclic;
 
 using Repository = CAR::Repository
 		<

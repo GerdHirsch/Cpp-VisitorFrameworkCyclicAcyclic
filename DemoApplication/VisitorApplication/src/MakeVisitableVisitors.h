@@ -18,12 +18,8 @@ namespace MakeVisitable{
 class DemoVisitor : public Repository::visits<typelist>{
 //class DemoVisitor : public Repository::visits<E1, E2, NonVisitable>{
 public:
-//	std::string toString() const override { return "DemoVisitor"; }
+	std::string toString() const override { return "DemoVisitor"; }
 
-	void visit(E1& v) {
-		std::cout << this->toString() << "::visit("
-				<< VisitorFramework::toString(v) << ")" << std::endl;
-	}
 	void visit(NonVisitable& v) {
 		std::cout << toString() << "::visit(" << VisitorFramework::toString(v) << ")" << std::endl;
 	}
