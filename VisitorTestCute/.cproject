@@ -16,7 +16,7 @@
 					<folderInfo id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1853184984." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.cygwin.exe.debug.1898507621" name="Cygwin GCC" nonInternalBuilderId="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug" superClass="cdt.managedbuild.toolchain.gnu.cygwin.exe.debug">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug.914390909" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug"/>
-							<builder autoBuildTarget="all" buildPath="${workspace_loc:/VisitorTestCute}/Debug" cleanBuildTarget="clean" id="org.eclipse.cdt.build.core.internal.builder.1231353706" incrementalBuildTarget="all" managedBuildOn="true" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
+							<builder autoBuildTarget="all" buildPath="${workspace_loc:/VisitorTestCute}/Debug" cleanBuildTarget="clean" id="org.eclipse.cdt.build.core.internal.builder.1231353706" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.cygwin.exe.debug.781728850" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.cygwin.exe.debug">
 								<option id="gnu.both.asm.option.include.paths.219146026" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/cute}&quot;"/>
@@ -52,8 +52,8 @@
 								</option>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.cygwin.exe.debug.696034567" name="Cygwin C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.cygwin.exe.debug">
-								<option id="gnu.cpp.link.option.paths.1888861054" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths"/>
-								<option id="gnu.cpp.link.option.libs.1613474724" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs"/>
+								<option id="gnu.cpp.link.option.paths.1888861054" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths"/>
+								<option id="gnu.cpp.link.option.libs.1613474724" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.2090033381" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>

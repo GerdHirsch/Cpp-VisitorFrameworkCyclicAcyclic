@@ -56,8 +56,6 @@ protected:
 //------------------------------------------
 template<class Adaptee>
 struct StorageByWeakpointer{
-private:
-	class DisableCtor;
 public:
 	using StorageType = std::weak_ptr<Adaptee>;
 
@@ -72,6 +70,28 @@ public:
 
 	ReturnType get(){ return adaptee.lock(); }
 	ConstReturnType get() const { return adaptee.lock(); }
+protected:
+	StorageType adaptee;
+};
+template<class Adaptee>
+struct StorageByUniquepointer{
+private:
+	class DisableCtor;
+public:
+	using StorageType = std::unique_ptr<Adaptee>;
+
+	using LValueReferenceType = DisableCtor&;
+//	using LValueReferenceType = StorageType;
+	using RValueReferenceType = StorageType&&;
+
+	using ReturnType = Adaptee*;
+	using ConstReturnType = Adaptee const *;
+
+	StorageByUniquepointer(LValueReferenceType adaptee):adaptee(adaptee){}
+	StorageByUniquepointer(RValueReferenceType adaptee):adaptee(std::move(adaptee)){}
+
+	ReturnType get(){ return &*adaptee; }
+	ConstReturnType get() const { return &*adaptee; }
 protected:
 	StorageType adaptee;
 };

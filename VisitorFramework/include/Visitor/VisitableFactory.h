@@ -25,26 +25,32 @@ public:
 	using AdapterVal = typename Repository::template AdapterByValue<ToVisit>;
 	template<class ToVisit>
 	using AdapterWeak = typename Repository::template AdapterByWeakpointer<ToVisit>;
+	template<class ToVisit>
+	using AdapterUnique = typename Repository::template AdapterByUniquepointer<ToVisit>;
 
 public:
-	using ReturnType = std::shared_ptr<typename Repository::Visitable>;
+	using ReturnType = std::unique_ptr<typename Repository::Visitable>;
+//	using ReturnType = std::shared_ptr<typename Repository::Visitable>;
 
 	template<class ToVisit>
 	static ReturnType makeVisitable(ToVisit& toVisit){
-		return std::make_shared<AdapterRef<ToVisit>>(toVisit);
-//		ReturnType retVal(new AdapterRef<ToVisit>(toVisit));
-//		return retVal;
+		return std::make_unique<AdapterRef<ToVisit>>(toVisit);
+//		return std::make_shared<AdapterRef<ToVisit>>(toVisit);
 	}
 	template<class ToVisit>
 	static ReturnType makeVisitable(ToVisit&& toVisit){
-//		std::cout << "makeVisitable(ToVisit&& toVisit)" << std::endl;
-//		return std::make_shared<AdapterVal<ToVisit>>(std::move(toVisit));
-		return std::make_shared<AdapterVal<ToVisit>>(std::forward<ToVisit>(toVisit));
-//		return std::make_shared<AdapterVal<ToVisit>>(toVisit);
+		return std::make_unique<AdapterVal<ToVisit>>(std::forward<ToVisit>(toVisit));
+//		return std::make_shared<AdapterVal<ToVisit>>(std::forward<ToVisit>(toVisit));
 	}
 	template<class ToVisit>
 	static ReturnType makeVisitable(std::shared_ptr<ToVisit> toVisit){
-		return std::make_shared<AdapterWeak<ToVisit>>(toVisit);
+		return std::make_unique<AdapterWeak<ToVisit>>(toVisit);
+//		return std::make_shared<AdapterWeak<ToVisit>>(toVisit);
+	}
+	template<class ToVisit>
+	static ReturnType makeVisitable(std::unique_ptr<ToVisit> toVisit){
+		return std::make_unique<AdapterUnique<ToVisit>>(std::move(toVisit));
+//		return std::make_shared<AdapterUnique<ToVisit>>(std::move(toVisit));
 	}
 };
 

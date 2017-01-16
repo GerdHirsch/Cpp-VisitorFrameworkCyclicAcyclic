@@ -39,13 +39,11 @@ using namespace CyclicAcyclicRepository;
 using namespace VisitorTestMock;
 using namespace std;
 
-
 void demoSwitchCyclicAcyclic(){
 	cout << "================================" << endl;
 	std::cout << "==== demoSwitchCyclicAcyclic() ====" << std::endl;
 	Visitables visitables;
 
-	DemoVisitor visitor;
 	DemoVisitor13 visitor13;
 	DemoVisitor23 visitor23;
 	MockVisitor<Repository, E1, NonVisitable> mock;
@@ -64,7 +62,7 @@ void demoSwitchCyclicAcyclic(){
 
 	std::cout << "==== new AdapterReference<NonVisitable>(nv) ====" << std::endl;
 	visitables.push_back(Visitable(new AdapterReference<NonVisitable>(nv)));
-	visitables.push_back(visitable1);
+	visitables.push_back(std::move(visitable1));
 	std::cout << "==== makeVisitable(NonVisitable()) ====" << std::endl;
 	visitables.push_back(Factory::makeVisitable(NonVisitable()));
 	visitables.push_back(Factory::makeVisitable(nv));
@@ -75,7 +73,6 @@ void demoSwitchCyclicAcyclic(){
 	std::cout << "==== new AdapterWeak<NonVisitableWithAccessor>(pNVWA) ====" << std::endl;
 	visitables.push_back(Visitable(new AdapterWeak<NonVisitableWithAccessor>(pNVWA)));
 
-	demoRunVisitor(visitor, visitables);
 	demoRunVisitor(visitor13, visitables);
 	demoRunVisitor(mock, visitables);
 	demoRunVisitor(visitor23, visitables);

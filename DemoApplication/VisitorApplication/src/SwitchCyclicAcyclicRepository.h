@@ -9,8 +9,6 @@
 #define SWITCHCYCLICACYCLICREPOSITORY_H_
 
 #include <Visitor/DefaultPolicy.h>
-//#include <visitor/Typelist.h>
-//#include <visitor/BaseKind.h>
 
 #include <Visitor/VisitableFactory.h>
 #include <Visitor/Cyclic/Repository.h>

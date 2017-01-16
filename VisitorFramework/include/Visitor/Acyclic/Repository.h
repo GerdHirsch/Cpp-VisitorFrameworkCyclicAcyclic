@@ -74,6 +74,9 @@ struct Repository{
 	template<class Adaptee>
 	using AdapterByValue =
 			VisitableAdapter<Adaptee, StorageByValue<Adaptee>>;
+	template<class Adaptee>
+	using AdapterByUniquepointer=
+			VisitableAdapter<Adaptee, StorageByUniquepointer<Adaptee>>;
 };
 
 // Convenience Interface Spezialization for Typelist
