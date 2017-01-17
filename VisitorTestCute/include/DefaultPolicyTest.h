@@ -50,44 +50,49 @@ public:
 };
 inline
 void DefaultPolicyTest::initCyclicVisitorDefaultPolicy(){
-	using namespace CyclicRepository;
 	using namespace VisitorTestMock;
+	using namespace CyclicRepository;
 	using Visitor = MockVisitor<Repository, E1>;
 	initAcyclicDefaultPolicyImpl<Visitor>();
 }
 inline
 void DefaultPolicyTest::initCyclicVisitableDefaultPolicy(){
-	using V = CR::E1;
+	using V = CyclicRepository::E1;
 	initAcyclicDefaultPolicyImpl<V>();
 }
 inline
 void DefaultPolicyTest::initAcyclicVisitorDefaultPolicy(){
-	using namespace AcyclicRepository;
 	using namespace VisitorTestMock;
+	using namespace AcyclicRepository;
+
 	using Visitor = MockVisitor<Repository, E1>;
 	initAcyclicDefaultPolicyImpl<Visitor>();
 }
 inline
 void DefaultPolicyTest::initAcyclicVisitableDefaultPolicy(){
-	using V = AR::E2;
+	using V = AcyclicRepository::E2;
 	initAcyclicDefaultPolicyImpl<V>();
 }
 template<class V>
 inline
 void DefaultPolicyTest::initAcyclicDefaultPolicyImpl(){
+	using namespace VisitorTestMock;
+
 	setDefaultPolicyInitValues();
 	V v;
-	ASSERTM("DefaultPolicy logAccepted not initialized", !VTM::MockLoggingPolicy::accepted);
-	ASSERTM("DefaultPolicy logNotAccepted not initialized", !VTM::MockLoggingPolicy::accepted);
-	ASSERTM("DefaultPolicy logNotVisited not initialized", !VTM::MockLoggingPolicy::notVisited);
-	ASSERTM("DefaultPolicy logInvalidVisitable not initialized", !VTM::MockLoggingPolicy::invalidVisitable);
+	ASSERTM("DefaultPolicy logAccepted not initialized", !MockLoggingPolicy::accepted);
+	ASSERTM("DefaultPolicy logNotAccepted not initialized", !MockLoggingPolicy::accepted);
+	ASSERTM("DefaultPolicy logNotVisited not initialized", !MockLoggingPolicy::notVisited);
+	ASSERTM("DefaultPolicy logInvalidVisitable not initialized", !MockLoggingPolicy::invalidVisitable);
 }
 
 inline void DefaultPolicyTest::setDefaultPolicyInitValues(){
-	VTM::MockLoggingPolicy::accepted = true;
-	VTM::MockLoggingPolicy::notAccepted = true;
-	VTM::MockLoggingPolicy::notVisited = true;
-	VTM::MockLoggingPolicy::invalidVisitable = true;
+	using namespace VisitorTestMock;
+
+	MockLoggingPolicy::accepted = true;
+	MockLoggingPolicy::notAccepted = true;
+	MockLoggingPolicy::notVisited = true;
+	MockLoggingPolicy::invalidVisitable = true;
 }
 
 

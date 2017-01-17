@@ -15,8 +15,8 @@
 
 namespace VisitorTestMock{
 
-using CyclicFactory = VisitorFramework::VisitableFactory<CyclicRepository::Repository>;
-using AcyclicFactory = VisitorFramework::VisitableFactory<AcyclicRepository::Repository>;
+//using CyclicFactory = VisitorFramework::VisitableFactory<CyclicRepository::Repository>;
+//using AcyclicFactory = VisitorFramework::VisitableFactory<AcyclicRepository::Repository>;
 
 }
 

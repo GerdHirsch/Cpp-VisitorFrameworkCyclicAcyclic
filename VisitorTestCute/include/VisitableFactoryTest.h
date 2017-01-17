@@ -16,10 +16,12 @@ class VisitableFactoryTest{
 	void makeCyclicVisitableByReference();
 	void makeCyclicVisitableByValue();
 	void makeCyclicVisitableByWeakpointer();
+	void makeCyclicVisitableByUniquepointer();
 
 	void makeAcyclicVisitableByReference();
 	void makeAcyclicVisitableByValue();
 	void makeAcyclicVisitableByWeakpointer();
+	void makeAcyclicVisitableByUniquepointer();
 
 public:
 
@@ -29,10 +31,12 @@ public:
 		s.push_back(CUTE_SMEMFUN(DerivedTest, makeCyclicVisitableByReference));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, makeCyclicVisitableByValue));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, makeCyclicVisitableByWeakpointer));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, makeCyclicVisitableByUniquepointer));
 
 		s.push_back(CUTE_SMEMFUN(DerivedTest, makeAcyclicVisitableByReference));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, makeAcyclicVisitableByValue));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, makeAcyclicVisitableByWeakpointer));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, makeAcyclicVisitableByUniquepointer));
 
 		return s;
 	}
@@ -41,24 +45,26 @@ public:
 inline
 void VisitableFactoryTest::makeCyclicVisitableByValue(){
 	using namespace VisitorTestMock;
+	using namespace CyclicRepository;
 
-	auto visitable = CyclicFactory::makeVisitable(NonVisitable());
+	auto visitable = Factory::makeVisitable(NonVisitable());
 
-	using Visitor = MockVisitor<CR::Repository, CR::E1, NonVisitable>;
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 
 	visitable->accept(visitor);
 
-	ASSERTM("Cyclic Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
+	ASSERTM("Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
 }
 
 inline
 void VisitableFactoryTest::makeAcyclicVisitableByValue(){
 	using namespace VisitorTestMock;
+	using namespace AcyclicRepository;
 
-	auto visitable = AcyclicFactory::makeVisitable(NonVisitable());
+	auto visitable = Factory::makeVisitable(NonVisitable());
 
-	using Visitor = MockVisitor<AR::Repository, AR::E1, NonVisitable>;
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 	visitable->accept(visitor);
 
@@ -68,11 +74,12 @@ void VisitableFactoryTest::makeAcyclicVisitableByValue(){
 inline
 void VisitableFactoryTest::makeCyclicVisitableByWeakpointer(){
 	using namespace VisitorTestMock;
+	using namespace CyclicRepository;
 
 	auto pNonVisitable = std::make_shared<NonVisitable>();
-	auto visitable = CyclicFactory::makeVisitable(pNonVisitable);
+	auto visitable = Factory::makeVisitable(pNonVisitable);
 
-	using Visitor = MockVisitor<CR::Repository, CR::E1, NonVisitable>;
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 	visitable->accept(visitor);
 
@@ -80,27 +87,57 @@ void VisitableFactoryTest::makeCyclicVisitableByWeakpointer(){
 }
 
 inline
-void VisitableFactoryTest::makeAcyclicVisitableByWeakpointer(){
+void VisitableFactoryTest::makeCyclicVisitableByUniquepointer(){
 	using namespace VisitorTestMock;
+	using namespace CyclicRepository;
 
-	auto pNonVisitable = std::make_shared<NonVisitable>();
-	auto visitable = AcyclicFactory::makeVisitable(pNonVisitable);
+	auto visitable = Factory::makeVisitable(std::make_unique<NonVisitable>());
 
-	using Visitor = MockVisitor<AR::Repository, AR::E1, NonVisitable>;
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 	visitable->accept(visitor);
 
-	ASSERTM("Acyclic Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
+	ASSERTM("Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
+}
+
+inline
+void VisitableFactoryTest::makeAcyclicVisitableByUniquepointer(){
+	using namespace VisitorTestMock;
+	using namespace AcyclicRepository;
+
+	auto visitable = Factory::makeVisitable(std::make_unique<NonVisitable>());
+
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
+	Visitor visitor;
+	visitable->accept(visitor);
+
+	ASSERTM("Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
+}
+
+inline
+void VisitableFactoryTest::makeAcyclicVisitableByWeakpointer(){
+	using namespace VisitorTestMock;
+	using namespace AcyclicRepository;
+
+	auto pNonVisitable = std::make_shared<NonVisitable>();
+	auto visitable = Factory::makeVisitable(pNonVisitable);
+
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
+	Visitor visitor;
+	visitable->accept(visitor);
+
+	ASSERTM("Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
 }
 
 inline
 void VisitableFactoryTest::makeCyclicVisitableByReference(){
 	using namespace VisitorTestMock;
+	using namespace CyclicRepository;
 
 	NonVisitable nonVisitable;
-	auto visitable = CyclicFactory::makeVisitable(nonVisitable);
+	auto visitable = Factory::makeVisitable(nonVisitable);
 
-	using Visitor = MockVisitor<CR::Repository, CR::E1, NonVisitable>;
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 	visitable->accept(visitor);
 
@@ -110,11 +147,12 @@ void VisitableFactoryTest::makeCyclicVisitableByReference(){
 inline
 void VisitableFactoryTest::makeAcyclicVisitableByReference(){
 	using namespace VisitorTestMock;
+	using namespace AcyclicRepository;
 
 	NonVisitable nonVisitable;
-	auto visitable = AcyclicFactory::makeVisitable(nonVisitable);
+	auto visitable = Factory::makeVisitable(nonVisitable);
 
-	using Visitor = MockVisitor<AR::Repository, AR::E1, NonVisitable>;
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 	visitable->accept(visitor);
 

@@ -23,9 +23,6 @@
 #include <memory>
 #include <iostream>
 
-namespace CR = CyclicRepository;
-namespace AR = AcyclicRepository;
-
 class AdapterTest{
 	using this_type = AdapterTest;
 
@@ -80,61 +77,75 @@ public:
 //=====================================
 inline
 void AdapterTest::visitCyclicAdapterByReference(){
-	NonVisitable nonVisitable;
-	CR::Repository::AdapterByReference<NonVisitable> adapter(nonVisitable);
+	using namespace VisitorTestMock;
+	using namespace CyclicRepository;
 
-	using Visitor = VTM::MockVisitor<CR::Repository, CR::E1, NonVisitable>;
+	NonVisitable nonVisitable;
+	Repository::AdapterByReference<NonVisitable> adapter(nonVisitable);
+
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 	adapter.accept(visitor);
 
-	ASSERTM("Cyclic Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
+	ASSERTM("Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
 }
 inline
 void AdapterTest::visitCyclicAdapterByValue(){
-	NonVisitable nonVisitable;
-	CR::Repository::AdapterByValue<NonVisitable> adapter(nonVisitable);
-	//temporäre objekte Adapter Ctor
-	CR::Repository::AdapterByValue<NonVisitable> adapterWithTemp((NonVisitable()) );
+	using namespace VisitorTestMock;
+	using namespace CyclicRepository;
 
-	using Visitor = VTM::MockVisitor<CR::Repository, CR::E1, NonVisitable>;
+	NonVisitable nonVisitable;
+	Repository::AdapterByValue<NonVisitable> adapter(nonVisitable);
+	//temporäre objekte Adapter Ctor
+	Repository::AdapterByValue<NonVisitable> adapterWithTemp((NonVisitable()) );
+
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 	adapter.accept(visitor);
 
-	ASSERTM("Cyclic Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
+	ASSERTM("Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
 }
 inline
 void AdapterTest::visitCyclicAdapterByWeakpointer(){
+	using namespace VisitorTestMock;
+	using namespace CyclicRepository;
 
 	auto nonVisitable = std::make_shared<NonVisitable>();
-	CR::Repository::AdapterByWeakpointer<NonVisitable> adapter(nonVisitable);
+	Repository::AdapterByWeakpointer<NonVisitable> adapter(nonVisitable);
 
-	using Visitor = VTM::MockVisitor<CR::Repository, CR::E1, NonVisitable>;
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 	adapter.accept(visitor);
 
-	ASSERTM("Cyclic Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
+	ASSERTM("Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
 }
 inline
 void AdapterTest::visitCyclicAdapterInvalidVisitable(){
-	using Adapter = CR::Repository::AdapterByWeakpointer<NonVisitable>;
+	using namespace VisitorTestMock;
+	using namespace CyclicRepository;
+
+	using Adapter = Repository::AdapterByWeakpointer<NonVisitable>;
 	std::shared_ptr<Adapter> pAdapter;
 	{
 		auto nonVisitable = std::make_shared<NonVisitable>();
 		pAdapter = std::make_shared<Adapter>(nonVisitable);
 	}
 
-	using Visitor = VTM::MockVisitor<CR::Repository, CR::E1, NonVisitable>;
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 
-	ASSERTM("DefaultPolicy logInvalidVisitable not initialized", !VTM::MockLoggingPolicy::invalidVisitable);
+	ASSERTM("DefaultPolicy logInvalidVisitable not initialized", !MockLoggingPolicy::invalidVisitable);
 
 	pAdapter->accept(visitor);
 
-	ASSERTM("DefaultPolicy logInvalidVisitable not called", VTM::MockLoggingPolicy::invalidVisitable);
+	ASSERTM("DefaultPolicy logInvalidVisitable not called", MockLoggingPolicy::invalidVisitable);
 }
 inline
 void AdapterTest::cyclicAdapterWeakpointerStayValid(){
-	using Adapter = CR::Repository::AdapterByWeakpointer<NonVisitable>;
+	using namespace VisitorTestMock;
+	using namespace CyclicRepository;
+
+	using Adapter = Repository::AdapterByWeakpointer<NonVisitable>;
 	auto nonVisitable = std::make_shared<NonVisitable>();
 
 	std::weak_ptr<NonVisitable> pWeak(nonVisitable);
@@ -149,61 +160,74 @@ void AdapterTest::cyclicAdapterWeakpointerStayValid(){
 //=====================================
 inline
 void AdapterTest::visitAcyclicAdapterByReference(){
-	NonVisitable nonVisitable;
-	AR::Repository::AdapterByReference<NonVisitable> adapter(nonVisitable);
+	using namespace VisitorTestMock;
+	using namespace AcyclicRepository;
 
-	using Visitor = VTM::MockVisitor<AR::Repository, AR::E1, NonVisitable>;
+	NonVisitable nonVisitable;
+	Repository::AdapterByReference<NonVisitable> adapter(nonVisitable);
+
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 	adapter.accept(visitor);
 
-	ASSERTM("Cyclic Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
+	ASSERTM("Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
 }
 inline
 void AdapterTest::visitAcyclicAdapterByValue(){
+	using namespace VisitorTestMock;
+	using namespace AcyclicRepository;
 
 	NonVisitable nonVisitable;
-	AR::Repository::AdapterByValue<NonVisitable> adapter(nonVisitable);
-//	AR::Repository::AdapterByValue<NonVisitable> adapter((NonVisitable()) );
+	Repository::AdapterByValue<NonVisitable> adapter(nonVisitable);
+	Repository::AdapterByValue<NonVisitable> adapterTemp((NonVisitable()) );
 
-	using Visitor = VTM::MockVisitor<AR::Repository, AR::E1, NonVisitable>;
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 	adapter.accept(visitor);
 
-	ASSERTM("Cyclic Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
+	ASSERTM("Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
 }
 inline
 void AdapterTest::visitAcyclicAdapterByWeakpointer(){
+	using namespace VisitorTestMock;
+	using namespace AcyclicRepository;
 
 	auto nonVisitable = std::make_shared<NonVisitable>();
-	AR::Repository::AdapterByWeakpointer<NonVisitable> adapter(nonVisitable);
+	Repository::AdapterByWeakpointer<NonVisitable> adapter(nonVisitable);
 
-	using Visitor = VTM::MockVisitor<AR::Repository, AR::E1, NonVisitable>;
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 	adapter.accept(visitor);
 
-	ASSERTM("Cyclic Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
+	ASSERTM("Visitor::visit(NonVisitable&) not called", visitor.nonVisitableVisited);
 }
 inline
 void AdapterTest::visitAcyclicAdapterInvalidVisitable(){
-	using Adapter = AR::Repository::AdapterByWeakpointer<NonVisitable>;
+	using namespace VisitorTestMock;
+	using namespace AcyclicRepository;
+
+	using Adapter = Repository::AdapterByWeakpointer<NonVisitable>;
 	std::shared_ptr<Adapter> pAdapter;
 	{
 		auto nonVisitable = std::make_shared<NonVisitable>();
 		pAdapter = std::make_shared<Adapter>(nonVisitable);
 	}
 
-	using Visitor = VTM::MockVisitor<AR::Repository, AR::E1, NonVisitable>;
+	using Visitor = MockVisitor<Repository, E1, NonVisitable>;
 	Visitor visitor;
 
-	ASSERTM("DefaultPolicy logInvalidVisitable not initialized", !VTM::MockLoggingPolicy::invalidVisitable);
+	ASSERTM("DefaultPolicy logInvalidVisitable not initialized", !MockLoggingPolicy::invalidVisitable);
 
 	pAdapter->accept(visitor);
 
-	ASSERTM("DefaultPolicy logInvalidVisitable not called", VTM::MockLoggingPolicy::invalidVisitable);
+	ASSERTM("DefaultPolicy logInvalidVisitable not called", MockLoggingPolicy::invalidVisitable);
 }
 inline
 void AdapterTest::acyclicAdapterWeakpointerStayValid(){
-	using Adapter = AR::Repository::AdapterByWeakpointer<NonVisitable>;
+	using namespace VisitorTestMock;
+	using namespace AcyclicRepository;
+
+	using Adapter = Repository::AdapterByWeakpointer<NonVisitable>;
 	auto nonVisitable = std::make_shared<NonVisitable>();
 
 	std::weak_ptr<NonVisitable> pWeak(nonVisitable);

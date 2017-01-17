@@ -81,13 +81,11 @@ public:
 	using StorageType = std::unique_ptr<Adaptee>;
 
 	using LValueReferenceType = DisableCtor&;
-//	using LValueReferenceType = StorageType;
 	using RValueReferenceType = StorageType&&;
 
 	using ReturnType = Adaptee*;
 	using ConstReturnType = Adaptee const *;
 
-	StorageByUniquepointer(LValueReferenceType adaptee):adaptee(adaptee){}
 	StorageByUniquepointer(RValueReferenceType adaptee):adaptee(std::move(adaptee)){}
 
 	ReturnType get(){ return &*adaptee; }

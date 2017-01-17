@@ -11,8 +11,7 @@
 
 #include "DefaultPolicy.h"
 
-#include <visitor/Typelist.h>
-#include <visitor/BaseKind.h>
+#include <visitor/DefaultPolicy.h>
 #include <Visitor/Acyclic/Repository.h>
 #include <Visitor/VisitableFactory.h>
 
@@ -46,6 +45,8 @@ using AbstractRepository = VisitorFramework::Acyclic::Repository
 		BaseKind::Abstract,
 		typelist
 		>;
+using Factory = VisitorFramework::VisitableFactory<Repository>;
+
 }
 
 

@@ -9,9 +9,10 @@
 #define CYCLICREPOSITORY_H_
 
 #include "DefaultPolicy.h"
-#include <visitor/Typelist.h>
+
+#include <visitor/DefaultPolicy.h>
 #include <Visitor/Cyclic/Repository.h>
-#include <Visitor/Acyclic/Repository.h>
+#include <Visitor/VisitableFactory.h>
 
 class NonVisitable;
 
@@ -41,6 +42,9 @@ using AbstractRepository = VisitorFramework::Cyclic::Repository
 		BaseKind::Abstract,
 		typelist
 		>;
+
+using Factory = VisitorFramework::VisitableFactory<Repository>;
+
 }
 
 #endif /* CYCLICREPOSITORY_H_ */

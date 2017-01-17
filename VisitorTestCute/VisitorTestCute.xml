@@ -36,13 +36,15 @@ visitAcyclicNonVisitableWithAccessor: Todo: implement test
 		<testcase classname="Visitor::visit Inheritance" name="VisitorInheritanceTest::visitAcyclicBase"/>
 		<testcase classname="Visitor::visit Inheritance" name="VisitorInheritanceTest::visitAcyclicDerived"/>
 	</testsuite>
-	<testsuite name="Visitable Factory" tests="6">
+	<testsuite name="Visitable Factory" tests="8">
 		<testcase classname="Visitable Factory" name="VisitableFactoryTest::makeCyclicVisitableByReference"/>
 		<testcase classname="Visitable Factory" name="VisitableFactoryTest::makeCyclicVisitableByValue"/>
 		<testcase classname="Visitable Factory" name="VisitableFactoryTest::makeCyclicVisitableByWeakpointer"/>
+		<testcase classname="Visitable Factory" name="VisitableFactoryTest::makeCyclicVisitableByUniquepointer"/>
 		<testcase classname="Visitable Factory" name="VisitableFactoryTest::makeAcyclicVisitableByReference"/>
 		<testcase classname="Visitable Factory" name="VisitableFactoryTest::makeAcyclicVisitableByValue"/>
 		<testcase classname="Visitable Factory" name="VisitableFactoryTest::makeAcyclicVisitableByWeakpointer"/>
+		<testcase classname="Visitable Factory" name="VisitableFactoryTest::makeAcyclicVisitableByUniquepointer"/>
 	</testsuite>
 	<testsuite name="Visitor abstract" tests="2">
 		<testcase classname="Visitor abstract" name="VisitorAbstractTest::cyclicAbstract"/>

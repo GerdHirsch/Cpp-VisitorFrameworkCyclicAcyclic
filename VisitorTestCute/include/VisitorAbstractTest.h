@@ -19,9 +19,9 @@
 
 #include <iostream>
 
-namespace CR = CyclicRepository;
-namespace AR = AcyclicRepository;
-namespace VTM = VisitorTestMock;
+//namespace CR = CyclicRepository;
+//namespace AR = AcyclicRepository;
+//namespace VTM = VisitorTestMock;
 
 #include <type_traits>
 
@@ -46,11 +46,15 @@ public:
 };
 inline
 void VisitorAbstractTest::cyclicAbstract(){
-	using Visitor = VisitorTestMock::MockVisitor<CR::AbstractRepository, CR::typelist>;
+	using namespace VisitorTestMock;
+	using namespace CyclicRepository;
+	using Visitor = MockVisitor<AbstractRepository, typelist>;
 	ASSERTM("Cyclic Visitor not abstract", std::is_abstract<Visitor>::value );
 }
 void VisitorAbstractTest::acyclicAbstract(){
-	using Visitor = VisitorTestMock::MockVisitor<AR::AbstractRepository, AR::typelist>;
+	using namespace VisitorTestMock;
+	using namespace AcyclicRepository;
+	using Visitor = MockVisitor<AbstractRepository, typelist>;
 	ASSERTM("Acyclic Visitor not abstract", std::is_abstract<Visitor>::value );
 }
 
