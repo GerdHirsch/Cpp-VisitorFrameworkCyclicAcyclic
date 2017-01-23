@@ -8,7 +8,11 @@
 #ifndef INCLUDE_VISITABLEFACTORYTEST_H_
 #define INCLUDE_VISITABLEFACTORYTEST_H_
 
-#include "../Mocks/VisitableFactory.h"
+#include "../Mocks/CyclicRepository.h"
+#include "../Mocks/AcyclicRepository.h"
+
+#include <Visitor/VisitableFactory.h>
+
 
 class VisitableFactoryTest{
 	using this_type = VisitableFactoryTest;
