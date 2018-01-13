@@ -7,5 +7,13 @@ environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.cygwin.exe.debug
 environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.cygwin.exe.debug.279953283/C_INCLUDE_PATH/operation=remove
 environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.cygwin.exe.debug.279953283/append=true
 environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.cygwin.exe.debug.279953283/appendContributed=true
+environment/buildEnvironmentInclude/gcov/CPATH/delimiter=;
+environment/buildEnvironmentInclude/gcov/CPATH/operation=remove
+environment/buildEnvironmentInclude/gcov/CPLUS_INCLUDE_PATH/delimiter=;
+environment/buildEnvironmentInclude/gcov/CPLUS_INCLUDE_PATH/operation=remove
+environment/buildEnvironmentInclude/gcov/C_INCLUDE_PATH/delimiter=;
+environment/buildEnvironmentInclude/gcov/C_INCLUDE_PATH/operation=remove
+environment/buildEnvironmentInclude/gcov/append=true
+environment/buildEnvironmentInclude/gcov/appendContributed=true
 environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.cygwin.exe.debug.279953283/append=true
 environment/buildEnvironmentLibrary/cdt.managedbuild.config.gnu.cygwin.exe.debug.279953283/appendContributed=true
