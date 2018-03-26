@@ -8,7 +8,8 @@
 #ifndef VISITOR_ACYCLIC_VISITABLE_H_
 #define VISITOR_ACYCLIC_VISITABLE_H_
 
-#include "ElementVisitor.h"
+//#include "ElementVisitor.h"
+#include "../ElementVisitor.h"
 
 #include <typeinfo>
 #include <string>

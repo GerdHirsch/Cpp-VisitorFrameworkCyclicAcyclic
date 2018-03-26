@@ -11,7 +11,6 @@
 #include <string>
 #include <typeinfo>
 
-#include "ElementVisitor.h"
 #include "../TypeFunctions.h"
 
 namespace VisitorFramework{

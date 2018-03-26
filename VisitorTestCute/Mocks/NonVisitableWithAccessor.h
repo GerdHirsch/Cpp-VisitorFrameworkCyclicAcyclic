@@ -35,6 +35,7 @@ public:
 	void visitorVisited(){
 		wasVisitorVisited = true;
 	}
+//protected:
 	class Accessor{
 	protected:
 		static void setData(this_type& This, bool data){

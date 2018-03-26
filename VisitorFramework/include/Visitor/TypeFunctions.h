@@ -9,7 +9,7 @@
 #define TYPEFUNCTIONS_H_
 
 #include "MetaFunctions.h"
-#include "Acyclic/ElementVisitor.h"
+#include "ElementVisitor.h"
 
 #include <string>
 
@@ -36,7 +36,7 @@ public:
 	using ConcreteVisitable = ToVisit;
 	using Accessor = Accessor_;
 	using this_type = VisitorInterface<ToVisit, Accessor>;
-	using type = Acyclic::ElementVisitor<this_type>;
+	using type = ElementVisitor<this_type>;
 };
 
 template<class T, class = void>

@@ -22,8 +22,6 @@
 
 namespace VisitorFramework{
 
-namespace Acyclic{
-
 template<class VisitableImpl>
 class ElementVisitor : protected VIRTUAL VisitableImpl::Accessor
 {
@@ -31,5 +29,5 @@ public:
 	virtual void visit(typename VisitableImpl::ConcreteVisitable& visitable) = 0;
 };
 
-}} // end namespace
+} // end namespace
 #endif /* ELEMENTVISITOR_H_ */
