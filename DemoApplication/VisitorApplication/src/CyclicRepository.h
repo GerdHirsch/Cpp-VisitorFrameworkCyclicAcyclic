@@ -11,9 +11,11 @@
 #include <Visitor/DefaultPolicy.h>
 #include <visitor/Typelist.h>
 #include <Visitor/Cyclic/Repository.h>
-#include <Visitor/Acyclic/Repository.h>
+//#include <Visitor/Acyclic/Repository.h>
 
 class NonVisitable;
+class NonVisitableWithAccessor;
+class NonVisitableWithAccessor2;
 
 namespace CyclicRepository{
 class E1;
@@ -24,17 +26,20 @@ namespace VF = VisitorFramework;
 
 using typelist =
 		VisitorFramework::Typelist
-		<
-		E1, E2, E3,
-		NonVisitable
+		< E1
+		, E2
+		, E3
+		, NonVisitableWithAccessor
+		, NonVisitable
+		, NonVisitableWithAccessor2
 		>;
 
 using Repository = VF::Cyclic::Repository
 		<
 //		VF::EmptyLoggingPolicy,
 		VF::StdOutLoggingPolicy,
-//		BaseKind::Abstract,
-		BaseKind::Default,
+		BaseKind::Abstract,
+//		BaseKind::Default,
 		typelist
 		>;
 }

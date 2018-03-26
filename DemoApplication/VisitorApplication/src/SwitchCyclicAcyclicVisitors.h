@@ -8,10 +8,11 @@
 #ifndef SWITCHCYCLICACYCLICVISITORS_H_
 #define SWITCHCYCLICACYCLICVISITORS_H_
 
+#include "SwitchCyclicAcyclicRepository.h"
+
 #include "SwitchCyclicAcyclicVisitables.h"
 #include "NonVisitable.h"
 #include "NonVisitableWithAccessor.h"
-#include "SwitchCyclicAcyclicRepository.h"
 
 namespace CyclicAcyclicRepository{
 

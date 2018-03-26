@@ -20,6 +20,9 @@ namespace Cyclic {
 //=================================================================
 // Visitors
 //=================================================================
+//Wrapper around EmptyAccessor
+template<class ToVisit, class Accessor>
+struct AccessorWrapper : Accessor{};
 /**
  * infrastructure to Create the Baseclass of a Cyclic Visitor
  * class A; class B; class C;
@@ -27,7 +30,7 @@ namespace Cyclic {
 template<class LoggingPolicy, class ToVisit, class... Rest>
 struct InheritFromDefault
 	:
-//	protected getAccessor<ToVisit>,
+	protected AccessorWrapper<ToVisit, getAccessor<ToVisit>>,
 	public InheritFromDefault<LoggingPolicy, Rest...>
 {
 public:
@@ -40,7 +43,7 @@ public:
 template<class LoggingPolicy, class ToVisit>
 struct InheritFromDefault<LoggingPolicy, ToVisit>
 	:
-//	protected getAccessor<ToVisit>,
+	protected AccessorWrapper<ToVisit, getAccessor<ToVisit>>,
 	public LoggingPolicy
 {
 public:
@@ -56,7 +59,7 @@ public:
 template<class ToVisit, class... Rest>
 struct InheritFromAbstract
 	:
-//	protected getAccessor<ToVisit>,
+	protected AccessorWrapper<ToVisit, getAccessor<ToVisit>>,
 	public InheritFromAbstract<Rest...>{
 public:
 	virtual void visit(ToVisit& v) = 0;
@@ -65,7 +68,7 @@ public:
 };
 template<class ToVisit>
 struct InheritFromAbstract<ToVisit>
-//	: protected getAccessor<ToVisit>
+	: protected AccessorWrapper<ToVisit, getAccessor<ToVisit>>
 {
 public:
 	virtual void visit(ToVisit& v) = 0;

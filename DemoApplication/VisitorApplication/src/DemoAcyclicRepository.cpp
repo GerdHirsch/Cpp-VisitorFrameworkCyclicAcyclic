@@ -8,6 +8,7 @@
 #include "AcyclicVisitables.h"
 #include "NonVisitable.h"
 #include "NonVisitableWithAccessor.h"
+#include "NonVisitableWithAccessor2.h"
 
 #include "AcyclicVisitors.h"
 #include "AcyclicRepository.h"
@@ -41,6 +42,7 @@ void demoAcyclicRepository(){
 	DemoVisitor13 visitor13;
 	DemoVisitor23 visitor23;
 	NonVisitableWithAccessor nvwa;
+	NonVisitableWithAccessor2 nvwa2;
 	auto pNV = std::make_shared<NonVisitable>();
 
 	{
@@ -48,14 +50,14 @@ void demoAcyclicRepository(){
 		visitables.push_back(Visitable(new AdapterWeak<NonVisitable>(p)));
 	}
 
-	visitables.push_back(Visitable(new E1));
-	visitables.push_back(Visitable(new E2));
-	visitables.push_back(Visitable(new E3));
-	visitables.push_back(Visitable(new AdapterWeak<NonVisitable>(pNV)));
+//	visitables.push_back(Visitable(new E1));
+//	visitables.push_back(Visitable(new E2));
+//	visitables.push_back(Visitable(new E3));
+//	visitables.push_back(Visitable(new AdapterWeak<NonVisitable>(pNV)));
 	visitables.push_back(Visitable(new AdapterReference<NonVisitableWithAccessor>(nvwa)));
-	visitables.push_back(Visitable(new AdapterValue<NonVisitableWithAccessor>(nvwa)));
+	visitables.push_back(Visitable(new AdapterReference<NonVisitableWithAccessor2>(nvwa2)));
 
-	demoRunVisitor(visitor13, visitables);
+//	demoRunVisitor(visitor13, visitables);
 	demoRunVisitor(visitor23, visitables);
 
 

@@ -7,6 +7,7 @@
 
 #ifndef MOCKS_DEFAULTPOLICY_H_
 #define MOCKS_DEFAULTPOLICY_H_
+#include <Visitor/has_method_toString.h>
 
 #include <iostream>
 
@@ -52,7 +53,7 @@ struct MockLoggingPolicy{
 	void logNotVisited(Visitable & visitable, Visitor const& visitor){
 		notVisited = true;
 		visitable.defaultVisited();
-		if(trace) std::cout << "logNotVisited( " << visitable.toString() << ", " << visitor.toString() << ")" << std::endl;
+		if(trace) std::cout << "logNotVisited( " << VisitorFramework::toString(visitable) << ", " << visitor.toString() << ")" << std::endl;
 	}
 	template<class Visitable, class Visitor>
 	void logInvalidVisitable(Visitable const& visitable, Visitor const& visitor){

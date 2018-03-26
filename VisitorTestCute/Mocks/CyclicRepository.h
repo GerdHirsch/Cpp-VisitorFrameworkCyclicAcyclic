@@ -15,8 +15,12 @@
 #include <Visitor/VisitableFactory.h>
 
 class NonVisitable;
+class NonVisitableWithAccessor;
+class NonVisitableWithAccessor2;
 
 namespace CyclicRepository{
+class VisitableWithAccessor;
+class VisitableWithAccessor2;
 class E1;
 class E2;
 class E3;
@@ -24,10 +28,25 @@ class E4;
 
 using typelist =
 		VisitorFramework::Typelist
+		< E1
+		, E3
+		, E4
+//		, E1, E2, E3
+		, NonVisitable
+//		, NonVisitableWithAccessor
+		>;
+
+using typelistAccessor = VisitorFramework::Typelist
+		< NonVisitableWithAccessor
+		, NonVisitableWithAccessor2
+		, VisitableWithAccessor
+		, VisitableWithAccessor2
+		>;
+using AccessorRepository = VisitorFramework::Cyclic::Repository
 		<
-		E1, E3, E4,
-//		E1, E2, E3,
-		NonVisitable
+		VisitorTestMock::MockLoggingPolicy,
+		BaseKind::Default,
+		typelistAccessor
 		>;
 
 using Repository = VisitorFramework::Cyclic::Repository

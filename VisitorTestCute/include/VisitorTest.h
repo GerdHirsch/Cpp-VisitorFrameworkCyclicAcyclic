@@ -18,10 +18,17 @@
 #include "../Mocks/CyclicRepository.h"
 #include "../Mocks/AcyclicRepository.h"
 
+#include "../Mocks/NonVisitableWithAccessor.h"
+#include "../Mocks/CyclicVisitableWithAccessor.h"
+#include "../Mocks/AcyclicVisitableWithAccessor.h"
+
 #include <iostream>
 
 class VisitorTest{
 public:
+	VisitorTest(){
+		VisitorTestMock::MockLoggingPolicy::trace = false;
+	}
 	using this_type = VisitorTest;
 
 	template<class Visitor, class Visitable>
@@ -50,11 +57,13 @@ public:
 	void visitCyclicNonVisitableWithAccessor();
 	void visitAcyclicVisitableWithAccessor();
 	void visitAcyclicNonVisitableWithAccessor();
+	void visitCyclicNonVisitableAmbiguousAccessorMethod(); //
+	void visitCyclicVisitableAmbiguousAccessorMethod(); //
+	void visitAcyclicAmbiguousAccessorMethod(); //
 
 	void visitMixedVisitables(); // A, B, NonVisitable
 	void visitPartitionOfVisitables(); // A, B not C
-	void visitVisitableWithAccessor(); // Only AcyclicVisitor
-	void visitNonVisitableWithAccessor(); // Only AcyclicVisitor
+
 
 	template<class DerivedTest = this_type>
 	static cute::suite make_suite(){
@@ -62,26 +71,28 @@ public:
 		//=====================================
 		// Cyclic
 		//=====================================
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclic));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogAccepted));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogNotVisited));
-
-		//=====================================
-		// Acyclic
-		//=====================================
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclic));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogAccepted));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotAccepted));
-		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotVisited));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclic));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogAccepted));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogNotVisited));
+//
+//		//=====================================
+//		// Acyclic
+//		//=====================================
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclic));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogAccepted));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotAccepted));
+//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotVisited));
 
 		//=====================================
 		// Accessor
 		//=====================================
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicVisitableWithAccessor));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicNonVisitableWithAccessor));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicNonVisitableAmbiguousAccessorMethod));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicVisitableAmbiguousAccessorMethod));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicVisitableWithAccessor));
 		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicNonVisitableWithAccessor));
-
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicAmbiguousAccessorMethod));
 
 		return s;
 	}
@@ -89,21 +100,122 @@ public:
 
 inline
 void VisitorTest::visitCyclicVisitableWithAccessor(){
-	ASSERTM("Todo: implement test", false);
+	using namespace CyclicRepository;
+	using namespace VisitorTestMock;
+
+	using Visitable = VisitableWithAccessor;
+	using Visitor = MockVisitorUseAccessor<AccessorRepository, Visitable>;
+	Visitable visitable;
+	Visitor visitor;
+
+	visitable.accept(visitor);
+	bool result = visitor.accessedValue;
+
+	std::string message("Visitor::visit(NonVisitableWithAccessor&) accessedValue not changed");
+	ASSERTM(message, result);
 }
 inline
 void VisitorTest::visitCyclicNonVisitableWithAccessor(){
-	ASSERTM("Todo: implement test", false);
+	using namespace CyclicRepository;
+	using namespace VisitorTestMock;
+
+	using Visitable = NonVisitableWithAccessor;
+	using Visitor = MockVisitorUseAccessor<AccessorRepository, Visitable>;
+	Visitable visitable;
+	AccessorRepository::AdapterByReference<Visitable> adapter(visitable);
+
+	Visitor visitor;
+	adapter.accept(visitor);
+
+	bool result = visitor.accessedValue;
+
+	std::string message("Visitor::visit(NonVisitableWithAccessor&) accessedValue not changed");
+	ASSERTM(message, result);
+}
+inline
+void VisitorTest::visitCyclicVisitableAmbiguousAccessorMethod(){
+	using namespace CyclicRepository;
+	using namespace VisitorTestMock;
+
+	using Visitable = VisitableWithAccessor2;
+	using Visitor = MockVisitorUseAccessor<AccessorRepository, Visitable>;
+	Visitable visitable;
+	Visitor visitor;
+
+	visitable.accept(visitor);
+	bool result = visitor.accessedValue;
+
+	std::string message("Visitor::visit(VisitableWithAccessor2&) accessedValue not changed");
+	ASSERTM(message, result);
+}
+inline
+void VisitorTest::visitCyclicNonVisitableAmbiguousAccessorMethod(){
+	using namespace CyclicRepository;
+	using namespace VisitorTestMock;
+
+	using Visitable = NonVisitableWithAccessor2;
+	using Visitor = MockVisitorUseAccessor<AccessorRepository, Visitable>;
+	Visitable nvwA;
+	AccessorRepository::AdapterByReference<Visitable> adapter(nvwA);
+
+	Visitor visitor;
+	adapter.accept(visitor);
+
+	bool result = visitor.accessedValue;
+	std::string message("Visitor::visit(NonVisitableWithAccessor2&) accessedValue not changed");
+	ASSERTM(message, result);
 }
 inline
 void VisitorTest::visitAcyclicVisitableWithAccessor(){
-	ASSERTM("Todo: implement test", false);
+	using namespace AcyclicRepository;
+	using namespace VisitorTestMock;
+
+	using Visitable = VisitableWithAccessor;
+	using Visitor = MockVisitorUseAccessor<AccessorRepository, Visitable>;
+	Visitable visitable;
+	Visitor visitor;
+
+	visitable.accept(visitor);
+	bool result = visitor.accessedValue;
+
+	std::string message("Visitor::visit(VisitableWithAccessor&) accessedValue not changed");
+	ASSERTM(message, result);
+//	ASSERTM("implement test", false);
 }
 inline
 void VisitorTest::visitAcyclicNonVisitableWithAccessor(){
-	ASSERTM("Todo: implement test", false);
-}
+	using namespace AcyclicRepository;
+	using namespace VisitorTestMock;
 
+	using Visitable = NonVisitableWithAccessor;
+	using Visitor = MockVisitorUseAccessor<AccessorRepository, Visitable>;
+	Visitable nvwA;
+	AccessorRepository::AdapterByReference<Visitable> adapter(nvwA);
+
+	Visitor visitor;
+	adapter.accept(visitor);
+
+	bool result = visitor.accessedValue;
+	std::string message("Visitor::visit(NonVisitableWithAccessor&) accessedValue not changed");
+	ASSERTM(message, result);
+}
+inline
+void VisitorTest::visitAcyclicAmbiguousAccessorMethod(){
+	using namespace AcyclicRepository;
+	using namespace VisitorTestMock;
+
+	using Visitable = NonVisitableWithAccessor2;
+	using Visitor = MockVisitorUseAccessor<AccessorRepository, Visitable>;
+	Visitable nvwA;
+	AccessorRepository::AdapterByReference<Visitable> adapter(nvwA);
+
+	Visitor visitor;
+	adapter.accept(visitor);
+
+	bool result = visitor.accessedValue;
+	std::string message("Visitor::visit(NonVisitableWithAccessor2&) accessedValue not changed");
+	ASSERTM(message, result);
+}
 ////=====================================
 //// Cyclic
 ////=====================================

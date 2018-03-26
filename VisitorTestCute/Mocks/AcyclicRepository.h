@@ -17,9 +17,11 @@
 
 class NonVisitable;
 class NonVisitableWithAccessor;
+class NonVisitableWithAccessor2;
 
 namespace AcyclicRepository{
-
+class VisitableWithAccessor;
+class VisitableWithAccessor2;
 class E1;
 class E2;
 class E3;
@@ -38,7 +40,18 @@ using Repository = VisitorFramework::Acyclic::Repository
 		BaseKind::Default,
 		typelist
 		>;
-
+using typelistAccessor = VisitorFramework::Typelist
+		< NonVisitableWithAccessor
+		, NonVisitableWithAccessor2
+		, VisitableWithAccessor
+		, VisitableWithAccessor2
+		>;
+using AccessorRepository = VisitorFramework::Acyclic::Repository
+		<
+		VisitorTestMock::MockLoggingPolicy,
+		BaseKind::Default,
+		typelistAccessor
+		>;
 using AbstractRepository = VisitorFramework::Acyclic::Repository
 		<
 		VisitorFramework::EmptyLoggingPolicy,
@@ -48,8 +61,5 @@ using AbstractRepository = VisitorFramework::Acyclic::Repository
 using Factory = VisitorFramework::VisitableFactory<Repository>;
 
 }
-
-
-
 
 #endif /* ACYCLICREPOSITORY_H_ */

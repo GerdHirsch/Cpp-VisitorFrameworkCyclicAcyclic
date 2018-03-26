@@ -8,7 +8,6 @@
 #ifndef INCLUDE_ADAPTERTEST_H_
 #define INCLUDE_ADAPTERTEST_H_
 
-#include "../Mocks/NonVisitable.h"
 
 #include "../Mocks/DefaultPolicy.h"
 
@@ -19,6 +18,8 @@
 
 #include "../Mocks/CyclicRepository.h"
 #include "../Mocks/AcyclicRepository.h"
+
+#include "../Mocks/NonVisitable.h"
 
 #include <memory>
 #include <iostream>

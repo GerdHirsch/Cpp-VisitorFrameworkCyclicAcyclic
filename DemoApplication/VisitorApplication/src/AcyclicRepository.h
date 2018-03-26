@@ -16,6 +16,7 @@
 
 class NonVisitable;
 class NonVisitableWithAccessor;
+class NonVisitableWithAccessor2;
 
 namespace AcyclicRepository{
 class E1;
@@ -26,9 +27,11 @@ namespace VF = VisitorFramework;
 
 using typelist =
 		VisitorFramework::Typelist
-		<
-		E1, E2, E3,
-		NonVisitableWithAccessor
+		< E1
+		, E2
+		, E3
+		, NonVisitableWithAccessor
+		, NonVisitableWithAccessor2
 		>;
 
 using Repository = VF::Acyclic::Repository
