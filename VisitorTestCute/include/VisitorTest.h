@@ -71,17 +71,17 @@ public:
 		//=====================================
 		// Cyclic
 		//=====================================
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclic));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogAccepted));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogNotVisited));
-//
-//		//=====================================
-//		// Acyclic
-//		//=====================================
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclic));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogAccepted));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotAccepted));
-//		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotVisited));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclic));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogAccepted));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitCyclicLogNotVisited));
+
+		//=====================================
+		// Acyclic
+		//=====================================
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclic));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogAccepted));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotAccepted));
+		s.push_back(CUTE_SMEMFUN(DerivedTest, visitAcyclicLogNotVisited));
 
 		//=====================================
 		// Accessor

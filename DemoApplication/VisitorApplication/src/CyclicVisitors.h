@@ -47,7 +47,7 @@ public:
 		std::cout << toString() << "::visit(" << VisitorFramework::toString(v) << ")" << std::endl;
 		std::cout << this->Accessor::getData(v) << std::endl;
 		Accessor::setData(v, "DemoVisitor23::Data");
-//		this->Accessor::setData(v, "DemoVisitor23::Data");
+//		this->AccessorsetData(v, "DemoVisitor23::Data");
 		std::cout << this->Accessor::getData(v) << std::endl;
 	}
 
