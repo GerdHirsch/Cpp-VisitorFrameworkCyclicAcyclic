@@ -51,7 +51,6 @@ template
 		class VisitableImplementation = ConcreteVisitable
 	>
 struct VisitableImpl : VisitableBase<BaseType, VisitorBase, LoggingPolicy>
-//struct VisitableImpl : Visitable<VisitorBase>, LoggingPolicy
 {
 	typedef Visitable<VisitorBase> base_type;
 

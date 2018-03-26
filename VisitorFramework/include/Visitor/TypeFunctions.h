@@ -15,8 +15,6 @@
 
 namespace VisitorFramework{
 
-//namespace Acyclic{
-
 struct EmptyAccessor{
 //	virtual std::string toString() const { return "EmptyAccessor";}
 };
@@ -28,14 +26,14 @@ struct EmptyAccessor{
  * besuchten Visitable zugreifen kann
  */
 template<class ToVisit, class Accessor_ = EmptyAccessor>
-class VisitorInterface{
+class CreateVisitorInterface{
 public:
 	std::string toString(){ return "VisitorInterface";}
 
 //	void print(){ std::cout << "VisitorInterface" << std::endl; }
 	using ConcreteVisitable = ToVisit;
 	using Accessor = Accessor_;
-	using this_type = VisitorInterface<ToVisit, Accessor>;
+	using this_type = CreateVisitorInterface<ToVisit, Accessor>;
 	using type = ElementVisitor<this_type>;
 };
 
@@ -61,7 +59,7 @@ struct hasAccessor<T, typename void_type<typename T::Accessor>::type>{
 	using type = typename T::Accessor;
 };
 //---------------------------------------------------------------------
-template<class ToVisit, class =
+template<class ToVisit, class = // create Default Type for primary template
 								IF<	hasVisitor<ToVisit>::value,
 									typename hasVisitor<ToVisit>::type,
 								IF<	hasAccessor<ToVisit>::value,
@@ -71,17 +69,17 @@ template<class ToVisit, class =
 		>
 struct getVisitorType{
 	// no Visitor and no Accessor in ToVisit available
-	using type = typename VisitorInterface<ToVisit>::type;
+	using type = typename CreateVisitorInterface<ToVisit>::type;
 };
-template<class ToVisit>
+template<class ToVisit> // Specialization for ToVisit::Visitor SFINAE if not exist
 struct getVisitorType<ToVisit, typename hasVisitor<ToVisit>::type>{
 	// ToVisit defines its Visitor
 	using type = typename hasVisitor<ToVisit>::type;
 };
-template<class ToVisit>
+template<class ToVisit> // Specialization for ToVisit::Accessor SFINAE if not exist
 struct getVisitorType<ToVisit, typename hasAccessor<ToVisit>::type>{
 	// ToVisit defines only an Accessor
-	using type = typename VisitorInterface<ToVisit, typename ToVisit::Accessor>::type;
+	using type = typename CreateVisitorInterface<ToVisit, typename ToVisit::Accessor>::type;
 };
 
 //=====================================================================
@@ -98,7 +96,7 @@ struct getAccessorType{
 template<class ToVisit>
 struct getAccessorType<ToVisit, typename hasAccessor<ToVisit>::type>{
 	// ToVisit defines an Accessor
-	using type = typename VisitorInterface<ToVisit, typename ToVisit::Accessor>::type;
+	using type = typename CreateVisitorInterface<ToVisit, typename ToVisit::Accessor>::type;
 };
 
 template<class ToVisit>
