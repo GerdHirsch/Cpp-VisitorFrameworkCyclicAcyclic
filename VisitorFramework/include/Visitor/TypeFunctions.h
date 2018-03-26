@@ -37,12 +37,13 @@ public:
 	using type = ElementVisitor<this_type>;
 };
 
-template<class T, class = void>
+template<class T, class = void> // Default void chooses specialization if exists
 struct hasVisitor{
 	enum {value = false};
 	using type = void;
 };
-template<class T>
+// Specialization for void
+template<class T> // SFINAE void_type<T::Visitor>::type == void
 struct hasVisitor<T, typename void_type<typename T::Visitor>::type>{
 	enum {value = true};
 	using type = typename T::Visitor;
@@ -53,7 +54,7 @@ struct hasAccessor{
 	enum {value = false};
 	using type = void;
 };
-template<class T>
+template<class T> // SFINAE void_type<T::Accessor>
 struct hasAccessor<T, typename void_type<typename T::Accessor>::type>{
 	enum {value = true};
 	using type = typename T::Accessor;
